@@ -1,0 +1,19 @@
+# ninja log v5
+16	746	7543336613368330	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e94e3b9510e9dac8
+24	762	7543336613518631	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	de7cc7a276181fad
+35	847	7543336614388083	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	72ef92a86e26bfcc
+1	766	7543336613572374	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	9645ec7225a0c130
+1089	1185	7543336617723958	C:/Unity Projects/The Wizard of the Fortress/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/k6j3q403/obj/arm64-v8a/libgame.so	87d8b86b62939188
+10	886	7543336614766238	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	b399a08d63c51dfd
+41	793	7543336613850971	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	f6feb6e2245f0c0a
+29	1011	7543336616031867	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	95a31bd1b56ab273
+6	1089	7543336616788297	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	9ff5debf63d0e908
+22	761	7543347006146163	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	9645ec7225a0c130
+28	762	7543347006136059	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	de7cc7a276181fad
+40	763	7543347006171311	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e94e3b9510e9dac8
+34	768	7543347006226860	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	f6feb6e2245f0c0a
+53	829	7543347006834454	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	72ef92a86e26bfcc
+16	871	7543347007254728	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	b399a08d63c51dfd
+46	981	7543347008345794	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	95a31bd1b56ab273
+9	1095	7543347009477196	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	9ff5debf63d0e908
+1095	1190	7543347010395363	C:/Unity Projects/The Wizard of the Fortress/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/k6j3q403/obj/arm64-v8a/libgame.so	87d8b86b62939188

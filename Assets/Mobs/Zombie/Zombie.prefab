@@ -2182,9 +2182,10 @@ GameObject:
   - component: {fileID: 827830468794245110}
   - component: {fileID: 6921452877391597193}
   - component: {fileID: 6833138534832112543}
+  - component: {fileID: 6349747781352638606}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2251,6 +2252,21 @@ CapsuleCollider:
   m_Height: 1.7592988
   m_Direction: 1
   m_Center: {x: 0, y: 0.9059584, z: 0}
+--- !u!114 &6349747781352638606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439434663815670097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8ca7532bba47044a11c4df04c64e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  damage: 5
+  speed: 1
 --- !u!1 &8592272053794248391
 GameObject:
   m_ObjectHideFlags: 0

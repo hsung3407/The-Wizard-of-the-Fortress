@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -5,24 +6,29 @@ namespace Ingame
 {
     public class Mob : MonoBehaviour
     {
+        private Rigidbody _rb;
+        
         [SerializeField] private float maxHealth = 100f;
         private float _health;
         
         [SerializeField] private float damage = 1f;
         public float Damage => damage;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        [SerializeField] private float speed = 1;
+
+        private void Awake()
         {
-        
+            _rb = GetComponent<Rigidbody>();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnEnable()
         {
-        
+            _health = maxHealth;
         }
-        
-        
+
+        private void Update()
+        {
+            transform.position += transform.forward * (speed * Time.deltaTime);
+        }
     }
 }

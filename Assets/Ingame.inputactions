@@ -1,0 +1,46 @@
+{
+    "name": "Ingame",
+    "maps": [
+        {
+            "name": "Point",
+            "id": "758787b9-99d0-4740-9919-95e6deabe7aa",
+            "actions": [
+                {
+                    "name": "OnPoint",
+                    "type": "Value",
+                    "id": "4fd74e34-9438-49ee-9b84-674d8dbd7c7b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1cc046cf-0b46-4a19-80d1-9b47e541e21d",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Pointer",
+                    "action": "OnPoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Pointer",
+            "bindingGroup": "Pointer",
+            "devices": [
+                {
+                    "devicePath": "<Pointer>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
