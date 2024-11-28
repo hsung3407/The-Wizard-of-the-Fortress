@@ -23,11 +23,6 @@ namespace Ingame
             StartCoroutine(SpawnMob());
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        }
-
         IEnumerator SpawnMob()
         {
             var delay = new WaitForSeconds(1f);

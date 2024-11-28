@@ -1,33 +1,40 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour
 {
-
-    [SerializeField] private InputActionReference pointAction;
+    [SerializeField] private InputActionReference pressInput;
+    [SerializeField] private InputActionReference pointInput;
+    
+    private bool _pressed;
+    private Vector2 _pressedPosition;
+    private Vector2 _currentPosition;
 
     private void Awake()
     {
-        pointAction.action.started += _ => Debug.Log("started");
-        pointAction.action.performed += Pressed;
-        pointAction.action.canceled += _ => Debug.Log("canceled");
+        pressInput.action.performed += _ => Pressed(true);
+        pressInput.action.canceled += _ => Pressed(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!_pressed) return;
         
     }
 
-    void Pressed(InputAction.CallbackContext context)
+    void Pressed(bool performed)
     {
-        Debug.Log(context.ReadValue<Vector2>());
+        _pressed = performed;
+        if(performed) _pressedPosition = pointInput.action.ReadValue<Vector2>();
+        Debug.LogWarning(_pressedPosition);
     }
+
 }

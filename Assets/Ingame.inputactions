@@ -2,28 +2,70 @@
     "name": "Ingame",
     "maps": [
         {
-            "name": "Point",
-            "id": "758787b9-99d0-4740-9919-95e6deabe7aa",
+            "name": "Ingame",
+            "id": "03e3f58b-8f16-4723-b1b1-cdaed6620cb6",
             "actions": [
                 {
                     "name": "OnPoint",
                     "type": "Value",
-                    "id": "4fd74e34-9438-49ee-9b84-674d8dbd7c7b",
+                    "id": "654993e2-e25b-4b31-8b9f-ee9129f9356e",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "OnPress",
+                    "type": "Button",
+                    "id": "075afbce-ea02-43af-9939-1a94891aa193",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "1cc046cf-0b46-4a19-80d1-9b47e541e21d",
-                    "path": "<Pointer>/position",
+                    "id": "6a5c113f-e8f4-4600-b989-aa5fb68cd849",
+                    "path": "<Touchscreen>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Pointer",
+                    "groups": ";Touchscreen",
                     "action": "OnPoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d69d680-4b54-4a7c-96ed-26ff6dea5dec",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mouse",
+                    "action": "OnPoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51f7f53a-966c-4570-8df8-c7731fe115cc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mouse",
+                    "action": "OnPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "549ee07b-4d1e-4b6d-9993-adfe7636c24b",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touchscreen",
+                    "action": "OnPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -32,11 +74,22 @@
     ],
     "controlSchemes": [
         {
-            "name": "Pointer",
-            "bindingGroup": "Pointer",
+            "name": "Mouse",
+            "bindingGroup": "Mouse",
             "devices": [
                 {
-                    "devicePath": "<Pointer>",
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Touchscreen",
+            "bindingGroup": "Touchscreen",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }
