@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,9 +27,9 @@ public class IngameViewPanel : MonoBehaviour, IPointerClickHandler
         Debug.Log(v[3]);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnRectTransformDimensionsChange()
     {
+        _image.rectTransform.GetWorldCorners(v);
     }
 
     public void OnPointerClick(PointerEventData eventData)
