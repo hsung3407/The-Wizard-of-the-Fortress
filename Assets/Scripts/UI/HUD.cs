@@ -10,7 +10,6 @@ namespace Ingame
     
         [SerializeField] private Image manaBar;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             healthBar.fillAmount = 1;
@@ -21,7 +20,7 @@ namespace Ingame
         {
             healthBar.fillAmount = health / maxHealth;
         }
-        
+
         public void SetMana(float mana, float maxMana)
         {
             
