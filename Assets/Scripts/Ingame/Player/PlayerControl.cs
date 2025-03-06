@@ -26,7 +26,7 @@ public class PlayerControl : MonoBehaviour
             if (!_predicating) return;
             
             var ray = IngameViewToRay(pointInput.action.ReadValue<Vector2>());
-            if (Physics.RaycastNonAlloc(ray, _hits, 30, ~LayerMask.NameToLayer("Enemy")) > 0)
+            if (Physics.RaycastNonAlloc(ray, _hits, 30, LayerMask.GetMask("Ground", "Default")) > 0)
             {
                 if (_hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
@@ -41,9 +41,8 @@ public class PlayerControl : MonoBehaviour
 
         pressInput.action.performed += _ =>
         {
-
             var ray = IngameViewToRay(pointInput.action.ReadValue<Vector2>());
-            if (Physics.RaycastNonAlloc(ray, _hits, 30, ~LayerMask.NameToLayer("Enemy")) < 1) return;
+            if (Physics.RaycastNonAlloc(ray, _hits, 30, LayerMask.GetMask("Ground", "Default")) < 1) return;
             if (_hits[0].transform.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
             _predicating = true;
 
