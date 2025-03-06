@@ -10,25 +10,33 @@ namespace Ingame.Player.Predictor
 
         private GameObject _currentPredictor;
 
+        public enum PredictorType
+        {
+            Square,
+            Circle,
+            None
+        }
+
         private void Awake()
         {
             foreach (var predictor in predictors)
                 predictor.SetActive(false);
         }
 
-        public void SetPredictor(string predictorType)
+        public void SetPredictor(PredictorType predictorType, float range = 1)
         {
             _currentPredictor?.SetActive(false);
-            if(predictorType == null) return;
+
+            if(predictorType == PredictorType.None) return;
             
-            _currentPredictor = predictors.Find(p=>p.name == predictorType);
+            _currentPredictor = predictors[(int)predictorType];
             _currentPredictor.SetActive(true);
         }
 
-        public void Update()
+        public void PosUpdate(Vector3 position)
         {
-            if(!_currentPredictor) return;
-            _currentPredictor.transform.position = transform.position;
+            if(!_currentPredictor || !_currentPredictor.activeSelf) return;
+            transform.position = position;
         }
     }
 }
