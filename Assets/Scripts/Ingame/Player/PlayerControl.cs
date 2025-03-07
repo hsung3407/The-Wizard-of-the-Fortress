@@ -53,7 +53,6 @@ public class PlayerControl : MonoBehaviour
         
         pointInput.action.performed += c =>
         {
-            Debug.Log(Time.deltaTime);
             var point = c.ReadValue<Vector2>();
             if (!_predicating) return;
 
