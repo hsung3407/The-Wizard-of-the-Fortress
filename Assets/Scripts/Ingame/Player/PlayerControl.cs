@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private PredictorManager predictorManager;
 
     private readonly RaycastHit[] _hits = new RaycastHit[1];
-    LayerMask _layerMask;
+    private LayerMask _layerMask;
 
     private void Awake()
     {
