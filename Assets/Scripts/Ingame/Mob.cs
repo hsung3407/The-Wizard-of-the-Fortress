@@ -6,8 +6,6 @@ namespace Ingame
 {
     public class Mob : MonoBehaviour
     {
-        private Rigidbody _rb;
-        
         [SerializeField] private float maxHealth = 100f;
         private float _health;
         
@@ -15,11 +13,6 @@ namespace Ingame
         public float Damage => damage;
 
         [SerializeField] private float speed = 1;
-
-        private void Awake()
-        {
-            _rb = GetComponent<Rigidbody>();
-        }
 
         private void OnEnable()
         {
