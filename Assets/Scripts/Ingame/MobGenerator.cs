@@ -28,7 +28,7 @@ namespace Ingame
             var delay = new WaitForSeconds(1f);
             while (true)
             {
-                var go = ObjectPool.Instance.Get("Zombie");
+                var go = ObjectPool.Instance.Get(StageInfo.MobType);
                 go.transform.position = new Vector3(Random.Range(_spawnArea.bounds.min.x, _spawnArea.bounds.max.x),
                     Random.Range(_spawnArea.bounds.min.y, _spawnArea.bounds.max.y),
                     Random.Range(_spawnArea.bounds.min.z, _spawnArea.bounds.max.z));
