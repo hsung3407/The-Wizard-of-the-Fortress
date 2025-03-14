@@ -34,7 +34,7 @@ public class PlayerControl : MonoBehaviour
 
             var ray = IngameViewToRay(point);
             if (Physics.RaycastNonAlloc(ray, _hits, 30, _layerMask) < 1) return;
-            if (_hits[0].transform.gameObject.layer != LayerMask.GetMask("Ground")) return;
+            if (_hits[0].transform.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
             _predicating = true;
 
             //현재는 테스트용
@@ -61,7 +61,7 @@ public class PlayerControl : MonoBehaviour
                 var ray = IngameViewToRay(point);
                 if (Physics.RaycastNonAlloc(ray, _hits, 30, _layerMask) > 0)
                 {
-                    if (_hits[0].transform.gameObject.layer == LayerMask.GetMask("Ground"))
+                    if (_hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
                         predictorManager.PosUpdate(_hits[0].point);
                         return;
