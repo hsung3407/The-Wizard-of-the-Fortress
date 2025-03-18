@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace Ingame.Player
 {
-    public class CommandManager : MonoBehaviour
+    public class PlayerCommand : MonoBehaviour
     {
         private readonly List<Command> _commandList = new List<Command>();
         private int _commandCount;
