@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class CommandDisplayView : MonoBehaviour
+    public class PlayerCommandView : MonoBehaviour
     {
         [SerializeField] private Color[] commandColors = new Color[2];
         [SerializeField] private Image commandPrefab;

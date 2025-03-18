@@ -13,7 +13,7 @@ namespace Ingame.Player
         private int _commandCounter;
         private Command[] _commands;
 
-        [SerializeField] private CommandDisplayView commandDisplayView;
+        [FormerlySerializedAs("commandDisplayView")] [SerializeField] private PlayerCommandView playerCommandView;
 
         public enum Command
         {
@@ -25,7 +25,7 @@ namespace Ingame.Player
         {
             _commandCount = StageInfo.CommandCount;
             _commands = new Command[_commandCount];
-            commandDisplayView.Init(_commandCount);
+            playerCommandView.Init(_commandCount);
         }
 
         public void AddCommand(int command) => AddCommand((Command)command);
@@ -35,7 +35,7 @@ namespace Ingame.Player
             if(_commands.Length >= _commandCount) return;
             
             _commands[_commandCount] = command;
-            commandDisplayView.AddDisplay(command, _commandCounter++);
+            playerCommandView.AddDisplay(command, _commandCounter++);
         }
         
         public string GetCommand()
@@ -50,7 +50,7 @@ namespace Ingame.Player
         public void ClearCommands()
         {
             _commandCounter = 0;
-            commandDisplayView.ClearDisplay();
+            playerCommandView.ClearDisplay();
         }
     }
 }
