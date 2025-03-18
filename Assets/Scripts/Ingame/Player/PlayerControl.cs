@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private InputActionReference pressInput;
     [SerializeField] private InputActionReference pointInput;
 
-    private bool _predicating;
+    private bool _interacting;
 
     [SerializeField] private Camera ingameCamera;
     [SerializeField] private RectTransform ingameViewRect;
@@ -25,18 +25,13 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         _layerMask = LayerMask.GetMask("Ground", "Default");
-
-
+        
         pressInput.action.performed += _ =>
         {
             var point = pointInput.action.ReadValue<Vector2>();
-            if (!IsInTouchArea(point)) return;
+            if(!PredictRaycast(point)) return;
 
-            var ray = IngameViewToRay(point);
-            if (Physics.RaycastNonAlloc(ray, _hits, 30, _layerMask) < 1) return;
-            if (_hits[0].transform.gameObject.layer != LayerMask.NameToLayer("Ground")) return;
-            _predicating = true;
-
+            _interacting = true;
             //현재는 테스트용
             //TODO 마법 정보 불러와서 전달하기
             predictorManager.SetPredictor(PredictorManager.PredictorType.Square);
@@ -45,32 +40,26 @@ public class PlayerControl : MonoBehaviour
 
         pressInput.action.canceled += _ =>
         {
-            if (!_predicating) return;
-            _predicating = false;
+            if (!_interacting) return;
+            _interacting = false;
             predictorManager.SetPredictor(PredictorManager.PredictorType.None);
             Fire();
         };
-        
+
         pointInput.action.performed += c =>
         {
+            if (!_interacting) return;
+
             var point = c.ReadValue<Vector2>();
-            if (!_predicating) return;
-
-            if (IsInTouchArea(point))
+            if (PredictRaycast(point))
             {
-                var ray = IngameViewToRay(point);
-                if (Physics.RaycastNonAlloc(ray, _hits, 30, _layerMask) > 0)
-                {
-                    if (_hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
-                    {
-                        predictorManager.PosUpdate(_hits[0].point);
-                        return;
-                    }
-                }
+                predictorManager.PosUpdate(_hits[0].point);
             }
-
-            predictorManager.SetPredictor(PredictorManager.PredictorType.None);
-            _predicating = false;
+            else
+            {
+                predictorManager.SetPredictor(PredictorManager.PredictorType.None);
+                _interacting = false;
+            }
         };
     }
 
@@ -78,6 +67,14 @@ public class PlayerControl : MonoBehaviour
     {
         ingameViewRect.GetWorldCorners(_ingameViewCorners);
         touchAreaRect.GetWorldCorners(_touchAreaCorners);
+    }
+
+    private bool PredictRaycast(Vector2 point)
+    {
+        if (!IsInTouchArea(point)) return false;
+        var ray = IngameViewToRay(point);
+        return Physics.RaycastNonAlloc(ray, _hits, 30, _layerMask) > 0 &&
+               _hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground");
     }
 
     private bool IsInTouchArea(Vector3 origin)
