@@ -13,17 +13,11 @@ namespace UI
     {
         [SerializeField] private Color[] commandColors = new Color[2];
         [SerializeField] private Image commandPrefab;
-
-        private PlayerCommand.Command[] _commands;
+        
         private Image[] _commandObjects;
-        private int _count;
 
-        private void Start()
+        public void Init(int commandCount)
         {
-            var commandCount = StageInfo.CommandCount;
-            
-            _commands = new PlayerCommand.Command[commandCount];
-            
             _commandObjects = new Image[commandCount];
             for (var i = 0; i < _commandObjects.Length; i++)
             {
@@ -31,38 +25,18 @@ namespace UI
                 image.enabled = false;
                 _commandObjects[i] = image;
             }
-
-            _count = 0;
         }
 
-        public void AddDisplay(PlayerCommand.Command command)
+        public void AddDisplay(PlayerCommand.Command command, int commandCounter)
         {
-            if (_count >= _commandObjects.Length) return;
-            
-            _commands[_count] = command;
-            _commandObjects[_count].enabled = true;
-            _commandObjects[_count].color = commandColors[(int)command];
-            
-            Debug.Log(GetCommand());
-
-            _count++;
-        }
-
-        public string GetCommand()
-        {
-            var sb = new StringBuilder();
-            for (int i = 0; i <= _count; i++)
-                sb.Append(((int)_commands[i]).ToString());
-
-            return sb.ToString();
+            _commandObjects[commandCounter].enabled = true;
+            _commandObjects[commandCounter].color = commandColors[(int)command];
         }
 
         public void ClearDisplay()
         {
             foreach (var commandObject in _commandObjects)
                 commandObject.enabled = false;
-
-            _count = 0;
         }
     }
 }
