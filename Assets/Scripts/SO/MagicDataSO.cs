@@ -22,6 +22,9 @@ namespace Ingame.Player
         public string MagicName => magicName;
         public string Command => command;
         
+        public Sprite Icon => icon;
+        public string Description => description;
+        
         public PredictorManager.PredictorType PredictorType => predictorType;
         public MagicBase MagicObject => magicObject;
     }
