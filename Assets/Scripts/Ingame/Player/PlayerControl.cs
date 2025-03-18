@@ -29,7 +29,7 @@ public class PlayerControl : MonoBehaviour
         pressInput.action.performed += _ =>
         {
             var point = pointInput.action.ReadValue<Vector2>();
-            if(!PredictRaycast(point)) return;
+            if(!PredictRaycast(point, _hits)) return;
 
             _interacting = true;
             //현재는 테스트용
@@ -41,8 +41,13 @@ public class PlayerControl : MonoBehaviour
         pressInput.action.canceled += _ =>
         {
             if (!_interacting) return;
+            
+            var point = pointInput.action.ReadValue<Vector2>();
+            if(!PredictRaycast(point, _hits)) return;
+            
             _interacting = false;
             predictorManager.SetPredictor(PredictorManager.PredictorType.None);
+            
             Fire();
         };
 
@@ -51,7 +56,7 @@ public class PlayerControl : MonoBehaviour
             if (!_interacting) return;
 
             var point = c.ReadValue<Vector2>();
-            if (PredictRaycast(point))
+            if (PredictRaycast(point, _hits))
             {
                 predictorManager.PosUpdate(_hits[0].point);
             }
@@ -69,12 +74,12 @@ public class PlayerControl : MonoBehaviour
         touchAreaRect.GetWorldCorners(_touchAreaCorners);
     }
 
-    private bool PredictRaycast(Vector2 point)
+    private bool PredictRaycast(Vector2 point, RaycastHit[] hits)
     {
         if (!IsInTouchArea(point)) return false;
         var ray = IngameViewToRay(point);
-        return Physics.RaycastNonAlloc(ray, _hits, 30, _layerMask) > 0 &&
-               _hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground");
+        return Physics.RaycastNonAlloc(ray, hits, 30, _layerMask) > 0 &&
+               hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground");
     }
 
     private bool IsInTouchArea(Vector3 origin)
