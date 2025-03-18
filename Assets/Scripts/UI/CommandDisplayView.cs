@@ -14,7 +14,7 @@ namespace UI
         [SerializeField] private Color[] commandColors = new Color[2];
         [SerializeField] private Image commandPrefab;
 
-        private CommandManager.Command[] _commands;
+        private PlayerCommand.Command[] _commands;
         private Image[] _commandObjects;
         private int _count;
 
@@ -22,7 +22,7 @@ namespace UI
         {
             var commandCount = StageInfo.CommandCount;
             
-            _commands = new CommandManager.Command[commandCount];
+            _commands = new PlayerCommand.Command[commandCount];
             
             _commandObjects = new Image[commandCount];
             for (var i = 0; i < _commandObjects.Length; i++)
@@ -35,7 +35,7 @@ namespace UI
             _count = 0;
         }
 
-        public void AddDisplay(CommandManager.Command command)
+        public void AddDisplay(PlayerCommand.Command command)
         {
             if (_count >= _commandObjects.Length) return;
             
