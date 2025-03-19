@@ -35,15 +35,15 @@ public class PlayerControl : MonoBehaviour
         
         pressInput.action.performed += _ =>
         {
+            var point = pointInput.action.ReadValue<Vector2>();
+            if(!PredictRaycast(point, _hits)) return;
+            
             var command = _playerCommand.GetCommand();
             if (!_playerMagic.GetMagicDataWithCommand(command, out var magicData))
             {
                 MagicNotFound();
                 return;
             }
-            
-            var point = pointInput.action.ReadValue<Vector2>();
-            if(!PredictRaycast(point, _hits)) return;
 
             _interacting = true;
             predictorManager.SetPredictor(magicData.PredictorType);
