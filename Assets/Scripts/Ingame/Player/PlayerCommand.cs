@@ -13,7 +13,7 @@ namespace Ingame.Player
         private int _commandCounter;
         private Command[] _commands;
 
-        [FormerlySerializedAs("commandDisplayView")] [SerializeField] private PlayerCommandView playerCommandView;
+        [SerializeField] private PlayerCommandView playerCommandView;
 
         public enum Command
         {
