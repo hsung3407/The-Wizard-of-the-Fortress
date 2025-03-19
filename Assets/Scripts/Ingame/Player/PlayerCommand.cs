@@ -32,7 +32,7 @@ namespace Ingame.Player
         
         public void AddCommand(Command command)
         {
-            if(_commands.Length >= _commandCount) return;
+            if(_commands.Length <= _commandCount) return;
             
             _commands[_commandCount] = command;
             playerCommandView.AddDisplay(command, _commandCounter++);
