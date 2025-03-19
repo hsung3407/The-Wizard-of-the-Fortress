@@ -1,4 +1,5 @@
 using System;
+using Ingame.Player;
 using Ingame.Player.Predictor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +10,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private InputActionReference pressInput;
     [SerializeField] private InputActionReference pointInput;
 
-    private bool _interacting;
+    private PlayerCommand _playerCommand;
+    private PlayerMagic _playerMagic;
 
     [SerializeField] private Camera ingameCamera;
     [SerializeField] private RectTransform ingameViewRect;
@@ -22,19 +24,29 @@ public class PlayerControl : MonoBehaviour
     private readonly RaycastHit[] _hits = new RaycastHit[1];
     private LayerMask _layerMask;
 
+    private bool _interacting;
+
     private void Awake()
     {
+        _playerCommand = GetComponent<PlayerCommand>();
+        _playerMagic = GetComponent<PlayerMagic>();
+        
         _layerMask = LayerMask.GetMask("Ground", "Default");
         
         pressInput.action.performed += _ =>
         {
+            var command = _playerCommand.GetCommand();
+            if (!_playerMagic.GetMagicDataWithCommand(command, out var magicData))
+            {
+                MagicNotFound();
+                return;
+            }
+            
             var point = pointInput.action.ReadValue<Vector2>();
             if(!PredictRaycast(point, _hits)) return;
 
             _interacting = true;
-            //현재는 테스트용
-            //TODO 마법 정보 불러와서 전달하기
-            predictorManager.SetPredictor(PredictorManager.PredictorType.Square);
+            predictorManager.SetPredictor(magicData.PredictorType);
             predictorManager.PosUpdate(_hits[0].point);
         };
 
@@ -48,7 +60,7 @@ public class PlayerControl : MonoBehaviour
             _interacting = false;
             predictorManager.SetPredictor(PredictorManager.PredictorType.None);
             
-            Fire();
+            Fire(_hits[0].point);
         };
 
         pointInput.action.performed += c =>
@@ -97,7 +109,20 @@ public class PlayerControl : MonoBehaviour
         return ingameCamera.ScreenPointToRay(new Vector3(x, y, 0));
     }
 
-    private void Fire()
+    private void MagicNotFound()
     {
+        _playerCommand.ClearCommands();
+    }
+
+    private void Fire(Vector3 point)
+    {
+        var command = _playerCommand.GetCommand();
+        if (!_playerMagic.GetMagicDataWithCommand(command, out var magicData))
+        {
+            MagicNotFound();
+            return;
+        }
+        
+        if(magicData.MagicObject) Instantiate(magicData.MagicObject, point, Quaternion.identity);
     }
 }
