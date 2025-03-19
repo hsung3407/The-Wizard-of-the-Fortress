@@ -122,6 +122,7 @@ public class PlayerControl : MonoBehaviour
             MagicNotFound();
             return;
         }
+        _playerCommand.ClearCommands();
         
         if(magicData.MagicObject) Instantiate(magicData.MagicObject, point, Quaternion.identity);
     }
