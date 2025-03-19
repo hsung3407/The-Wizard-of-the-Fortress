@@ -41,7 +41,7 @@ namespace Ingame.Player
         public string GetCommand()
         {
             var sb = new StringBuilder();
-            for (int i = 0; i <= _commandCounter; i++)
+            for (int i = 0; i < _commandCounter; i++)
                 sb.Append(((int)_commands[i]).ToString());
 
             return sb.ToString();
