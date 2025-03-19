@@ -10,7 +10,7 @@ namespace Ingame.Player
     public class PlayerCommand : MonoBehaviour
     {
         private int _commandCount;
-        private int _commandCounter;
+        private int _counter;
         private Command[] _commands;
 
         [SerializeField] private PlayerCommandView playerCommandView;
@@ -32,16 +32,16 @@ namespace Ingame.Player
         
         public void AddCommand(Command command)
         {
-            if(_commands.Length <= _commandCount) return;
+            if(_commands.Length <= _counter) return;
             
-            _commands[_commandCount] = command;
-            playerCommandView.AddDisplay(command, _commandCounter++);
+            _commands[_counter] = command;
+            playerCommandView.AddDisplay(command, _counter++);
         }
         
         public string GetCommand()
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < _commandCounter; i++)
+            for (int i = 0; i < _counter; i++)
                 sb.Append(((int)_commands[i]).ToString());
 
             return sb.ToString();
@@ -49,7 +49,7 @@ namespace Ingame.Player
 
         public void ClearCommands()
         {
-            _commandCounter = 0;
+            _counter = 0;
             playerCommandView.ClearDisplay();
         }
     }
