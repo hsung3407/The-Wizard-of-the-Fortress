@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Ingame.Player.Predictor
 {
     public class PredictorManager : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> predictors;
+        private List<DecalProjector> predictors;
 
         private GameObject _currentPredictor;
 
@@ -19,8 +21,10 @@ namespace Ingame.Player.Predictor
 
         private void Awake()
         {
+            predictors = GetComponentsInChildren<DecalProjector>().ToList();
+            
             foreach (var predictor in predictors)
-                predictor.SetActive(false);
+                predictor.gameObject.SetActive(false);
         }
 
         public void SetPredictor(PredictorType predictorType, float range = 1)
@@ -29,7 +33,7 @@ namespace Ingame.Player.Predictor
 
             if(predictorType == PredictorType.None) return;
             
-            _currentPredictor = predictors[(int)predictorType];
+            _currentPredictor = predictors[(int)predictorType].gameObject;
             _currentPredictor.SetActive(true);
         }
 
