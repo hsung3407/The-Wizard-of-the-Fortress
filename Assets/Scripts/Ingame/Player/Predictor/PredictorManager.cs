@@ -34,7 +34,7 @@ namespace Ingame.Player.Predictor
             if(predictorType == PredictorType.None) return;
             
             var projector = predictors[(int)predictorType];
-            projector.size = new Vector2(range, range);
+            projector.size = new Vector3(range, range, 1);
             _currentPredictor = projector.gameObject;
             _currentPredictor.SetActive(true);
         }
