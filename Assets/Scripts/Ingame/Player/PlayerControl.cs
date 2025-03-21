@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour
             }
 
             _interacting = true;
-            predictorManager.SetPredictor(magicData.PredictorType);
+            predictorManager.SetPredictor(magicData.PredictorType, magicData.PredictRange);
             predictorManager.PosUpdate(_hits[0].point);
         };
 
