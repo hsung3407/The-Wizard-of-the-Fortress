@@ -5,6 +5,5 @@ namespace Ingame.Player
 {
     public abstract class MagicBase : MonoBehaviour
     {
-        public PredictorManager.PredictorType predictorType;
     }
 }
