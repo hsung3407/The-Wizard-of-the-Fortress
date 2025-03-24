@@ -15,7 +15,8 @@ MonoBehaviour:
   magicName: Ice Field
   command: 1
   icon: {fileID: 0}
-  description: "\uBC94\uC704 \uB0B4\uC758 \uC801\uC744 \uB454\uD558\uAC8C \uD55C\uB2E4"
+  description: "\uBC94\uC704 \uB0B4\uC758 \uC801\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C
+    30% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
   predictorType: 1
   predictRange: 1.9
-  magicObject: {fileID: 0}
+  magicObject: {fileID: 523172810074697831, guid: e5894d487c1a3ba4fb06fa867860aa1f, type: 3}
