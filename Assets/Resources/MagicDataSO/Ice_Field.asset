@@ -19,4 +19,5 @@ MonoBehaviour:
     50% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
   predictorType: 1
   predictRange: 3.8
+  manaCost: 30
   magicObject: {fileID: 523172810074697831, guid: e5894d487c1a3ba4fb06fa867860aa1f, type: 3}
