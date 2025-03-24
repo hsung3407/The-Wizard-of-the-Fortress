@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControler : MonoBehaviour
 {
     [SerializeField] private InputActionReference pressInput;
     [SerializeField] private InputActionReference pointInput;
