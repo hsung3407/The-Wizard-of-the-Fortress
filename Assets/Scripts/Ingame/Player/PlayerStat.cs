@@ -14,12 +14,16 @@ namespace Ingame.Player
             _mana = maxMana;
         }
 
-        public bool CheckMana(float mana) => mana <= _mana;
-
-        public void UseMana(float mana)
+        public bool UseMana(float mana)
         {
+            if (mana > _mana)
+            {
+                Debug.Log("마나 부족");
+                return false;
+            }
             _mana -= mana;
             HUD.Instance.SetMana(_mana, maxMana);
+            return true;
         }
     }
 }
