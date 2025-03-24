@@ -28,6 +28,7 @@ namespace Ingame.Player
 
         private void Awake()
         {
+            _playerStat = GetComponent<PlayerStat>();
             _playerCommand = GetComponent<PlayerCommand>();
             _playerMagic = GetComponent<PlayerMagic>();
         
