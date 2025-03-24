@@ -13,7 +13,14 @@ namespace Ingame
         public float Damage => damage;
 
         [SerializeField] private float speed = 1;
-
+        private float _speedMultiplier = 1;
+        
+        public enum StatType
+        {
+            Speed,
+            SpeedMultiplier
+        }
+        
         private void OnEnable()
         {
             _health = maxHealth;
@@ -21,7 +28,22 @@ namespace Ingame
 
         private void Update()
         {
-            transform.position += transform.forward * (speed * Time.deltaTime);
+            transform.position += transform.forward * (speed * _speedMultiplier * Time.deltaTime);
+        }
+
+        public void ModifyStat(StatType statType, float amount)
+        {
+            switch (statType)
+            {
+                case StatType.Speed:
+                    speed += amount;
+                    break;
+                case StatType.SpeedMultiplier:
+                    _speedMultiplier += amount;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
