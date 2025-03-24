@@ -28,7 +28,7 @@ namespace Ingame
 
         private void Update()
         {
-            transform.position += transform.forward * (speed * _speedMultiplier * Time.deltaTime);
+            transform.position += transform.forward * Mathf.Max(speed * _speedMultiplier * Time.deltaTime, 0);
         }
 
         public void ModifyStat(StatType statType, float amount)
