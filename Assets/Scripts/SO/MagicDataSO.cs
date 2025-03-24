@@ -19,7 +19,7 @@ namespace Ingame.Player
         [SerializeField] private PredictorManager.PredictorType predictorType;
         [SerializeField] private float predictRange;
         
-        [SerializeField] private MagicBase magicObject;
+        [SerializeField] private MagicController magicObject;
     
         public string MagicName => magicName;
         public string Command => command;
@@ -29,6 +29,6 @@ namespace Ingame.Player
         
         public PredictorManager.PredictorType PredictorType => predictorType;
         public float PredictRange => predictRange;
-        public MagicBase MagicObject => magicObject;
+        public MagicController MagicObject => magicObject;
     }
 }
