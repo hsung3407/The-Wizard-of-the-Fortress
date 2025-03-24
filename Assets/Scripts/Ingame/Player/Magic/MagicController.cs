@@ -8,6 +8,8 @@ namespace Ingame.Player
 {
     public class MagicController : MonoBehaviour
     {
+        [SerializeField] private float lifeTime = 5f;
+        
         private DetectorBase detector;
         private ModifierBase modifier;
 
@@ -22,6 +24,8 @@ namespace Ingame.Player
             if (!detector || !modifier) return;
             detector.RegisterOnDetected(modifier.Modify);
             detector.RegisterOnReleased(modifier.UnModify);
+            
+            Destroy(gameObject, lifeTime);
         }
     }
 }
