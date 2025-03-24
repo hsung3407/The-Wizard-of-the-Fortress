@@ -23,7 +23,7 @@ namespace Ingame
 
         public void SetMana(float mana, float maxMana)
         {
-            
+            manaBar.fillAmount = mana / maxMana;
         }
     }
 }
