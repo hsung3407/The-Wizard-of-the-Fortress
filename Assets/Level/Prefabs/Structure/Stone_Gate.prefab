@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6742635515024352771}
   - component: {fileID: 4570829109618417424}
   - component: {fileID: 6319169556056654448}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Stone_Gate_Pillar_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4057690151435011102}
   - component: {fileID: 2426633517811854348}
   - component: {fileID: 1967794161632257886}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 1734340054746163111}
   - component: {fileID: 6695290095460332493}
   - component: {fileID: 8428315162526347162}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Stone_Gate_Pillar_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 1637416554242508656}
   - component: {fileID: 7397811686817793216}
   - component: {fileID: 8091474139196029477}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Stone_Doorway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2972895543716427211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Stone_Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194323648986388311}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.07899354, y: -0.0015568993, z: -0.0021117576, w: 0.9968717}
+  m_LocalRotation: {x: -0.07899546, y: -0.0015591321, z: -0.0021118838, w: 0.99687153}
   m_LocalPosition: {x: -0.07841121, y: -0.007827101, z: 5.402636}
   m_LocalScale: {x: 1.609, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -378,4 +378,4 @@ Transform:
   - {fileID: 6742635515024352771}
   - {fileID: 1734340054746163111}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -9.038, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -9.062, y: -0.161, z: -0.23}
