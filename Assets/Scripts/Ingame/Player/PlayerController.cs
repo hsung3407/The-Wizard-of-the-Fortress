@@ -125,7 +125,7 @@ namespace Ingame.Player
             }
             _playerCommand.ClearCommands();
 
-            if (_playerStat.UseMana(magicData.ManaCost)) return;
+            if (!_playerStat.UseMana(magicData.ManaCost)) return;
             if(magicData.MagicObject) Instantiate(magicData.MagicObject, point, Quaternion.identity);
         }
     }
