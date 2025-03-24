@@ -151,7 +151,7 @@ Material:
     - _ReceiveShadows: 1
     - _SampleGI: 0
     - _Shades: 0.1
-    - _Smoothness: 0.508
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularCutoff: 1.62
     - _SpecularHighlights: 1
