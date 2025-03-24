@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6216532115693788942}
   - component: {fileID: 6469287540622861476}
-  - component: {fileID: 6671932784713063191}
+  - component: {fileID: 9035632188689488801}
   m_Layer: 6
   m_Name: Slime
   m_TagString: Mob
@@ -269,8 +269,8 @@ MonoBehaviour:
   maxHealth: 100
   damage: 1
   speed: 1
---- !u!65 &6671932784713063191
-BoxCollider:
+--- !u!135 &9035632188689488801
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -288,8 +288,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6086922, y: 0.5213364, z: 0.60733426}
-  m_Center: {x: -0.0048985183, y: 0.23933181, z: 0.0020279884}
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &7534262480104691789
 GameObject:
   m_ObjectHideFlags: 0
