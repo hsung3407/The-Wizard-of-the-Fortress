@@ -18,6 +18,7 @@ namespace Ingame.Player
         private void Update()
         {
             _mana = Mathf.Clamp(_mana + manaRegenerationAmountPerSec * Time.deltaTime, 0, maxMana);
+            HUD.Instance.SetMana(_mana, maxMana);
         }
 
         public bool UseMana(float mana)
