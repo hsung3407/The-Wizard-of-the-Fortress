@@ -1,6 +1,7 @@
 using Ingame.Player.Predictor;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ingame.Player
 {
@@ -19,7 +20,7 @@ namespace Ingame.Player
         [SerializeField] private PredictorManager.PredictorType predictorType;
         [SerializeField] private float predictRange;
         
-        [SerializeField] private float useMana;
+        [FormerlySerializedAs("useMana")] [SerializeField] private float manaCost;
         
         [SerializeField] private MagicController magicObject;
     
@@ -31,7 +32,7 @@ namespace Ingame.Player
         
         public PredictorManager.PredictorType PredictorType => predictorType;
         public float PredictRange => predictRange;
-        public float UseMana => useMana;
+        public float ManaCost => manaCost;
         public MagicController MagicObject => magicObject;
     }
 }
