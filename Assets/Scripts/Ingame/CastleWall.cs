@@ -18,7 +18,7 @@ namespace Ingame
         {
             if (other.CompareTag("Mob"))
             {
-                TakeHit(other.GetComponent<Mob>().Damage);
+                TakeHit(other.GetComponent<Enemy>().Damage);
                 ObjectPool.Instance.Return(other.gameObject);
             }
         }

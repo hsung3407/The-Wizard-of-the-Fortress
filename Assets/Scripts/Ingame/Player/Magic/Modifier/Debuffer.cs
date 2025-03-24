@@ -8,19 +8,19 @@ namespace Ingame.Player.Magic.Modifier
     {
         [SerializeField] private List<DebuffInfo> debuffs = new List<DebuffInfo>();
         
-        public override void Modify(Mob mob)
+        public override void Modify(Enemy enemy)
         {
             foreach (var debuffInfo in debuffs)
             {
-                mob.ModifyStat(debuffInfo.StatType, debuffInfo.Amount);  
+                enemy.ModifyStat(debuffInfo.StatType, debuffInfo.Amount);  
             }
         }
 
-        public override void UnModify(Mob mob)
+        public override void UnModify(Enemy enemy)
         {
             foreach (var debuffInfo in debuffs)
             {
-                mob.ModifyStat(debuffInfo.StatType, -debuffInfo.Amount);  
+                enemy.ModifyStat(debuffInfo.StatType, -debuffInfo.Amount);  
             }
         }
     }

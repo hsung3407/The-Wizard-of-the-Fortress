@@ -6,17 +6,17 @@ namespace Ingame.Player.Modifier
 {
     public abstract class ModifierBase : MonoBehaviour
     {
-        public abstract void Modify(Mob mob);
-        public abstract void UnModify(Mob mob);
+        public abstract void Modify(Enemy enemy);
+        public abstract void UnModify(Enemy enemy);
     }
 
     [Serializable]
     public class DebuffInfo
     {
-        [SerializeField] private Mob.StatType statType;
+        [SerializeField] private Enemy.StatType statType;
         [SerializeField] private float amount;
         
-        public Mob.StatType StatType => statType;
+        public Enemy.StatType StatType => statType;
         public float Amount => amount;
     }
 }

@@ -7,36 +7,36 @@ namespace Ingame.Player.Magic.Detector
 {
     public abstract class DetectorBase : MonoBehaviour
     {
-        private Dictionary<Mob, int> DetectedMobs {get; set;} = new Dictionary<Mob, int>();
+        private Dictionary<Enemy, int> DetectedMobs {get; set;} = new Dictionary<Enemy, int>();
 
-        private Action<Mob> OnDetected { get; set; }
-        private Action<Mob> OnReleased { get; set; }
-        public void RegisterOnDetected(Action<Mob> onDetected) => OnDetected = onDetected;
-        public void RegisterOnReleased(Action<Mob> onReleased) => OnReleased = onReleased;
+        private Action<Enemy> OnDetected { get; set; }
+        private Action<Enemy> OnReleased { get; set; }
+        public void RegisterOnDetected(Action<Enemy> onDetected) => OnDetected = onDetected;
+        public void RegisterOnReleased(Action<Enemy> onReleased) => OnReleased = onReleased;
 
         //true = 감지가 해제 되기 전에 재 감지 되었을 때 효과를 중복 적용 가능
         [SerializeField] private bool isDuplicateDetectable;
 
-        protected void OnDetect(Mob mob)
+        protected void OnDetect(Enemy enemy)
         {
-            if (!DetectedMobs.TryAdd(mob, 1))
+            if (!DetectedMobs.TryAdd(enemy, 1))
             {
                 if (!isDuplicateDetectable) return;
-                DetectedMobs[mob]++;
+                DetectedMobs[enemy]++;
             }
 
-            OnDetected(mob);
+            OnDetected(enemy);
         }
 
-        protected void OnRelease(Mob mob)
+        protected void OnRelease(Enemy enemy)
         {
-            if (!DetectedMobs.ContainsKey(mob))
+            if (!DetectedMobs.ContainsKey(enemy))
             {
-                DetectedMobs[mob]--;
-                if (DetectedMobs[mob] == 0) DetectedMobs.Remove(mob);
+                DetectedMobs[enemy]--;
+                if (DetectedMobs[enemy] == 0) DetectedMobs.Remove(enemy);
             }
 
-            OnReleased(mob);
+            OnReleased(enemy);
         }
 
         protected void OnDisable()

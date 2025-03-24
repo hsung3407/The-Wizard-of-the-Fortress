@@ -7,7 +7,7 @@ namespace Ingame.Player.Magic.Detector
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Mob")) return;
-            var mob = other.GetComponent<Mob>();
+            var mob = other.GetComponent<Enemy>();
             if (mob == null) return;
             OnDetect(mob);
         }
@@ -15,7 +15,7 @@ namespace Ingame.Player.Magic.Detector
         private void OnTriggerExit(Collider other)
         {
             if (!other.CompareTag("Mob")) return;
-            var mob = other.GetComponent<Mob>();
+            var mob = other.GetComponent<Enemy>();
             if (mob == null) return;
             OnRelease(mob);
         }

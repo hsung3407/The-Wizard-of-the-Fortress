@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 namespace Ingame
 {
-    public class Mob : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
         [SerializeField] private float maxHealth = 100f;
         private float _health;
