@@ -19,6 +19,8 @@ namespace Ingame.Player
         [SerializeField] private PredictorManager.PredictorType predictorType;
         [SerializeField] private float predictRange;
         
+        [SerializeField] private float useMana;
+        
         [SerializeField] private MagicController magicObject;
     
         public string MagicName => magicName;
@@ -29,6 +31,7 @@ namespace Ingame.Player
         
         public PredictorManager.PredictorType PredictorType => predictorType;
         public float PredictRange => predictRange;
+        public float UseMana => useMana;
         public MagicController MagicObject => magicObject;
     }
 }
