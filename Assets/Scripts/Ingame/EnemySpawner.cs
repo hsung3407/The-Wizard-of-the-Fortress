@@ -20,7 +20,7 @@ namespace Ingame
         
         public void SpawnEnemy()
         {
-            var go = ObjectPool.Instance.Get(StageInfo.MobType);
+            var go = ObjectPool.Instance.Get(StaticStageInfo.MobType);
             go.transform.position = new Vector3(Random.Range(_spawnArea.bounds.min.x, _spawnArea.bounds.max.x),
                 Random.Range(_spawnArea.bounds.min.y, _spawnArea.bounds.max.y),
                 Random.Range(_spawnArea.bounds.min.z, _spawnArea.bounds.max.z));

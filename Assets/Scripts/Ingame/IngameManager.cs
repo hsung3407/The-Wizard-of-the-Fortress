@@ -15,7 +15,7 @@ namespace Ingame
 
         private void Awake()
         {
-            _waveData = Resources.LoadAll<StageWaveDataSO>($"StageWaveData/Stage {StageInfo.StageIndex}");
+            _waveData = Resources.LoadAll<StageWaveDataSO>($"StageWaveData/Stage {StaticStageInfo.StageIndex}");
         }
 
         private void Start()

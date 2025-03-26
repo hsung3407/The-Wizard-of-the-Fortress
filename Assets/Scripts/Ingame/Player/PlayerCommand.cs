@@ -23,7 +23,7 @@ namespace Ingame.Player
 
         private void Start()
         {
-            _commandCount = StageInfo.CommandCount;
+            _commandCount = StaticStageInfo.CommandCount;
             _commands = new Command[_commandCount];
             playerCommandView.Init(_commandCount);
         }
