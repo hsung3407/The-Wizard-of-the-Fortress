@@ -1,15 +1,40 @@
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    Dictionary<string, int> dict = new Dictionary<string, int>();
+    private bool condition;
+
+    private void Awake()
+    {
+        Debug.Log("Awake");
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("Enabled");
+    }
+    
     void Start()
     {
-        dict.Add("Test", 0);
-        
-        dict["Test"]++;
-        
-        Debug.Log($"Value : {dict["Test"]}");
+        Debug.Log("Start");
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            condition = true;
+            Debug.Log($"Input {Time.time}");
+        }
+    }
+
+    IEnumerator TestC()
+    {
+        yield return new WaitUntil(() => condition);
+        Debug.Log($"Coroutine {Time.time}");
     }
 }
