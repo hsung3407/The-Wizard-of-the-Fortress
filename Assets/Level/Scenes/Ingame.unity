@@ -2794,7 +2794,7 @@ GameObject:
   - component: {fileID: 637915641}
   - component: {fileID: 637915643}
   m_Layer: 0
-  m_Name: Mob Generator
+  m_Name: Enemy Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3834,7 +3834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveDelay: 1
-  mobGenerator: {fileID: 637915641}
+  enemySpawner: {fileID: 637915641}
 --- !u!4 &949819550
 Transform:
   m_ObjectHideFlags: 0
