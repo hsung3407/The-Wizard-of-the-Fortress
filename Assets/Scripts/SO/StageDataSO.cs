@@ -7,10 +7,8 @@ namespace SO
     {
         [SerializeField] private string stageName;
         [SerializeField] private int stageIndex;
-        [SerializeField] private int commandCount;
         
         public string StageName => stageName;
         public int StageIndex => stageIndex;
-        public int CommandCount => commandCount;
     }
 }

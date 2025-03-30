@@ -85,6 +85,8 @@ namespace Ingame.Player
         {
             ingameViewRect.GetWorldCorners(_ingameViewCorners);
             touchAreaRect.GetWorldCorners(_touchAreaCorners);
+            
+            _playerCommand.Init(_playerStat.CommandCount);
         }
 
         private bool PredictRaycast(Vector2 point, RaycastHit[] hits)

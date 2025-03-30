@@ -10,9 +10,14 @@ namespace Ingame.Player
         [SerializeField] private float manaRegenerationAmountPerSec = 10;
         private float _mana;
 
+        public int CommandCount { get; private set; }
+
         private void Start()
         {
             _mana = maxMana;
+
+            //TODO 세이브 파일에서 로드
+            CommandCount = 1;
         }
 
         private void Update()
@@ -28,6 +33,7 @@ namespace Ingame.Player
                 Debug.Log("마나 부족");
                 return false;
             }
+
             _mana -= mana;
             HUD.Instance.SetMana(_mana, maxMana);
             return true;

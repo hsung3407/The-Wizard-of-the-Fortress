@@ -27,7 +27,6 @@ namespace Main
                 button.onClick.AddListener(() =>
                 {
                     StaticStageInfo.StageIndex = data.StageIndex;
-                    StaticStageInfo.CommandCount = data.CommandCount;
                     stageInfoView.DisplayView(data);
                 });
             }
