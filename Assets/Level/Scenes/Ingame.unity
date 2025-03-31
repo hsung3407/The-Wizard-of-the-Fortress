@@ -2792,9 +2792,10 @@ GameObject:
   m_Component:
   - component: {fileID: 637915640}
   - component: {fileID: 637915641}
+  - component: {fileID: 637915644}
   - component: {fileID: 637915643}
   m_Layer: 0
-  m_Name: Enemy Spawner
+  m_Name: Wave Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2848,6 +2849,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.87, y: 0, z: 1.3426323}
   m_Center: {x: 0.006131649, y: 0.034953773, z: -0.17131615}
+--- !u!114 &637915644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637915639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce626a0dd164776bc0aadb598f0c506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObjectPrefabs:
+  - {fileID: 6469287540622861476, guid: 7035e9b54bec9194aa7859a7f5fa9415, type: 3}
+  initCount: 0
 --- !u!1 &662153017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3834,7 +3850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveDelay: 1
-  enemySpawner: {fileID: 637915641}
+  waveManager: {fileID: 637915641}
 --- !u!4 &949819550
 Transform:
   m_ObjectHideFlags: 0
@@ -4825,54 +4841,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &1240927440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1240927442}
-  - component: {fileID: 1240927441}
-  m_Layer: 0
-  m_Name: Object Pool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1240927441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240927440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec71d433d99c4949a98988e9b42b6813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canBeDestroy: 1
-  poolObjects:
-  - {fileID: 6705402075998324148, guid: 7035e9b54bec9194aa7859a7f5fa9415, type: 3}
-  initCount: 15
---- !u!4 &1240927442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240927440}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.363034, y: -1.877442, z: -16.659035}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1262076131
 GameObject:
   m_ObjectHideFlags: 0
@@ -8934,9 +8902,8 @@ SceneRoots:
   - {fileID: 999259879}
   - {fileID: 1426565852}
   - {fileID: 949819550}
-  - {fileID: 1240927442}
-  - {fileID: 315067847}
   - {fileID: 637915640}
+  - {fileID: 315067847}
   - {fileID: 1964602099}
   - {fileID: 106012233}
   - {fileID: 896731963}
