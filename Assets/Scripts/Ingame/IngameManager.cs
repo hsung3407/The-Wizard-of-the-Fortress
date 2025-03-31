@@ -11,7 +11,7 @@ namespace Ingame
         private StageWaveDataSO[] _waveData;
         private int _waveIndex;
         
-        [SerializeField] private EnemySpawner enemySpawner;
+        [SerializeField] private WaveManager waveManager;
 
         private void Awake()
         {
@@ -21,32 +21,41 @@ namespace Ingame
         private void Start()
         {
             _waveIndex = 0;
-            StartCoroutine(MainFlow());
+            StartCoroutine(StartFlow());
         }
 
-        private IEnumerator MainFlow()
+        private IEnumerator StartFlow()
         {
-            //TODO: Wave Start Notify Display
-            int waveDataCount = _waveData.Length;
-            for (_waveIndex = 0; _waveIndex < waveDataCount; _waveIndex++)
-            {
-                Debug.Log($"Wave Start : {_waveIndex}");
-            
-                var data = _waveData[_waveIndex];
-                var spawnDelay = new WaitForSeconds(1 / data.GeneratePerSec);
-                int enemyCount = data.EnemyCount;
-                for (int i = 0; i < enemyCount; i++)
-                {
-                    enemySpawner.SpawnEnemy();
-                    yield return spawnDelay;
-                }
+            yield return new WaitForSeconds(1f);
 
-                Debug.Log($"Wave End : {_waveIndex}");
+            StartCoroutine(IngameFlow());
+        }
+
+        private IEnumerator IngameFlow()
+        {
+            yield return new WaitForSeconds(1f);
             
-                yield return new WaitForSeconds(waveDelay);
-            }
-        
-            Debug.Log($"Stage Clear");
+            WaveStart();
+        }
+
+        private void WaveStart()
+        {
+            Debug.Log($"Wave {_waveIndex} Start");
+            
+            waveManager.StartWave(_waveData[_waveIndex], WaveClear);
+        }
+
+        private void WaveClear()
+        {
+            Debug.Log($"Wave {_waveIndex} Clear");
+
+            if (++_waveIndex == _waveData.Length) StageClear();
+            else StartCoroutine(IngameFlow());
+        }
+
+        private void StageClear()
+        {
+            Debug.Log("Stage Clear");
         }
     }
 }
