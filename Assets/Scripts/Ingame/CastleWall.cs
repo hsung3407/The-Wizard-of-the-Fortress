@@ -16,10 +16,11 @@ namespace Ingame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Mob"))
+            if (other.CompareTag("Enemy"))
             {
-                TakeHit(other.GetComponent<Enemy>().Damage);
-                ObjectPool.Instance.Return(other.gameObject);
+                var enemy = other.GetComponent<Enemy>();
+                enemy.TakeDamage(int.MaxValue);
+                TakeHit(enemy.Damage);
             }
         }
 
