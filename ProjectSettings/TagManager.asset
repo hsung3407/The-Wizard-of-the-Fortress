@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Mob
   - CastleWall
+  - Enemy
   layers:
   - Default
   - TransparentFX
