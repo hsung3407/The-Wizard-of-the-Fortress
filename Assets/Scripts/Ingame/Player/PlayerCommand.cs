@@ -20,16 +20,12 @@ namespace Ingame.Player
             Emission,
             Control
         }
-
-        private void Start()
-        {
-            _commands = new Command[_commandCount];
-            playerCommandView.Init(_commandCount);
-        }
-
+        
         public void Init(int commandCount)
         {
             _commandCount = commandCount;
+            _commands = new Command[_commandCount];
+            playerCommandView.Init(_commandCount);
         }
 
         public void AddCommand(int command) => AddCommand((Command)command);
