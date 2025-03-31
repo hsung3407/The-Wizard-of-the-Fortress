@@ -5,8 +5,6 @@
 
 public class Test : MonoBehaviour
 {
-    private bool condition;
-
     private void Awake()
     {
         Debug.Log("Awake");
@@ -25,16 +23,33 @@ public class Test : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            condition = true;
-            Debug.Log($"Input {Time.time}");
+            var gameobject = new GameObject
+            {
+                name = "Test Gen"
+            };
+
+            var type = Type.GetType("Test");
+            var t = gameobject.AddComponent(type);   
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log($"Invoke On Test : {Time.time} / {Time.frameCount} - {Time.deltaTime}");
+            BroadcastMessage("OnTest");
+            StartCoroutine(TestTime());
         }
     }
 
-    IEnumerator TestC()
+    protected void OnTest()
     {
-        yield return new WaitUntil(() => condition);
-        Debug.Log($"Coroutine {Time.time}");
+        Debug.Log($"OnTest : {Time.time}");
+    }
+
+    IEnumerator TestTime()
+    {
+        yield return null;
+        Debug.Log($"TestTime : : {Time.time} / {Time.frameCount} - {Time.deltaTime}");
     }
 }
