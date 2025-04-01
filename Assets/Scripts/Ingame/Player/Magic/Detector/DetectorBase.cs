@@ -19,6 +19,8 @@ namespace Ingame.Player.Magic.Detector
 
         protected void OnDetect(Enemy enemy)
         {
+            if(enemy == null) return;
+            
             if (!DetectedMobs.TryAdd(enemy, 1))
             {
                 if (!isDuplicateDetectable) return;
@@ -30,6 +32,8 @@ namespace Ingame.Player.Magic.Detector
 
         protected void OnRelease(Enemy enemy)
         {
+            if(enemy == null) return;
+            
             if (!DetectedMobs.ContainsKey(enemy))
             {
                 DetectedMobs[enemy]--;

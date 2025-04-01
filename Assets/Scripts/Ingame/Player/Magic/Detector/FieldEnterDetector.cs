@@ -6,18 +6,16 @@ namespace Ingame.Player.Magic.Detector
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Mob")) return;
-            var mob = other.GetComponent<Enemy>();
-            if (mob == null) return;
-            OnDetect(mob);
+            if (!other.CompareTag("Enemy")) return;
+            var enemy = other.GetComponent<Enemy>();
+            OnDetect(enemy);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.CompareTag("Mob")) return;
-            var mob = other.GetComponent<Enemy>();
-            if (mob == null) return;
-            OnRelease(mob);
+            if (!other.CompareTag("Enemy")) return;
+            var enemy = other.GetComponent<Enemy>();
+            OnRelease(enemy);
         }
     }
 }
