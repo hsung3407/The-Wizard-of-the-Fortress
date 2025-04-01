@@ -8585,10 +8585,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 848302680}
     m_Modifications:
     - target: {fileID: 2972895543716427211, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2972895543716427211, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.04
       objectReference: {fileID: 0}
@@ -8628,29 +8624,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4963869086703095034, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5533571796674830554, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5898002113555617304, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 8312138387738324153, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 9194323648986388311, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
       propertyPath: m_Name
       value: Stone_Gate
-      objectReference: {fileID: 0}
-    - target: {fileID: 9194323648986388311, guid: 46f9038531284ec4894b46ba07a28a3d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
