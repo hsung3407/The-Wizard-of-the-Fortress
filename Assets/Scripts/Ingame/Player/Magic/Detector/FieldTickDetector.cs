@@ -26,7 +26,7 @@ namespace Ingame.Player.Magic.Detector
 
         private IEnumerator Tick()
         {
-            var delay = tickDelay;
+            var delay = new WaitForSeconds(tickDelay);
 
             while (true)
             {
