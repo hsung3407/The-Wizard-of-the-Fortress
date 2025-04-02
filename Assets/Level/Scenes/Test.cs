@@ -7,11 +7,11 @@ public class Test : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger Enter");
+        Debug.Log($"Trigger Enter : {Time.frameCount}");
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Trigger Exit");
+        Debug.Log($"Trigger Exit : {Time.frameCount}");
     }
 }
