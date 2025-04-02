@@ -14,8 +14,11 @@ namespace Ingame.Player.Magic.Detector
         public void RegisterOnDetected(Action<Enemy> onDetected) => OnDetected = onDetected;
         public void RegisterOnReleased(Action<Enemy> onReleased) => OnReleased = onReleased;
 
-        //true = 감지가 해제 되기 전에 재 감지 되었을 때 효과를 중복 적용 가능
+        //true = 감지가 해제 되기 전에 재 감지 되었을 때 효과를 중복 감지 가능
         [SerializeField] private bool isDuplicateDetectable;
+        
+        //true = isDuplicateDetectable 이 true일 때, Release시 중복된 감지를 모두 해제
+        [SerializeField] private bool releaseAllEffectAtOnce;
 
         protected void OnDetect(Enemy enemy)
         {
@@ -36,10 +39,21 @@ namespace Ingame.Player.Magic.Detector
             
             if (!DetectedMobs.ContainsKey(enemy))
             {
+                if (isDuplicateDetectable && releaseAllEffectAtOnce)
+                {
+                    for (; 0 < DetectedMobs[enemy]; DetectedMobs[enemy]--)
+                    {
+                        OnReleased(enemy);
+                    }
+                    DetectedMobs.Remove(enemy);
+                    return;
+                }
+                
                 DetectedMobs[enemy]--;
-                if (DetectedMobs[enemy] == 0) DetectedMobs.Remove(enemy);
-            }
 
+                if (DetectedMobs[enemy] <= 0) DetectedMobs.Remove(enemy);
+            }
+            
             OnReleased(enemy);
         }
 
