@@ -8,7 +8,7 @@ namespace Ingame
     {
         [SerializeField] private float maxHealth = 100f;
         private float _health;
-        
+
         [SerializeField] private float damage = 1f;
         public float Damage => damage;
 
@@ -16,7 +16,8 @@ namespace Ingame
         private float _speedMultiplier = 1;
 
         private event Action OnDie;
-        
+        private bool isDie;
+
         public enum StatType
         {
             Speed,
@@ -35,6 +36,7 @@ namespace Ingame
 
         private void Init()
         {
+            isDie = false;
             _health = maxHealth;
         }
 
@@ -59,14 +61,15 @@ namespace Ingame
             }
         }
 
-        public void TakeDamage(float cursedDamage)
+        public void TakeDamage(float takenDamage)
         {
-            _health -= cursedDamage;
-            if(_health <= 0) Die();
+            _health -= takenDamage;
+            if (_health <= 0 && !isDie) Die();
         }
 
         private void Die()
         {
+            isDie = true;
             OnDie?.Invoke();
         }
     }
