@@ -15,7 +15,7 @@ namespace Ingame.Player.Magic.Detector
 
         private void OnTriggerStay(Collider other)
         {
-            if(other.CompareTag("Enemy")) return;
+            if(!other.CompareTag("Enemy")) return;
             
             if (Time.time - _lastDetectedTime > detectDelay)
             {
