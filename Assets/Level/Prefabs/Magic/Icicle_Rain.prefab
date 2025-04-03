@@ -19795,8 +19795,6 @@ GameObject:
   m_Component:
   - component: {fileID: 55214284967184913}
   - component: {fileID: 1451320462282840845}
-  - component: {fileID: 5122678999978837080}
-  - component: {fileID: 8652391471447440683}
   - component: {fileID: 1628545270888627204}
   - component: {fileID: -7021088972045485995}
   - component: {fileID: -4726456978515080685}
@@ -19840,54 +19838,6 @@ MonoBehaviour:
   - {fileID: 693770083033942933}
   visualEffects:
   - {fileID: 5088574086575898284}
---- !u!54 &5122678999978837080
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5019838613219049323}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!135 &8652391471447440683
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5019838613219049323}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2.6
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1628545270888627204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19913,9 +19863,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770305aebc404065bc6e1b662003ef8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDuplicateDetectable: 1
-  releaseAllEffectAtOnce: 1
-  detectDelay: 1
+  radius: 2.6
+  tickDelay: 1
 --- !u!114 &-4726456978515080685
 MonoBehaviour:
   m_ObjectHideFlags: 0
