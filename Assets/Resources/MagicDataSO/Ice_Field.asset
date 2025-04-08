@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cd0b0570151584784fac851369fe0c, type: 3}
   m_Name: Ice_Field
   m_EditorClassIdentifier: 
-  magicName: Ice Field
-  command: 1
-  icon: {fileID: 0}
-  description: "5.5\uCD08 \uB3D9\uC548 \uBC94\uC704 \uB0B4\uC758 \uC801\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C
-    50% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
-  predictorType: 1
-  predictRange: 3.8
-  manaCost: 30
-  magicObject: {fileID: 523172810074697831, guid: e5894d487c1a3ba4fb06fa867860aa1f, type: 3}
+  <MagicName>k__BackingField: Ice_Field
+  <Command>k__BackingField: 1
+  <Icon>k__BackingField: {fileID: 0}
+  <Description>k__BackingField: 
+  <PredictorType>k__BackingField: 1
+  <PredictRange>k__BackingField: 3.8
+  <ManaCost>k__BackingField: 10
+  <MagicObject>k__BackingField: {fileID: 523172810074697831, guid: e5894d487c1a3ba4fb06fa867860aa1f, type: 3}

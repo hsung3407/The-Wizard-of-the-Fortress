@@ -9,30 +9,17 @@ namespace Ingame.Player
     public class MagicDataSO : ScriptableObject
     {
         [Header("Identify")]
-        [SerializeField] private string magicName;
-        [SerializeField] private string command;
+        [field: SerializeField] public string MagicName { get; private set; }
+        [field: SerializeField] public string Command { get; private set; }
         
         [Header("Description")]
-        [SerializeField] private Sprite icon;
-        [SerializeField] private string description;
-
+        [field: SerializeField] public Sprite Icon { get; private set; }
+        [field: SerializeField] public string Description { get; private set; }
+        
         [Header("Data")] 
-        [SerializeField] private PredictorManager.PredictorType predictorType;
-        [SerializeField] private float predictRange;
-        
-        [FormerlySerializedAs("useMana")] [SerializeField] private float manaCost;
-        
-        [SerializeField] private MagicController magicObject;
-    
-        public string MagicName => magicName;
-        public string Command => command;
-        
-        public Sprite Icon => icon;
-        public string Description => description;
-        
-        public PredictorManager.PredictorType PredictorType => predictorType;
-        public float PredictRange => predictRange;
-        public float ManaCost => manaCost;
-        public MagicController MagicObject => magicObject;
+        [field: SerializeField] public PredictorManager.PredictorType PredictorType { get; private set; }
+        [field: SerializeField] public float PredictRange { get; private set; }
+        [field: SerializeField] public float ManaCost { get; private set; }
+        [field: SerializeField] public MagicController MagicObject { get; private set; }
     }
 }

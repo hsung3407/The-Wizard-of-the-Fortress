@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cd0b0570151584784fac851369fe0c, type: 3}
   m_Name: Icicle_Rain
   m_EditorClassIdentifier: 
-  magicName: Icicle_Rain
-  command: 0
-  icon: {fileID: 0}
-  description: "\uC5BC\uC74C \uBE44\uB97C \uB0B4\uB824 \uBC94\uC704 \uB0B4 \uC801\uC744
-    \uC9C0\uC18D\uC801\uC73C\uB85C \uACF5\uACA9\uD55C\uB2E4."
-  predictorType: 1
-  predictRange: 5.2
-  manaCost: 40
-  magicObject: {fileID: 1628545270888627204, guid: c5d73d4b77de02a48a53a8dede6261e8, type: 3}
+  <MagicName>k__BackingField: Icicle_Rain
+  <Command>k__BackingField: 0
+  <Icon>k__BackingField: {fileID: 0}
+  <Description>k__BackingField: 
+  <PredictorType>k__BackingField: 1
+  <PredictRange>k__BackingField: 5.2
+  <ManaCost>k__BackingField: 35
+  <MagicObject>k__BackingField: {fileID: 1628545270888627204, guid: c5d73d4b77de02a48a53a8dede6261e8, type: 3}
