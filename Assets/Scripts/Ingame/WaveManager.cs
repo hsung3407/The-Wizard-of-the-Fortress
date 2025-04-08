@@ -31,7 +31,7 @@ namespace Ingame
             int enemyKillCount = 0;
             for (int i = 0; i < enemyCount; i++)
             {
-                var enemy = _enemyPool.Get(StaticStageInfo.MobType);
+                var enemy = _enemyPool.Get();
                 InitEnemyTransform(enemy.transform);
                 enemy.Init((() =>
                 {

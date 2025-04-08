@@ -25,7 +25,7 @@ public class TsetTwo : MonoBehaviour
             yield return new WaitForSeconds(5f);
             for (int j = 0; j < Count; j++)
             {
-                var enemy = _enemyPool.Get("Slime");
+                var enemy = _enemyPool.Get();
                 enemy.transform.position = transform.position;
                 _enemies.Add(enemy);
             }
