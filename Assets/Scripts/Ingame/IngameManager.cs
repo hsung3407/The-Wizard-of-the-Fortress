@@ -7,7 +7,6 @@ namespace Ingame
 {
     public class IngameManager : MonoBehaviour
     {
-        [SerializeField] private float waveDelay = 5;
         private StageWaveDataSO[] _waveData;
         private int _waveIndex;
         
