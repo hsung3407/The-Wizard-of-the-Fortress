@@ -1,30 +1,49 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Ingame;
 using UnityEngine;
 
 public class TsetTwo : MonoBehaviour
 {
-    private void Update()
+    private EnemyPool _enemyPool;
+    private List<Enemy> _enemies = new List<Enemy>();
+
+    public const int Count = 1000;
+    
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        _enemyPool = GetComponent<EnemyPool>();
+        StartCoroutine(Spawn());
+        StartCoroutine(Return());
+    }
+
+    IEnumerator Spawn()
+    {
+        for (int i = 0; i < 5; i++)
         {
-            Debug.Log($"Move : {Time.frameCount}");
-            transform.position = new Vector3(0, 10000, 0);
-
-            StartCoroutine(Wait());
-
+            yield return new WaitForSeconds(5f);
+            for (int j = 0; j < Count; j++)
+            {
+                var enemy = _enemyPool.Get("Slime");
+                enemy.transform.position = transform.position;
+                _enemies.Add(enemy);
+            }
         }
     }
 
-    IEnumerator Wait()
+    private IEnumerator Return()
     {
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(3f);
+        
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(5f);
+            foreach (var enemy in _enemies)
+            {
+                _enemyPool.Return(enemy);
+            }
+            _enemies.Clear();
+        }
     }
 }

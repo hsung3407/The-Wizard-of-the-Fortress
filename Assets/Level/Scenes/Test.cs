@@ -1,17 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Ingame;
 using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private GameObject prefab;
+
+    private void Start()
     {
-        Debug.Log($"Trigger Enter : {Time.frameCount}");
+        StartCoroutine(Spawn());
     }
 
-    private void OnTriggerExit(Collider other)
+    IEnumerator Spawn()
     {
-        Debug.Log($"Trigger Exit : {Time.frameCount}");
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(5f);
+            for (int j = 0; j < TsetTwo.Count; j++)
+            {
+                var go = Instantiate(prefab, transform.position, Quaternion.identity);
+            
+                Destroy(go, 3f);
+            }
+        }
     }
 }
