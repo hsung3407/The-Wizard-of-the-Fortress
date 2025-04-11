@@ -1,29 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Ingame;
+using Ingame.Player;
 using UnityEngine;
+
+
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
+    private LinkedList<int> list = new();
 
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(Spawn());
-    }
-
-    IEnumerator Spawn()
-    {
-        for (int i = 0; i < 5; i++)
+        for (var i = 0; i < 10; i++)
         {
-            yield return new WaitForSeconds(5f);
-            for (int j = 0; j < TsetTwo.Count; j++)
-            {
-                var go = Instantiate(prefab, transform.position, Quaternion.identity);
-            
-                Destroy(go, 3f);
-            }
+            list.AddLast(i);
+        }
+        
+        LinkedListNode<int> nextNode = null;
+        for (var node = list.First; node != null; node = nextNode)
+        {
+            nextNode = node.Next;
+            Debug.Log(node.Value);
+            list.Remove(node);
         }
     }
 }
