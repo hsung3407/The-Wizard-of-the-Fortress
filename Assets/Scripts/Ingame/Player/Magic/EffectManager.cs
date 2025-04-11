@@ -15,22 +15,46 @@ namespace Ingame.Player
         [SerializeField] private string effectGroupName;
         [SerializeField] private string effectName;
 
+        [field: SerializeField] public CompareType ObjectCompareType { get; set; }
+        [field: SerializeField] public CompareType EffectCompareType { get; private set; }
+        
         public EffectID(string effectGroupName, string effectName)
         {
             this.effectGroupName = effectGroupName;
             this.effectName = effectName;
         }
 
-        public static bool operator ==(EffectID a, EffectID b)
+        public enum CompareType
         {
-            bool effectGroupNameIsSame = a?.effectGroupName == b?.effectGroupName;
-            bool effectNameIsSame = a?.effectName == b?.effectName;
-            return effectGroupNameIsSame && effectNameIsSame;
+            All,
+            WithoutHash,
+            True,
+            False,
         }
 
-        public static bool operator !=(EffectID a, EffectID b)
+        public bool Compare(EffectID other)
         {
-            return !(a == b);
+            return Compare(this, other, other.ObjectCompareType);
+        }
+
+        public bool Compare(EffectID other, CompareType compareType)
+        {
+            return Compare(this, other, compareType);
+        }
+
+        public static bool Compare(EffectID a, EffectID b, CompareType compareType)
+        {
+            bool checkGroup = a?.effectGroupName == b?.effectGroupName;
+            bool checkName = a?.effectName == b?.effectName;
+            bool checkHash = a?.GetHashCode() == b?.GetHashCode();
+            return compareType switch
+            {
+                CompareType.All => checkGroup && checkName && checkHash,
+                CompareType.WithoutHash => checkGroup && checkName,
+                CompareType.True => true,
+                CompareType.False => false,
+                _ => throw new ArgumentOutOfRangeException(nameof(compareType), compareType, null)
+            };
         }
 
         public override string ToString()
@@ -47,7 +71,7 @@ namespace Ingame.Player
         public float LastDuration { get; private set; }
         public float EndTime { get; private set; }
 
-        public EffectCommand(EffectID effectID, Enemy enemy, float lastDuration)
+        protected EffectCommand(EffectID effectID, Enemy enemy, float lastDuration)
         {
             EffectID = effectID;
             Enemy = enemy;
@@ -81,9 +105,66 @@ namespace Ingame.Player
         }
     }
 
+    public class EffectCommandList : LinkedList<EffectCommand>
+    {
+        public void Add(EffectCommand effectCommand)
+        {
+            if (!Contains(effectCommand.EffectID, effectCommand.EffectID.EffectCompareType)) effectCommand.Execute();
+            AddLast(effectCommand);
+        }
+
+        public bool Contains(EffectID effectID, EffectID.CompareType compareType)
+        {
+            return this.Contains(c => c.EffectID.Compare(effectID, compareType));
+        }
+
+        public new EffectCommand First(EffectID effectID, EffectID.CompareType compareType)
+        {
+            return this.FirstOrDefault(e => e.EffectID.Compare(effectID, compareType));
+        }
+
+        private new void Remove(LinkedListNode<EffectCommand> node)
+        {
+            if (node?.Value == null) { return; }
+
+            var command = node.Value;
+            base.Remove(node);
+            if (!Contains(node.Value.EffectID, node.Value.EffectID.EffectCompareType)) { command.Release(); }
+        }
+
+        public bool Remove(EffectID effectID, bool removeAll = false)
+        {
+            bool removed = false;
+            if (removeAll)
+            {
+                this.ForEachNodes(node =>
+                {
+                    if (!node.Value.EffectID.Compare(effectID, effectID.ObjectCompareType)) { return; }
+
+                    removed = true;
+                    Remove(node);
+                });
+            }
+            else
+            {
+                var node = this.NodeFirst(e =>
+                    e.Value.EffectID.Compare(effectID, e.Value.EffectID.ObjectCompareType));
+                removed = node != null;
+                Remove(node);
+            }
+
+            return removed;
+        }
+
+        public new void Clear()
+        {
+            this.ForEachNodes(Remove);
+        }
+    }
+
     public class EffectManager : SingleMono<EffectManager>
     {
-        private readonly Dictionary<Enemy, LinkedList<EffectCommand>> _effectCommands = new();
+        private readonly Dictionary<Enemy, EffectCommandList> _effectCommands = new();
 
         public void Add(EffectCommand effectCommand)
         {
@@ -91,62 +172,41 @@ namespace Ingame.Player
 
             if (!_effectCommands.TryGetValue(enemy, out var list))
             {
-                list = new LinkedList<EffectCommand>();
+                list = new EffectCommandList();
                 _effectCommands.Add(enemy, list);
             }
 
-            effectCommand.Execute();
-            list.AddLast(effectCommand);
+            list.Add(effectCommand);
         }
 
-        public EffectCommand First(Enemy enemy, EffectID effectID)
+        public bool Contains(Enemy enemy, EffectID effectID, EffectID.CompareType compareType)
         {
             _effectCommands.TryGetValue(enemy, out var list);
-            return list?.FirstOrDefault(e => e.EffectID == effectID);
+            return list?.Contains(effectID, compareType) ?? false;
         }
 
-        public bool Contains(Enemy enemy, EffectID effectID)
+        public EffectCommand First(Enemy enemy, EffectID effectID, EffectID.CompareType compareType)
         {
             _effectCommands.TryGetValue(enemy, out var list);
-            return list?.Select(e => e.EffectID)
-                .Contains(effectID) ?? false;
-        }
-
-        private static void Remove(LinkedListNode<EffectCommand> node)
-        {
-            node.Value.Release();
-            node.List.Remove(node);
+            return list?.First(effectID, compareType);
         }
 
         public bool Remove(Enemy enemy, EffectID effectID, bool removeAll = false)
         {
-            bool removed = false;
             _effectCommands.TryGetValue(enemy, out var list);
-            list?.ForEachNodes(node =>
-            {
-                if (node.Value.EffectID != effectID || (!removeAll && removed)) { return; }
-
-                removed = true;
-                Remove(node);
-            });
-            return removed;
+            return list?.Remove(effectID, removeAll) ?? false;
         }
 
         public IEnumerable<Enemy> Remove(EffectID effectID, bool removeAll = false)
         {
-            var effectRemovedEnemies = new Queue<Enemy>(25);
+            var effectRemovedEnemies = new HashSet<Enemy>(25);
 
-            foreach (var (key, value) in _effectCommands)
+            foreach (var (enemy, list) in _effectCommands)
             {
-                bool removed = false;
-                value.ForEachNodes(node =>
+                if (list.Remove(effectID, removeAll))
                 {
-                    if (node.Value.EffectID != effectID || (!removeAll && removed)) { return; }
-
-                    removed = true;
-                    effectRemovedEnemies.Enqueue(key);
-                    Remove(node);
-                });
+                    effectRemovedEnemies.Add(enemy);
+                }
             }
 
             return effectRemovedEnemies;
@@ -156,8 +216,7 @@ namespace Ingame.Player
         {
             if (!_effectCommands.TryGetValue(enemy, out var list)) { return; }
 
-            list.ForEachNodes(Remove);
-            _effectCommands.Remove(enemy);
+            list?.Clear();
         }
 
         private void Update()
@@ -174,10 +233,7 @@ namespace Ingame.Player
 
                 list.ForEachNodes(node =>
                 {
-                    if (node.Value.EndTime <= Time.time)
-                    {
-                        Remove(node);
-                    }
+                    if (node.Value.EndTime <= Time.time) { list.Remove(node); }
                 });
             }
         }

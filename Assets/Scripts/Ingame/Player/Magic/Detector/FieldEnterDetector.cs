@@ -6,7 +6,7 @@ namespace Ingame.Player.Magic.Detector
 {
     public class FieldEnterDetector : DetectorBase
     {
-        private HashSet<Enemy> _detectedEnemies;
+        private readonly HashSet<Enemy> _detectedEnemies = new HashSet<Enemy>();
 
         private void OnTriggerEnter(Collider other)
         {

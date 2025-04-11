@@ -44,10 +44,7 @@ namespace Ingame.Player.Magic.Modifier
 
         public override void Modify([NotNull] Enemy enemy)
         {
-            var effectManager = EffectManager.Instance;
-            var first = effectManager.First(enemy, effectData.EffectID);
-            if (first != null) { first.ExtendTime(effectData.Duration); }
-            else { effectManager.Add(new SimpleEffectCommand(effectData, enemy)); }
+            EffectManager.Instance.Add(new SimpleEffectCommand(effectData, enemy));
         }
 
         public override void UnModify([NotNull] Enemy enemy)
