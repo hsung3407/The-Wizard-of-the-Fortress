@@ -1,4 +1,5 @@
 using System;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,32 +11,27 @@ namespace Ingame
         [SerializeField] private float maxHealth = 100;
         [SerializeField] private float damage = 1;
         [SerializeField] private float speed = 1;
-        [SerializeField] private float speedMultiplier = 1;
-        
+
         public float MaxHealth => maxHealth;
         public float Damage => damage;
         public float Speed => speed;
-        public float SpeedMultiplier => speedMultiplier;
-        
     }
-    
+
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private EnemyBaseStat baseStat;
-        
+
         private float _health;
         private float _damage = 1f;
-        private float _speed = 1;
         private float _speedMultiplier = 1;
 
         public float Damage => _damage;
-        
-        private event Action OnDie;
-        private bool isDie;
 
-        public enum StatType
+        public event Action OnDie;
+        private bool _isDie;
+
+        public enum StatModifyType
         {
-            Speed,
             SpeedMultiplier
         }
 
@@ -46,32 +42,28 @@ namespace Ingame
 
         private void Update()
         {
-            transform.position += transform.forward * Mathf.Max(_speed * _speedMultiplier * Time.deltaTime, 0);
+            var finalSpeed = baseStat.Speed * _speedMultiplier;
+            transform.position += transform.forward * Mathf.Max(finalSpeed * Time.deltaTime, 0);
+        }
+
+        private void OnDisable()
+        {
+            OnDie = null;
         }
 
         private void Init()
         {
-            isDie = false;
+            _isDie = false;
             _health = baseStat.MaxHealth;
             _damage = baseStat.Damage;
-            _speed = baseStat.Speed;
-            _speedMultiplier = baseStat.SpeedMultiplier;
+            _speedMultiplier = 1;
         }
 
-        public void Init(Action onDie)
+        public void ModifyStat(StatModifyType statModifyType, float amount)
         {
-            OnDie = onDie;
-            Init();
-        }
-
-        public void ModifyStat(StatType statType, float amount)
-        {
-            switch (statType)
+            switch (statModifyType)
             {
-                case StatType.Speed:
-                    _speed += amount;
-                    break;
-                case StatType.SpeedMultiplier:
+                case StatModifyType.SpeedMultiplier:
                     _speedMultiplier += amount;
                     break;
                 default:
@@ -82,12 +74,12 @@ namespace Ingame
         public void TakeDamage(float takenDamage)
         {
             _health -= takenDamage;
-            if (_health <= 0 && !isDie) Die();
+            if (_health <= 0 && !_isDie) Die();
         }
 
         private void Die()
         {
-            isDie = true;
+            _isDie = true;
             OnDie?.Invoke();
         }
     }
