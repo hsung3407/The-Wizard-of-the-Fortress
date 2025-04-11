@@ -6,25 +6,27 @@ using Ingame;
 using Ingame.Player;
 using UnityEngine;
 
+public class TsetClass
+{
+    public void TestLog()
+    {
+        Debug.Log("TestLog");
+    }
+}
 
+public class TestTT : TsetClass
+{
+    public new void TestLog()
+    {
+        Debug.Log("TestLog Two");
+    }
+}
 
 public class Test : MonoBehaviour
 {
-    private LinkedList<int> list = new();
-
     private void Awake()
     {
-        for (var i = 0; i < 10; i++)
-        {
-            list.AddLast(i);
-        }
-        
-        LinkedListNode<int> nextNode = null;
-        for (var node = list.First; node != null; node = nextNode)
-        {
-            nextNode = node.Next;
-            Debug.Log(node.Value);
-            list.Remove(node);
-        }
+        var c = new TestTT();
+        c.TestLog();
     }
 }
