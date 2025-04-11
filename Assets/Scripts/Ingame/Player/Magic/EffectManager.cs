@@ -8,7 +8,7 @@ using Utility.SingleTon;
 
 namespace Ingame.Player
 {
-    public abstract class EffectID
+    public class EffectID
     {
         private readonly string _effectGroupName;
         private readonly string _effectName;
