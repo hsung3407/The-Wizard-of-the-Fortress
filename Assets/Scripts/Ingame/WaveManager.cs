@@ -16,7 +16,6 @@ namespace Ingame
         {
             _enemyPool = GetComponent<EnemyPool>();
             _spawnArea = GetComponent<Collider>();
-            // _castleWallTr = GameObject.FindWithTag("CastleWall").transform;
         }
 
         public void StartWave(StageWaveDataSO waveData, Action onClear)
@@ -33,11 +32,11 @@ namespace Ingame
             {
                 var enemy = _enemyPool.Get();
                 InitEnemyTransform(enemy.transform);
-                enemy.Init((() =>
+                enemy.OnDie += () =>
                 {
                     _enemyPool.Return(enemy);
                     if(++enemyKillCount == enemyCount) onClear();
-                }));
+                };
                 yield return spawnDelay;
             }
         }

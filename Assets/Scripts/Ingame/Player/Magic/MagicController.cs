@@ -23,7 +23,6 @@ namespace Ingame.Player
         {
             if (!detector || !modifier) return;
             detector.RegisterOnDetected(modifier.Modify);
-            detector.RegisterOnReleased(modifier.UnModify);
             
             Destroy(gameObject, lifeTime);
         }

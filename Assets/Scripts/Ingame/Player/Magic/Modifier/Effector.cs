@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using Ingame.Player.Modifier;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Ingame.Player.Magic.Modifier
+{
+    public class SimpleEffectCommand : EffectCommand
+    {
+        private readonly Enemy.StatModifyType _statModifyType;
+        private readonly float _amount;
+
+        public SimpleEffectCommand(SimpleEffectData data, Enemy enemy) : base(data.EffectID, enemy, data.Duration)
+        {
+            _statModifyType = data.StatModifyType;
+            _amount = data.Amount;
+        }
+
+        public override void Execute()
+        {
+            Enemy.ModifyStat(_statModifyType, _amount);
+        }
+
+        public override void Release()
+        {
+            Enemy.ModifyStat(_statModifyType, -_amount);
+        }
+    }
+
+    [Serializable]
+    public class SimpleEffectData
+    {
+        [field: SerializeField] public EffectID EffectID { get; private set; }
+        [field: SerializeField] public Enemy.StatModifyType StatModifyType { get; private set; }
+        [field: SerializeField] public float Amount { get; private set; }
+        [field: SerializeField] public float Duration { get; private set; }
+    }
+
+    public class Effector : ModifierBase
+    {
+        [SerializeField] private SimpleEffectData effectData;
+
+        public override void Modify(Enemy enemy)
+        {
+            var effectManager = EffectManager.Instance;
+            var first = effectManager.First(enemy, effectData.EffectID);
+            if (first != null) { first.ExtendTime(effectData.Duration); }
+            else { effectManager.Add(new SimpleEffectCommand(effectData, enemy)); }
+        }
+    }
+}

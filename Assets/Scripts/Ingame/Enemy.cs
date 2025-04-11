@@ -1,5 +1,6 @@
 using System;
 using System.Timers;
+using Ingame.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -80,6 +81,7 @@ namespace Ingame
         private void Die()
         {
             _isDie = true;
+            EffectManager.Instance.Clear(this);
             OnDie?.Invoke();
         }
     }

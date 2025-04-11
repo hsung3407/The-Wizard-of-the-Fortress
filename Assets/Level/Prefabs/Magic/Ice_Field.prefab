@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8341091991396492639}
   - component: {fileID: 8527893617563335530}
   - component: {fileID: 523172810074697831}
-  - component: {fileID: 2807553930764936721}
-  - component: {fileID: 4147472397090999002}
+  - component: {fileID: 1305365710415323551}
+  - component: {fileID: 3729990871697959665}
   m_Layer: 0
   m_Name: Ice_Field
   m_TagString: Untagged
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 5.5
---- !u!114 &2807553930764936721
+--- !u!114 &1305365710415323551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +125,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8083006173459322554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8945de480d1048429b5e9aecc3c0222f, type: 3}
+  m_Script: {fileID: 11500000, guid: 770305aebc404065bc6e1b662003ef8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDuplicateDetectable: 0
---- !u!114 &4147472397090999002
+  radius: 1.9
+  tickDelay: 1
+--- !u!114 &3729990871697959665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,9 +142,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2cfb74adf24b8c8c94c679d75bd470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debuffs:
-  - statType: 1
-    amount: -0.5
+  effectData:
+    <EffectID>k__BackingField:
+      effectGroupName: Ice
+      effectName: Ice_Field
+    <StatModifyType>k__BackingField: 0
+    <Amount>k__BackingField: -0.5
+    <Duration>k__BackingField: 1.1
 --- !u!1001 &4014072496675384253
 PrefabInstance:
   m_ObjectHideFlags: 0

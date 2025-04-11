@@ -19,6 +19,6 @@ namespace Utility
                 nextNode = node.Next;
                 action(node);
             }
-        }        
+        }
     }
 }

@@ -10,12 +10,5 @@ namespace Ingame.Player.Magic.Detector
             var enemy = other.GetComponent<Enemy>();
             OnDetect(enemy);
         }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (!other.CompareTag("Enemy")) return;
-            var enemy = other.GetComponent<Enemy>();
-            OnRelease(enemy);
-        }
     }
 }

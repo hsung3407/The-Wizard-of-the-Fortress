@@ -3,32 +3,28 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utility;
 using Utility.SingleTon;
 
 namespace Ingame.Player
 {
+    [Serializable]
     public class EffectID
     {
-        private readonly string _effectGroupName;
-        private readonly string _effectName;
+        [SerializeField] private string effectGroupName;
+        [SerializeField] private string effectName;
 
         public EffectID(string effectGroupName, string effectName)
         {
-            _effectGroupName = effectGroupName;
-            _effectName = effectName;
+            this.effectGroupName = effectGroupName;
+            this.effectName = effectName;
         }
 
         public static bool operator ==(EffectID a, EffectID b)
         {
-            if (a == null && b == null)
-                return true;
-            else if (a != null && b == null)
-                return false;
-            else if (a == null) return false;
-
-            bool effectGroupNameIsSame = a._effectGroupName == b._effectGroupName;
-            bool effectNameIsSame = a._effectName == b._effectName;
+            bool effectGroupNameIsSame = a?.effectGroupName == b?.effectGroupName;
+            bool effectNameIsSame = a?.effectName == b?.effectName;
             return effectGroupNameIsSame && effectNameIsSame;
         }
 
@@ -36,82 +32,99 @@ namespace Ingame.Player
         {
             return !(a == b);
         }
+
+        public override string ToString()
+        {
+            return $"[{effectGroupName}]{effectName}";
+        }
     }
 
     public abstract class EffectCommand
     {
         public readonly EffectID EffectID;
         public readonly Enemy Enemy;
+        public readonly float StartTime;
+        public float LastDuration { get; private set; }
+        public float EndTime { get; private set; }
 
-        public EffectCommand(EffectID effectID, Enemy enemy)
+        public EffectCommand(EffectID effectID, Enemy enemy, float lastDuration)
         {
             EffectID = effectID;
             Enemy = enemy;
+            StartTime = Time.time;
+            LastDuration = lastDuration;
+            EndTime = StartTime + LastDuration;
         }
 
         public abstract void Execute();
         public abstract void Release();
-    }
 
-    public class EffectCommandInfo
-    {
-        [NotNull] public readonly EffectCommand EffectCommand;
-        public float EndTime { get; private set; }
-
-        public EffectCommandInfo(EffectCommand effectCommand, float endTime)
+        public void ResetTime(float duration)
         {
-            EffectCommand = effectCommand;
-            EndTime = endTime;
+            LastDuration = duration;
+            EndTime = Time.time + duration;
         }
 
-        public void ResetEndTime(float duration)
+        public void ExtendTime(float duration)
         {
-            EndTime = Time.time + duration;
+            var newEndTime = Time.time + duration;
+            if (newEndTime < EndTime) { return; }
+
+            LastDuration = duration;
+            EndTime = newEndTime;
+        }
+
+        public void AddTime(float duration)
+        {
+            LastDuration = duration;
+            EndTime += duration;
         }
     }
 
     public class EffectManager : SingleMono<EffectManager>
     {
-        //float is end Time of effect command duration
-        private readonly Dictionary<Enemy, LinkedList<EffectCommandInfo>> _effectCommandInfos = new();
+        private readonly Dictionary<Enemy, LinkedList<EffectCommand>> _effectCommands = new();
 
-        public void Add(EffectCommand effectCommand, float duration)
+        public void Add(EffectCommand effectCommand)
         {
             var enemy = effectCommand.Enemy;
 
-            if (_effectCommandInfos.TryGetValue(enemy, out var list))
+            if (!_effectCommands.TryGetValue(enemy, out var list))
             {
-                var duplication = list.FirstOrDefault(commandInfo =>
-                    commandInfo.EffectCommand.EffectID == effectCommand.EffectID);
-                if (duplication != null)
-                {
-                    duplication.ResetEndTime(duration);
-                    return;
-                }
-            }
-            else
-            {
-                list = new LinkedList<EffectCommandInfo>();
-                _effectCommandInfos.Add(enemy, list);
+                list = new LinkedList<EffectCommand>();
+                _effectCommands.Add(enemy, list);
             }
 
             effectCommand.Execute();
-            list.AddLast(new EffectCommandInfo(effectCommand, Time.time + duration));
+            list.AddLast(effectCommand);
         }
 
-        private static void Remove(LinkedListNode<EffectCommandInfo> node)
+        public EffectCommand First(Enemy enemy, EffectID effectID)
         {
-            node.Value.EffectCommand.Release();
+            _effectCommands.TryGetValue(enemy, out var list);
+            return list?.FirstOrDefault(e => e.EffectID == effectID);
+        }
+
+        public bool Contains(Enemy enemy, EffectID effectID)
+        {
+            _effectCommands.TryGetValue(enemy, out var list);
+            return list?.Select(e => e.EffectID)
+                .Contains(effectID) ?? false;
+        }
+
+        private static void Remove(LinkedListNode<EffectCommand> node)
+        {
+            node.Value.Release();
             node.List.Remove(node);
         }
 
         public bool Remove(Enemy enemy, EffectID effectID, bool removeAll = false)
         {
             bool removed = false;
-            var list = _effectCommandInfos[enemy];
-            list.ForEachNodes(node =>
+            _effectCommands.TryGetValue(enemy, out var list);
+            list?.ForEachNodes(node =>
             {
-                if (node.Value.EffectCommand.EffectID != effectID || (!removeAll && removed)) { return; }
+                if (node.Value.EffectID != effectID || (!removeAll && removed)) { return; }
 
                 removed = true;
                 Remove(node);
@@ -123,12 +136,12 @@ namespace Ingame.Player
         {
             var effectRemovedEnemies = new Queue<Enemy>(25);
 
-            foreach (var (key, value) in _effectCommandInfos)
+            foreach (var (key, value) in _effectCommands)
             {
                 bool removed = false;
                 value.ForEachNodes(node =>
                 {
-                    if (node.Value.EffectCommand.EffectID != effectID || (!removeAll && removed)) { return; }
+                    if (node.Value.EffectID != effectID || (!removeAll && removed)) { return; }
 
                     removed = true;
                     effectRemovedEnemies.Enqueue(key);
@@ -141,10 +154,10 @@ namespace Ingame.Player
 
         public void Clear(Enemy enemy)
         {
-            if (!_effectCommandInfos.TryGetValue(enemy, out var list)) { return; }
+            if (!_effectCommands.TryGetValue(enemy, out var list)) { return; }
 
             list.ForEachNodes(Remove);
-            _effectCommandInfos.Remove(enemy);
+            _effectCommands.Remove(enemy);
         }
 
         private void Update()
@@ -154,14 +167,17 @@ namespace Ingame.Player
 
         private void RemoveExpiredCommands()
         {
-            foreach (var keyValuePair in _effectCommandInfos)
+            foreach (var keyValuePair in _effectCommands)
             {
                 var list = keyValuePair.Value;
                 if (list == null || list.Count < 1) { continue; }
 
                 list.ForEachNodes(node =>
                 {
-                    if (node.Value.EndTime <= Time.time) { Remove(node); }
+                    if (node.Value.EndTime <= Time.time)
+                    {
+                        Remove(node);
+                    }
                 });
             }
         }
