@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Ingame.Player.Modifier;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -41,12 +42,17 @@ namespace Ingame.Player.Magic.Modifier
     {
         [SerializeField] private SimpleEffectData effectData;
 
-        public override void Modify(Enemy enemy)
+        public override void Modify([NotNull] Enemy enemy)
         {
             var effectManager = EffectManager.Instance;
             var first = effectManager.First(enemy, effectData.EffectID);
             if (first != null) { first.ExtendTime(effectData.Duration); }
             else { effectManager.Add(new SimpleEffectCommand(effectData, enemy)); }
+        }
+
+        public override void UnModify([NotNull] Enemy enemy)
+        {
+            EffectManager.Instance.Remove(enemy, effectData.EffectID);
         }
     }
 }

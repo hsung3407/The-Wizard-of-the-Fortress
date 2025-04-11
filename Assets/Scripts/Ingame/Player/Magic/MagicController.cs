@@ -22,7 +22,8 @@ namespace Ingame.Player
         private void Start()
         {
             if (!detector || !modifier) return;
-            detector.RegisterOnDetected(modifier.Modify);
+            detector.OnDetect += modifier.Modify;
+            detector.OnRelease += modifier.UnModify;
             
             Destroy(gameObject, lifeTime);
         }

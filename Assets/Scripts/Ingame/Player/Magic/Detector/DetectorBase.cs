@@ -7,14 +7,19 @@ namespace Ingame.Player.Magic.Detector
 {
     public abstract class DetectorBase : MonoBehaviour
     {
-        private Action<Enemy> OnDetected { get; set; }
-        public void RegisterOnDetected(Action<Enemy> onDetected) => OnDetected = onDetected;
+        public event Action<Enemy> OnDetect;
+        public event Action<Enemy> OnRelease;
 
-        protected void OnDetect(Enemy enemy)
+        protected void Detect(Enemy enemy)
         {
-            if (enemy == null) return;
+            if (OnDetect == null || enemy == null) return;
+            OnDetect.Invoke(enemy);
+        }
 
-            OnDetected(enemy);
+        protected void Release(Enemy enemy)
+        {
+            if (OnRelease == null || enemy == null) return;
+            OnRelease.Invoke(enemy);
         }
     }
 }

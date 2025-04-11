@@ -8,7 +8,9 @@ namespace Ingame.Player.Magic.Detector
 {
     public class SphereTickDetector : DetectorBase
     {
-        [FormerlySerializedAs("range")] [SerializeField] private float radius = 1;
+        [FormerlySerializedAs("range")] [SerializeField]
+        private float radius = 1;
+
         [SerializeField] private float tickDelay = 1;
 
         private void Start()
@@ -24,10 +26,7 @@ namespace Ingame.Player.Magic.Detector
             {
                 foreach (var detectedCollider in Physics.OverlapSphere(transform.position,
                              radius,
-                             LayerMask.GetMask("Enemy")))
-                {
-                    OnDetect(detectedCollider.GetComponent<Enemy>());
-                }
+                             LayerMask.GetMask("Enemy"))) { Detect(detectedCollider.GetComponent<Enemy>()); }
 
                 yield return delay;
             }
