@@ -64,7 +64,6 @@ namespace Ingame
             Init();
         }
 
-        //TODO: 특정 함수나 animation curve(=베지어)를 활용한 값 변환
         private float GetPlayValue(float alpha)
         {
             return Mathf.Clamp01(Mathf.Pow(alpha - 1.2f, 6));
