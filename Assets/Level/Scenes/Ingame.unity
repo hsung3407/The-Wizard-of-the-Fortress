@@ -1511,14 +1511,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57264735}
     m_Modifications:
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 2791790254490550218, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.99
@@ -1562,22 +1554,6 @@ PrefabInstance:
     - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_Name
       value: Shrub (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2847,8 +2823,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.87, y: 0, z: 1.3426323}
-  m_Center: {x: 0.006131649, y: 0.034953773, z: -0.17131615}
+  m_Size: {x: 8, y: 0, z: 0}
+  m_Center: {x: 0.006131649, y: 0, z: 0}
 --- !u!114 &637915644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3872,14 +3848,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57264735}
     m_Modifications:
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 2791790254490550218, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.24
@@ -3923,22 +3891,6 @@ PrefabInstance:
     - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_Name
       value: Shrub
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7899,14 +7851,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57264735}
     m_Modifications:
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 2791790254490550218, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.19
@@ -7950,22 +7894,6 @@ PrefabInstance:
     - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_Name
       value: Shrub (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8654,14 +8582,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57264735}
     m_Modifications:
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523954332599828014, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 2791790254490550218, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.63
@@ -8705,22 +8625,6 @@ PrefabInstance:
     - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
       propertyPath: m_Name
       value: Shrub
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873837757078665107, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5096742290233435312, guid: 595ab334472a1a94d82003e00d055379, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
