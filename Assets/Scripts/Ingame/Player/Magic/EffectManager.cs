@@ -28,8 +28,8 @@ namespace Ingame.Player
         {
             All,
             WithoutHash,
-            True,
-            False,
+            GroupName,
+            EffectName,
         }
 
         public bool Compare(EffectID other)
@@ -51,8 +51,8 @@ namespace Ingame.Player
             {
                 CompareType.All => checkGroup && checkName && checkHash,
                 CompareType.WithoutHash => checkGroup && checkName,
-                CompareType.True => true,
-                CompareType.False => false,
+                CompareType.GroupName => checkGroup,
+                CompareType.EffectName => checkName,
                 _ => throw new ArgumentOutOfRangeException(nameof(compareType), compareType, null)
             };
         }
