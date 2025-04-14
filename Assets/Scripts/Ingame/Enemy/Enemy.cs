@@ -21,6 +21,7 @@ namespace Ingame
     public class Enemy : MonoBehaviour
     {
         [SerializeField] private EnemyBaseStat baseStat;
+        private EnemyHitEffect _enemyHitEffect;
 
         private float _health;
         private float _damage = 1f;
@@ -34,6 +35,11 @@ namespace Ingame
         public enum StatModifyType
         {
             SpeedMultiplier
+        }
+
+        private void Awake()
+        {
+            _enemyHitEffect = GetComponent<EnemyHitEffect>();
         }
 
         private void OnEnable()
@@ -74,8 +80,11 @@ namespace Ingame
 
         public void TakeDamage(float takenDamage)
         {
+            if (_isDie) return;
+
             _health -= takenDamage;
-            if (_health <= 0 && !_isDie) Die();
+            if (_enemyHitEffect) _enemyHitEffect.Play();
+            if (_health <= 0) Die();
         }
 
         private void Die()

@@ -229,6 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6216532115693788942}
   - component: {fileID: 6469287540622861476}
+  - component: {fileID: 2703375770793145934}
   - component: {fileID: 9035632188689488801}
   m_Layer: 6
   m_Name: Slime
@@ -266,9 +267,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8ca7532bba47044a11c4df04c64e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damage: 1
-  speed: 1
+  baseStat:
+    maxHealth: 100
+    damage: 1
+    speed: 1
+--- !u!114 &2703375770793145934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705402075998324148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ea021d1a0b440bbb162be68ef11c85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  playTime: 1
+  effectCancelActiveTime: 0.5
 --- !u!135 &9035632188689488801
 SphereCollider:
   m_ObjectHideFlags: 0
