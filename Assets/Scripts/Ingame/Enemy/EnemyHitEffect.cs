@@ -27,12 +27,12 @@ namespace Ingame
             _originColor = _renderer.material.GetColor(BaseColorID);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             Init();
         }
 
-        public void Init()
+        private void Init()
         {
             _timer = 0;
             _renderer.material.SetColor(BaseColorID, _originColor);
