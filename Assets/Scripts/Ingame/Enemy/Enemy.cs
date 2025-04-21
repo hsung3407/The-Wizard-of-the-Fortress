@@ -56,6 +56,7 @@ namespace Ingame
         private void OnDisable()
         {
             OnDie = null;
+            _enemyHitEffect.Init();
         }
 
         private void Init()

@@ -25,7 +25,6 @@ namespace Ingame
         {
             _renderer = GetComponentInChildren<Renderer>();
             _originColor = _renderer.material.GetColor(BaseColorID);
-            Init();
         }
 
         private void OnDestroy()
@@ -33,7 +32,7 @@ namespace Ingame
             Init();
         }
 
-        private void Init()
+        public void Init()
         {
             _timer = 0;
             _renderer.material.SetColor(BaseColorID, _originColor);
