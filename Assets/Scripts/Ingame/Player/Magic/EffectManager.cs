@@ -125,10 +125,9 @@ namespace Ingame.Player
 
         private new void Remove(LinkedListNode<EffectCommand> node)
         {
-            if (node?.Value == null) { return; }
-
             var command = node.Value;
             base.Remove(node);
+            if (command == null) { return; }
             if (!Contains(node.Value.EffectID, node.Value.EffectID.EffectCompareType)) { command.Release(); }
         }
 
@@ -233,7 +232,7 @@ namespace Ingame.Player
 
                 list.ForEachNodes(node =>
                 {
-                    if (node.Value.EndTime <= Time.time) { list.Remove(node); }
+                    if (node.Value == null || node.Value.EndTime <= Time.time) { list.Remove(node); }
                 });
             }
         }
