@@ -140,12 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2cfb74adf24b8c8c94c679d75bd470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectIDData:
+    effectGroupName: Ice
+    effectName: Ice_Field
+    objectCompareType: 0
+    effectCompareType: 3
   effectData:
-    <EffectID>k__BackingField:
-      effectGroupName: Ice
-      effectName: Ice_Field
-      <ObjectCompareType>k__BackingField: 0
-      <EffectCompareType>k__BackingField: 3
     <StatModifyType>k__BackingField: 0
     <Amount>k__BackingField: -0.5
     <Duration>k__BackingField: 6

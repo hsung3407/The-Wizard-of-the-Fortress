@@ -16,7 +16,7 @@ namespace Ingame.Player.Magic.Modifier
         public float LastDuration { get; private set; }
         public float EndTime { get; private set; }
 
-        public SimpleTimeLimitEnemyEffectCommand(SimpleEffectData data, Enemy enemy, int ownerID) : base(new EffectID(data.EffectID, ownerID), enemy)
+        public SimpleTimeLimitEnemyEffectCommand(EffectID effectID, Enemy enemy, SimpleEffectData data) : base(effectID, enemy)
         {
             _enemy = enemy;
             _statModifyType = data.StatModifyType;
@@ -45,7 +45,6 @@ namespace Ingame.Player.Magic.Modifier
     [Serializable]
     public class SimpleEffectData
     {
-        [field: SerializeField] public EffectID EffectID { get; private set; }
         [field: SerializeField] public Enemy.StatModifyType StatModifyType { get; private set; }
         [field: SerializeField] public float Amount { get; private set; }
         [field: SerializeField] public float Duration { get; private set; }
@@ -53,17 +52,24 @@ namespace Ingame.Player.Magic.Modifier
 
     public class Effector : ModifierBase
     {
+        [SerializeField] private EffectIDData effectIDData;
+        private EffectID _effectID;
+        
         [SerializeField] private SimpleEffectData effectData;
+
+        private void Awake()
+        {
+            _effectID = effectIDData.GetEffectID(GetInstanceID());
+        }
 
         public override void Modify([NotNull] Enemy enemy)
         {
-            Debug.Log(effectData.EffectID.GetHashCode());
-            EffectManager.Instance.Add(new SimpleTimeLimitEnemyEffectCommand(effectData, enemy, GetInstanceID()));
+            EffectManager.Instance.Add(new SimpleTimeLimitEnemyEffectCommand(_effectID, enemy, effectData));
         }
 
         public override void UnModify([NotNull] Enemy enemy)
         {
-            EffectManager.Instance.Remove(enemy, effectData.EffectID);
+            EffectManager.Instance.Remove(enemy, _effectID);
         }
     }
 }

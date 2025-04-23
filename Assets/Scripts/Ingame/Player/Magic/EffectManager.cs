@@ -11,22 +11,36 @@ using Object = UnityEngine.Object;
 namespace Ingame.Player
 {
     [Serializable]
-    public class EffectID
+    public struct EffectIDData
     {
         [SerializeField] private string effectGroupName;
         [SerializeField] private string effectName;
-        private int _ownerID;
 
-        [field: SerializeField] public CompareType ObjectCompareType { get; private set; }
-        [field: SerializeField] public CompareType EffectCompareType { get; private set; }
-        
-        public EffectID(EffectID effectID, int ownerID)
+        [SerializeField] private EffectID.CompareType objectCompareType;
+        [SerializeField] private EffectID.CompareType effectCompareType;
+
+        public EffectID GetEffectID(int ownerID)
         {
-            effectGroupName = effectID.effectGroupName;
-            effectName = effectID.effectName;
+            return new EffectID(effectGroupName, effectName, ownerID, objectCompareType, effectCompareType);
+        }
+    }
+
+    public readonly struct EffectID
+    {
+        private readonly string _effectGroupName;
+        private readonly string _effectName;
+        private readonly int _ownerID;
+        public readonly CompareType ObjectCompareType;
+        public readonly CompareType EffectCompareType;
+
+        public EffectID(string effectGroupName, string effectName, int ownerID, CompareType objectCompareType,
+            CompareType effectCompareType)
+        {
+            _effectGroupName = effectGroupName;
+            _effectName = effectName;
             _ownerID = ownerID;
-            ObjectCompareType = effectID.ObjectCompareType;
-            EffectCompareType = effectID.EffectCompareType;
+            ObjectCompareType = objectCompareType;
+            EffectCompareType = effectCompareType;
         }
 
         public enum CompareType
@@ -36,7 +50,7 @@ namespace Ingame.Player
             EffectName,
             OnlyName,
         }
-        
+
         public bool Compare(EffectID other, CompareType compareType)
         {
             return Compare(this, other, compareType);
@@ -44,9 +58,9 @@ namespace Ingame.Player
 
         public static bool Compare(EffectID a, EffectID b, CompareType compareType)
         {
-            bool checkGroup = a?.effectGroupName == b?.effectGroupName;
-            bool checkName = a?.effectName == b?.effectName;
-            bool checkOwner = a?._ownerID == b?._ownerID;
+            bool checkGroup = a._effectGroupName == b._effectGroupName;
+            bool checkName = a._effectName == b._effectName;
+            bool checkOwner = a._ownerID == b._ownerID;
             return compareType switch
             {
                 CompareType.All => checkGroup && checkName && checkOwner,
@@ -56,14 +70,14 @@ namespace Ingame.Player
                 _ => throw new ArgumentOutOfRangeException(nameof(compareType), compareType, null)
             };
         }
-        
+
         public override string ToString()
         {
-            return $"[{effectGroupName}]{effectName}";
+            return $"[{_effectGroupName}]{_effectName}";
         }
     }
 
-    public abstract class EffectCommand : Object
+    public abstract class EffectCommand
     {
         public readonly EffectID EffectID;
         public readonly Object Obj;
@@ -76,7 +90,7 @@ namespace Ingame.Player
 
         public abstract void Execute();
         public abstract void Release();
-        
+
         public abstract bool IsExpired();
     }
 
@@ -100,10 +114,14 @@ namespace Ingame.Player
 
         private new void Remove(LinkedListNode<EffectCommand> node)
         {
+            if (node == null) return;
+
             var command = node.Value;
             base.Remove(node);
-            if (command == null) { return; }
-            if (!Contains(node.Value.EffectID, node.Value.EffectID.EffectCompareType)) { command.Release(); }
+            if (command != null && !Contains(command.EffectID, command.EffectID.EffectCompareType))
+            {
+                command.Release();
+            }
         }
 
         public bool Remove(EffectID effectID, bool removeAll = false)
@@ -177,10 +195,7 @@ namespace Ingame.Player
 
             foreach (var (effectedObject, list) in _effectCommands)
             {
-                if (list.Remove(effectID, removeAll))
-                {
-                    effectRemovedEnemies.Add(effectedObject);
-                }
+                if (list.Remove(effectID, removeAll)) { effectRemovedEnemies.Add(effectedObject); }
             }
 
             return effectRemovedEnemies;
