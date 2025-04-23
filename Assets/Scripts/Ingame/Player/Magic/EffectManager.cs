@@ -204,8 +204,10 @@ namespace Ingame.Player
         public void Clear(object effectedObject)
         {
             if (!_effectCommands.TryGetValue(effectedObject, out var list)) { return; }
-
+            
             list?.Clear();
+            _effectCommands[effectedObject] = null;
+            _effectCommands.Remove(effectedObject);
         }
 
         private void Update()
