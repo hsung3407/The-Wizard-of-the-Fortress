@@ -55,6 +55,7 @@ namespace Ingame
 
         private void OnDisable()
         {
+            EffectManager.Instance.Clear(this);
             OnDie = null;
         }
 
@@ -90,7 +91,6 @@ namespace Ingame
         private void Die()
         {
             _isDie = true;
-            EffectManager.Instance.Clear(this);
             OnDie?.Invoke();
         }
     }
