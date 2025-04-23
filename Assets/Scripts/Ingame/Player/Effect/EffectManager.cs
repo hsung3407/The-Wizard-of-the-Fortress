@@ -1,99 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.Serialization;
 using Utility;
 using Utility.SingleTon;
 using Object = UnityEngine.Object;
 
-namespace Ingame.Player
+namespace Ingame.Player.Effect
 {
-    [Serializable]
-    public struct EffectIDData
-    {
-        [SerializeField] private string effectGroupName;
-        [SerializeField] private string effectName;
-
-        [SerializeField] private EffectID.CompareType objectCompareType;
-        [SerializeField] private EffectID.CompareType effectCompareType;
-
-        public EffectID GetEffectID(int ownerID)
-        {
-            return new EffectID(effectGroupName, effectName, ownerID, objectCompareType, effectCompareType);
-        }
-    }
-
-    public readonly struct EffectID
-    {
-        private readonly string _effectGroupName;
-        private readonly string _effectName;
-        private readonly int _ownerID;
-        public readonly CompareType ObjectCompareType;
-        public readonly CompareType EffectCompareType;
-
-        public EffectID(string effectGroupName, string effectName, int ownerID, CompareType objectCompareType,
-            CompareType effectCompareType)
-        {
-            _effectGroupName = effectGroupName;
-            _effectName = effectName;
-            _ownerID = ownerID;
-            ObjectCompareType = objectCompareType;
-            EffectCompareType = effectCompareType;
-        }
-
-        public enum CompareType
-        {
-            All,
-            GroupName,
-            EffectName,
-            OnlyName,
-        }
-
-        public bool Compare(EffectID other, CompareType compareType)
-        {
-            return Compare(this, other, compareType);
-        }
-
-        public static bool Compare(EffectID a, EffectID b, CompareType compareType)
-        {
-            bool checkGroup = a._effectGroupName == b._effectGroupName;
-            bool checkName = a._effectName == b._effectName;
-            bool checkOwner = a._ownerID == b._ownerID;
-            return compareType switch
-            {
-                CompareType.All => checkGroup && checkName && checkOwner,
-                CompareType.GroupName => checkGroup,
-                CompareType.EffectName => checkName,
-                CompareType.OnlyName => checkGroup && checkName,
-                _ => throw new ArgumentOutOfRangeException(nameof(compareType), compareType, null)
-            };
-        }
-
-        public override string ToString()
-        {
-            return $"[{_effectGroupName}]{_effectName}";
-        }
-    }
-
-    public abstract class EffectCommand
-    {
-        public readonly EffectID EffectID;
-        public readonly Object Obj;
-
-        protected EffectCommand(EffectID effectID, Object obj)
-        {
-            EffectID = effectID;
-            Obj = obj;
-        }
-
-        public abstract void Execute();
-        public abstract void Release();
-
-        public abstract bool IsExpired();
-    }
-
     public class EffectCommandList : LinkedList<EffectCommand>
     {
         public void Add(EffectCommand effectCommand)
