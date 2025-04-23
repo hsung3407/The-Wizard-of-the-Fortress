@@ -145,7 +145,7 @@ MonoBehaviour:
       effectGroupName: Ice
       effectName: Ice_Field
       <ObjectCompareType>k__BackingField: 0
-      <EffectCompareType>k__BackingField: 1
+      <EffectCompareType>k__BackingField: 3
     <StatModifyType>k__BackingField: 0
     <Amount>k__BackingField: -0.5
     <Duration>k__BackingField: 6

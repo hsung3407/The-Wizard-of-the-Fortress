@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Utility;
 using Utility.SingleTon;
+using Object = UnityEngine.Object;
 
 namespace Ingame.Player
 {
@@ -14,29 +15,28 @@ namespace Ingame.Player
     {
         [SerializeField] private string effectGroupName;
         [SerializeField] private string effectName;
+        private int _ownerID;
 
-        [field: SerializeField] public CompareType ObjectCompareType { get; set; }
+        [field: SerializeField] public CompareType ObjectCompareType { get; private set; }
         [field: SerializeField] public CompareType EffectCompareType { get; private set; }
         
-        public EffectID(string effectGroupName, string effectName)
+        public EffectID(EffectID effectID, int ownerID)
         {
-            this.effectGroupName = effectGroupName;
-            this.effectName = effectName;
+            effectGroupName = effectID.effectGroupName;
+            effectName = effectID.effectName;
+            _ownerID = ownerID;
+            ObjectCompareType = effectID.ObjectCompareType;
+            EffectCompareType = effectID.EffectCompareType;
         }
 
         public enum CompareType
         {
             All,
-            WithoutHash,
             GroupName,
             EffectName,
+            OnlyName,
         }
-
-        public bool Compare(EffectID other)
-        {
-            return Compare(this, other, other.ObjectCompareType);
-        }
-
+        
         public bool Compare(EffectID other, CompareType compareType)
         {
             return Compare(this, other, compareType);
@@ -46,63 +46,38 @@ namespace Ingame.Player
         {
             bool checkGroup = a?.effectGroupName == b?.effectGroupName;
             bool checkName = a?.effectName == b?.effectName;
-            bool checkHash = a?.GetHashCode() == b?.GetHashCode();
+            bool checkOwner = a?._ownerID == b?._ownerID;
             return compareType switch
             {
-                CompareType.All => checkGroup && checkName && checkHash,
-                CompareType.WithoutHash => checkGroup && checkName,
+                CompareType.All => checkGroup && checkName && checkOwner,
                 CompareType.GroupName => checkGroup,
                 CompareType.EffectName => checkName,
+                CompareType.OnlyName => checkGroup && checkName,
                 _ => throw new ArgumentOutOfRangeException(nameof(compareType), compareType, null)
             };
         }
-
+        
         public override string ToString()
         {
             return $"[{effectGroupName}]{effectName}";
         }
     }
 
-    public abstract class EffectCommand
+    public abstract class EffectCommand : Object
     {
         public readonly EffectID EffectID;
-        public readonly Enemy Enemy;
-        public readonly float StartTime;
-        public float LastDuration { get; private set; }
-        public float EndTime { get; private set; }
+        public readonly Object Obj;
 
-        protected EffectCommand(EffectID effectID, Enemy enemy, float lastDuration)
+        protected EffectCommand(EffectID effectID, Object obj)
         {
             EffectID = effectID;
-            Enemy = enemy;
-            StartTime = Time.time;
-            LastDuration = lastDuration;
-            EndTime = StartTime + LastDuration;
+            Obj = obj;
         }
 
         public abstract void Execute();
         public abstract void Release();
-
-        public void ResetTime(float duration)
-        {
-            LastDuration = duration;
-            EndTime = Time.time + duration;
-        }
-
-        public void ExtendTime(float duration)
-        {
-            var newEndTime = Time.time + duration;
-            if (newEndTime < EndTime) { return; }
-
-            LastDuration = duration;
-            EndTime = newEndTime;
-        }
-
-        public void AddTime(float duration)
-        {
-            LastDuration = duration;
-            EndTime += duration;
-        }
+        
+        public abstract bool IsExpired();
     }
 
     public class EffectCommandList : LinkedList<EffectCommand>
@@ -163,11 +138,11 @@ namespace Ingame.Player
 
     public class EffectManager : SingleMono<EffectManager>
     {
-        private readonly Dictionary<Enemy, EffectCommandList> _effectCommands = new();
+        private readonly Dictionary<object, EffectCommandList> _effectCommands = new();
 
         public void Add(EffectCommand effectCommand)
         {
-            var enemy = effectCommand.Enemy;
+            var enemy = effectCommand.Obj;
 
             if (!_effectCommands.TryGetValue(enemy, out var list))
             {
@@ -178,15 +153,15 @@ namespace Ingame.Player
             list.Add(effectCommand);
         }
 
-        public bool Contains(Enemy enemy, EffectID effectID, EffectID.CompareType compareType)
+        public bool Contains(object effectedObject, EffectID effectID, EffectID.CompareType compareType)
         {
-            _effectCommands.TryGetValue(enemy, out var list);
+            _effectCommands.TryGetValue(effectedObject, out var list);
             return list?.Contains(effectID, compareType) ?? false;
         }
 
-        public EffectCommand First(Enemy enemy, EffectID effectID, EffectID.CompareType compareType)
+        public EffectCommand First(object effectedObject, EffectID effectID, EffectID.CompareType compareType)
         {
-            _effectCommands.TryGetValue(enemy, out var list);
+            _effectCommands.TryGetValue(effectedObject, out var list);
             return list?.First(effectID, compareType);
         }
 
@@ -196,24 +171,24 @@ namespace Ingame.Player
             return list?.Remove(effectID, removeAll) ?? false;
         }
 
-        public IEnumerable<Enemy> Remove(EffectID effectID, bool removeAll = false)
+        public IEnumerable<object> Remove(EffectID effectID, bool removeAll = false)
         {
-            var effectRemovedEnemies = new HashSet<Enemy>(25);
+            var effectRemovedEnemies = new HashSet<object>(25);
 
-            foreach (var (enemy, list) in _effectCommands)
+            foreach (var (effectedObject, list) in _effectCommands)
             {
                 if (list.Remove(effectID, removeAll))
                 {
-                    effectRemovedEnemies.Add(enemy);
+                    effectRemovedEnemies.Add(effectedObject);
                 }
             }
 
             return effectRemovedEnemies;
         }
 
-        public void Clear(Enemy enemy)
+        public void Clear(object effectedObject)
         {
-            if (!_effectCommands.TryGetValue(enemy, out var list)) { return; }
+            if (!_effectCommands.TryGetValue(effectedObject, out var list)) { return; }
 
             list?.Clear();
         }
@@ -232,7 +207,7 @@ namespace Ingame.Player
 
                 list.ForEachNodes(node =>
                 {
-                    if (node.Value == null || node.Value.EndTime <= Time.time) { list.Remove(node); }
+                    if (node.Value?.IsExpired() ?? true) { list.Remove(node); }
                 });
             }
         }
