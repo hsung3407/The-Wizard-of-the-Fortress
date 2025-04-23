@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Utility
 {
-    public static class DataStructureExpand
+    public static class LinkedListExtension
     {
         public static IEnumerable<LinkedListNode<T>> GetNodes<T>(this LinkedList<T> list)
         {
