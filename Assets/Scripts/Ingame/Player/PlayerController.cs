@@ -136,7 +136,7 @@ namespace Ingame.Player
             var magicStatsModifier = new MagicStatsModifier();
             OnFire?.Invoke(magicData, magicStatsModifier);
             var modifiedMagicStats = magicStatsModifier.Modify(magicData.MagicStats);
-            if (!_playerStat.UseMana(modifiedMagicStats.ManaCost))
+            if (_playerStat.UseMana(modifiedMagicStats.ManaCost))
             {
                 var magic = Instantiate(magicObject, point, Quaternion.identity);
                 magic.InitMagic(magicData, modifiedMagicStats);
