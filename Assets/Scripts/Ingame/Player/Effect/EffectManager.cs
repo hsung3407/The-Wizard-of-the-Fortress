@@ -68,58 +68,57 @@ namespace Ingame.Player.Effect
 
     public class EffectManager : SingleMono<EffectManager>
     {
-        private readonly Dictionary<object, EffectCommandList> _effectCommands = new();
+        private readonly Dictionary<Object, EffectCommandList> _effectCommands = new();
 
         public void Add(EffectCommand effectCommand)
         {
-            var enemy = effectCommand.Obj;
-
-            if (!_effectCommands.TryGetValue(enemy, out var list))
+            Object target = effectCommand.Target;
+            if (!_effectCommands.TryGetValue(target, out var list))
             {
                 list = new EffectCommandList();
-                _effectCommands.Add(enemy, list);
+                _effectCommands.Add(target, list);
             }
 
             list.Add(effectCommand);
         }
 
-        public bool Contains(object effectedObject, EffectID effectID, EffectID.CompareType compareType)
+        public bool Contains(Object target, EffectID effectID, EffectID.CompareType compareType)
         {
-            _effectCommands.TryGetValue(effectedObject, out var list);
+            _effectCommands.TryGetValue(target, out var list);
             return list?.Contains(effectID, compareType) ?? false;
         }
 
-        public EffectCommand First(object effectedObject, EffectID effectID, EffectID.CompareType compareType)
+        public EffectCommand First(Object target, EffectID effectID, EffectID.CompareType compareType)
         {
-            _effectCommands.TryGetValue(effectedObject, out var list);
+            _effectCommands.TryGetValue(target, out var list);
             return list?.First(effectID, compareType);
         }
 
-        public bool Remove(Enemy enemy, EffectID effectID, bool removeAll = false)
+        public bool Remove(Object target, EffectID effectID, bool removeAll = false)
         {
-            _effectCommands.TryGetValue(enemy, out var list);
+            _effectCommands.TryGetValue(target, out var list);
             return list?.Remove(effectID, removeAll) ?? false;
         }
 
-        public IEnumerable<object> Remove(EffectID effectID, bool removeAll = false)
+        public IEnumerable<Object> Remove(EffectID effectID, bool removeAll = false)
         {
-            var effectRemovedEnemies = new HashSet<object>(25);
+            var removedTargets = new HashSet<Object>(25);
 
-            foreach (var (effectedObject, list) in _effectCommands)
+            foreach (var (target, list) in _effectCommands)
             {
-                if (list.Remove(effectID, removeAll)) { effectRemovedEnemies.Add(effectedObject); }
+                if (list.Remove(effectID, removeAll)) { removedTargets.Add(target); }
             }
 
-            return effectRemovedEnemies;
+            return removedTargets;
         }
 
-        public void Clear(object effectedObject)
+        public void Clear(Object target)
         {
-            if (!_effectCommands.TryGetValue(effectedObject, out var list)) { return; }
+            if (!_effectCommands.TryGetValue(target, out var list)) { return; }
             
             list?.Clear();
-            _effectCommands[effectedObject] = null;
-            _effectCommands.Remove(effectedObject);
+            _effectCommands[target] = null;
+            _effectCommands.Remove(target);
         }
 
         private void Update()

@@ -1,3 +1,4 @@
+using System;
 using Ingame.Player.Predictor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,6 +26,8 @@ namespace Ingame.Player
         private LayerMask _layerMask;
 
         private bool _interacting;
+
+        public event Action<MagicDataSO, MagicStatsModifier> OnFire; 
 
         private void Awake()
         {
@@ -127,8 +130,17 @@ namespace Ingame.Player
             }
             _playerCommand.ClearCommands();
 
-            if (!_playerStat.UseMana(magicData.ManaCost)) return;
-            if(magicData.MagicObject) Instantiate(magicData.MagicObject, point, Quaternion.identity);
+            var magicObject = magicData.MagicObject;
+            if(!magicObject) return;
+            
+            var magicStatsModifier = new MagicStatsModifier();
+            OnFire?.Invoke(magicData, magicStatsModifier);
+            var modifiedMagicStats = magicStatsModifier.Modify(magicData.MagicStats);
+            if (!_playerStat.UseMana(modifiedMagicStats.ManaCost))
+            {
+                var magic = Instantiate(magicObject, point, Quaternion.identity);
+                magic.InitMagic(magicData, modifiedMagicStats);
+            }
         }
     }
 }

@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cd0b0570151584784fac851369fe0c, type: 3}
   m_Name: Icicle_Rain
   m_EditorClassIdentifier: 
+  <GroupName>k__BackingField: Ice
   <MagicName>k__BackingField: Icicle_Rain
   <Command>k__BackingField: 0
   <Icon>k__BackingField: {fileID: 0}
   <Description>k__BackingField: 
+  <MagicObject>k__BackingField: {fileID: 1628545270888627204, guid: c5d73d4b77de02a48a53a8dede6261e8, type: 3}
   <PredictorType>k__BackingField: 1
   <PredictRange>k__BackingField: 5.2
-  <ManaCost>k__BackingField: 35
-  <MagicObject>k__BackingField: {fileID: 1628545270888627204, guid: c5d73d4b77de02a48a53a8dede6261e8, type: 3}
+  <MagicStats>k__BackingField:
+    <Damage>k__BackingField: 35
+    <ManaCost>k__BackingField: 35

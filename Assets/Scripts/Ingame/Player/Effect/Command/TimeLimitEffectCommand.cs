@@ -18,7 +18,7 @@ namespace Ingame.Player.Effect.Command
         public float Duration { get; private set; }
         public float EndTime { get; private set; }
 
-        public TimeLimitEffectCommand(EffectID effectID, Object obj, float duration) : base(effectID, obj)
+        public TimeLimitEffectCommand(EffectID effectID, Object target, float duration) : base(effectID, target)
         {
             StartTime = Time.time;
             Duration = duration;

@@ -5,11 +5,16 @@ namespace Ingame.Player.Magic.Modifier
 {
     public class Attacker : ModifierBase
     {
-        [SerializeField] private float damage;
-        
+        private float _damage;
+
+        public override void Init(MagicDataSO magicData, MagicStats modifiedStats)
+        {
+            _damage = modifiedStats.Damage;
+        }
+
         public override void Modify(Enemy enemy)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(_damage);
         }
     }
 }

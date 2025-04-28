@@ -27,5 +27,10 @@ namespace Ingame.Player
             
             Destroy(gameObject, lifeTime);
         }
+
+        public void InitMagic(MagicDataSO data, MagicStats modifiedStats)
+        {
+            
+        }
     }
 }

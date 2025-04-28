@@ -1,16 +1,16 @@
-using System;
+using UnityEngine;
 
 namespace Ingame.Player.Effect
 {
     public abstract class EffectCommand
     {
         public readonly EffectID EffectID;
-        public readonly Object Obj;
+        public readonly Object Target;
 
-        protected EffectCommand(EffectID effectID, Object obj)
+        protected EffectCommand(EffectID effectID, Object target)
         {
             EffectID = effectID;
-            Obj = obj;
+            Target = target;
         }
 
         //효과 적용과 해제
