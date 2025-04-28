@@ -30,7 +30,7 @@ namespace Ingame.Player
 
         public void InitMagic(MagicDataSO data, MagicStats modifiedStats)
         {
-            
+            modifier.Init(data, modifiedStats);
         }
     }
 }
