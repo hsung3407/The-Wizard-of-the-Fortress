@@ -8,7 +8,7 @@ namespace Ingame.Player
     public class PlayerController : MonoBehaviour
     {
         private PlayerInput _playerInput;
-        private PlayerStat _playerStat;
+        private PlayerStatsManager playerStatsManager;
         private PlayerCommand _playerCommand;
         private PlayerMagic _playerMagic;
 
@@ -19,14 +19,14 @@ namespace Ingame.Player
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
-            _playerStat = GetComponent<PlayerStat>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
             _playerCommand = GetComponent<PlayerCommand>();
             _playerMagic = GetComponent<PlayerMagic>();
         }
 
         private void Start()
         {
-            _playerCommand.Init(_playerStat.CommandCount);
+            _playerCommand.Init(playerStatsManager.CommandCount);
 
             _playerInput.CheckInteractable += () =>
             {
@@ -62,7 +62,7 @@ namespace Ingame.Player
             OnFire?.Invoke(magicData, magicStatsModifier);
             var modifiedMagicStats = magicStatsModifier.Modify(magicData.MagicStats);
 
-            if (!_playerStat.UseMana(modifiedMagicStats.ManaCost)) { return; }
+            if (!playerStatsManager.UseMana(modifiedMagicStats.ManaCost)) { return; }
 
             var magic = Instantiate(magicObject, point, Quaternion.identity);
             magic.InitMagic(magicData, modifiedMagicStats);
