@@ -41,7 +41,7 @@ namespace Ingame.Player
             pressInput.action.performed += _ =>
             {
                 var point = pointInput.action.ReadValue<Vector2>();
-                if ((!CheckInteractable?.Invoke() ?? false) || !PredictRaycast(point, _hits)) { return; }
+                if ((!CheckInteractable?.Invoke() ?? true) || !PredictRaycast(point, _hits)) { return; }
 
                 _interacting = true;
                 OnInteractStart?.Invoke(_hits[0].point);
