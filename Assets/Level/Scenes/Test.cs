@@ -1,75 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Ingame;
-using Ingame.Player;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+namespace Level.Scenes
 {
-    Dictionary<object, int> map = new Dictionary<object, int>();
-    List<object> list = new List<object>();
-
-    private int i;
-    private void Awake()
+    public class Test : MonoBehaviour
     {
-        for (i = 0; i < 10; i++)
+        public TestOb tb;
+    
+        private void Start()
         {
-            var newObj = new GameObject
-            {
-                name = "Test" + i
-            };
-            list.Add(newObj);
-            map.Add(newObj, i);
+            Debug.Log(tb.test);
+            tb.test = 100;
+            Debug.Log(tb.test);
         }
     }
 
-    private void Update()
+    [CreateAssetMenu(fileName = "New Test", menuName = "Test")]
+    public class TestOb : ScriptableObject
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            var newObj = new GameObject
-            {
-                name = "Test" + i
-            };
-            list.Add(newObj);
-            map.Add(newObj, i);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            foreach (GameObject o in list)
-            {
-                Destroy(o);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Debug.Log("List");
-            foreach (var obj in list)
-            {
-                Debug.Log(obj);
-            }
-            Debug.Log("Map");
-            foreach (var keyValuePair in map)
-            {
-                Debug.Log(keyValuePair);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            foreach (var keyValuePair in map)
-            {
-                Debug.Log(map[null!]);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            map.Remove(null!);
-        }
+        public float test;
     }
 }
