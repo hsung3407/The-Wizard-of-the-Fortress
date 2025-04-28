@@ -34,7 +34,8 @@ namespace Ingame
 
         private void Die()
         {
-            // Debug.Log("Die");
+            Debug.Log("Die");
+            Time.timeScale = 0;
         }
     }
 }
