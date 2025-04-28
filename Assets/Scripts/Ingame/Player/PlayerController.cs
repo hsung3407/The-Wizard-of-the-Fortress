@@ -7,140 +7,65 @@ namespace Ingame.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private InputActionReference pressInput;
-        [SerializeField] private InputActionReference pointInput;
-
+        private PlayerInput _playerInput;
         private PlayerStat _playerStat;
         private PlayerCommand _playerCommand;
         private PlayerMagic _playerMagic;
 
-        [SerializeField] private Camera ingameCamera;
-        [SerializeField] private RectTransform ingameViewRect;
-        [SerializeField] private RectTransform touchAreaRect;
-        private readonly Vector3[] _ingameViewCorners = new Vector3[4];
-        private readonly Vector3[] _touchAreaCorners = new Vector3[4];
-
         [SerializeField] private PredictorManager predictorManager;
 
-        private readonly RaycastHit[] _hits = new RaycastHit[1];
-        private LayerMask _layerMask;
-
-        private bool _interacting;
-
-        public event Action<MagicDataSO, MagicStatsModifier> OnFire; 
+        public event Action<MagicDataSO, MagicStatsModifier> OnFire;
 
         private void Awake()
         {
+            _playerInput = GetComponent<PlayerInput>();
             _playerStat = GetComponent<PlayerStat>();
             _playerCommand = GetComponent<PlayerCommand>();
             _playerMagic = GetComponent<PlayerMagic>();
-        
-            _layerMask = LayerMask.GetMask("Ground", "Default");
-        
-            pressInput.action.performed += _ =>
-            {
-                var point = pointInput.action.ReadValue<Vector2>();
-                if(!PredictRaycast(point, _hits)) return;
-            
-                var command = _playerCommand.GetCommand();
-                if (!_playerMagic.GetMagicDataWithCommand(command, out var magicData))
-                {
-                    MagicNotFound();
-                    return;
-                }
-
-                _interacting = true;
-                predictorManager.SetPredictor(magicData.PredictorType, magicData.PredictRange);
-                predictorManager.PosUpdate(_hits[0].point);
-            };
-
-            pressInput.action.canceled += _ =>
-            {
-                if (!_interacting) return;
-            
-                var point = pointInput.action.ReadValue<Vector2>();
-                if(!PredictRaycast(point, _hits)) return;
-            
-                _interacting = false;
-                predictorManager.SetPredictor(PredictorManager.PredictorType.None);
-            
-                Fire(_hits[0].point);
-            };
-
-            pointInput.action.performed += c =>
-            {
-                if (!_interacting) return;
-
-                var point = c.ReadValue<Vector2>();
-                if (PredictRaycast(point, _hits))
-                {
-                    predictorManager.PosUpdate(_hits[0].point);
-                }
-                else
-                {
-                    predictorManager.SetPredictor(PredictorManager.PredictorType.None);
-                    _interacting = false;
-                }
-            };
         }
 
         private void Start()
         {
-            ingameViewRect.GetWorldCorners(_ingameViewCorners);
-            touchAreaRect.GetWorldCorners(_touchAreaCorners);
-            
             _playerCommand.Init(_playerStat.CommandCount);
-        }
 
-        private bool PredictRaycast(Vector2 point, RaycastHit[] hits)
-        {
-            if (!IsInTouchArea(point)) return false;
-            var ray = IngameViewToRay(point);
-            return Physics.RaycastNonAlloc(ray, hits, 30, _layerMask) > 0 &&
-                   hits[0].transform.gameObject.layer == LayerMask.NameToLayer("Ground");
-        }
+            _playerInput.CheckInteractable += () =>
+            {
+                if (_playerMagic.Contains(_playerCommand.GetCommand())) { return true; }
 
-        private bool IsInTouchArea(Vector3 origin)
-        {
-            return origin.x > _touchAreaCorners[0].x && origin.y > _touchAreaCorners[0].y &&
-                   origin.x < _touchAreaCorners[2].x && origin.y < _touchAreaCorners[2].y;
-        }
+                //TODO: 선택된 마법 없음 표시
+                _playerCommand.ClearCommands();
+                return false;
+            };
 
-        private Ray IngameViewToRay(Vector3 origin)
-        {
-            origin -= _ingameViewCorners[0];
-            var size = (_ingameViewCorners[2] - _ingameViewCorners[0]);
-            var x = origin.x / size.x * ingameCamera.pixelWidth;
-            var y = origin.y / size.y * ingameCamera.pixelHeight;
-            return ingameCamera.ScreenPointToRay(new Vector3(x, y, 0));
-        }
+            _playerInput.OnInteractStart += pos =>
+            {
+                _playerMagic.GetMagicDataWithCommand(_playerCommand.GetCommand(), out var magicData);
+                predictorManager.SetPredictor(magicData.PredictorType, magicData.PredictRange);
+                predictorManager.PosUpdate(pos);
+            };
 
-        private void MagicNotFound()
-        {
-            _playerCommand.ClearCommands();
+            _playerInput.OnInteract += pos => predictorManager.PosUpdate(pos);
+
+            _playerInput.OnInteractEnd += () => { predictorManager.SetPredictor(PredictorManager.PredictorType.None); };
+
+            _playerInput.OnApply += Fire;
         }
 
         private void Fire(Vector3 point)
         {
             var command = _playerCommand.GetCommand();
-            if (!_playerMagic.GetMagicDataWithCommand(command, out var magicData))
-            {
-                MagicNotFound();
-                return;
-            }
+            _playerMagic.GetMagicDataWithCommand(command, out var magicData);
             _playerCommand.ClearCommands();
 
             var magicObject = magicData.MagicObject;
-            if(!magicObject) return;
-            
             var magicStatsModifier = new MagicStatsModifier();
             OnFire?.Invoke(magicData, magicStatsModifier);
             var modifiedMagicStats = magicStatsModifier.Modify(magicData.MagicStats);
-            if (_playerStat.UseMana(modifiedMagicStats.ManaCost))
-            {
-                var magic = Instantiate(magicObject, point, Quaternion.identity);
-                magic.InitMagic(magicData, modifiedMagicStats);
-            }
+
+            if (!_playerStat.UseMana(modifiedMagicStats.ManaCost)) { return; }
+
+            var magic = Instantiate(magicObject, point, Quaternion.identity);
+            magic.InitMagic(magicData, modifiedMagicStats);
         }
     }
 }

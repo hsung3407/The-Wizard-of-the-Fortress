@@ -24,5 +24,10 @@ namespace Ingame.Player
             }
             return check;
         }
+
+        public bool Contains(string command)
+        {
+            return _magicDataDict.ContainsKey(command);
+        }
     }
 }
