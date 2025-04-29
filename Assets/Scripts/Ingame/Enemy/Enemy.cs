@@ -56,8 +56,12 @@ namespace Ingame
 
         private void OnDisable()
         {
-            EffectManager.Instance.Clear(this);
             OnDie = null;
+        }
+
+        private void OnDestroy()
+        {
+            if(EffectManager.Instance) EffectManager.Instance.Clear(this);
         }
 
         private void Init()
