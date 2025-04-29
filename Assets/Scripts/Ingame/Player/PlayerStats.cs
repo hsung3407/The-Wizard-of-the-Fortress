@@ -21,17 +21,30 @@ namespace Ingame.Player
             Damage = damage;
         }
     }
-
+    
     public class PlayerStatsModifier
     {
-        public float AdditionalHealth;
-        public float HealthMultiplier;
-        public float AdditionalMana;
-        public float ManaMultiplier;
-        public float AdditionalManaRegen;
-        public float ManaRegenMultiplier;
-        public float AdditionalDamage;
-        public float DamageMultiplier;
+        // A = additional, M = Multiplier
+        public enum PlayerStatsType
+        {
+            AHealth,
+            MHealth,
+            AMana,
+            MMana,
+            AManaRegen,
+            MManaRegen,
+            ADamage,
+            MDamage
+        }
+
+        public float AdditionalHealth { get; private set; }
+        public float HealthMultiplier { get; private set; }
+        public float AdditionalMana { get; private set; }
+        public float ManaMultiplier { get; private set; }
+        public float AdditionalManaRegen { get; private set; }
+        public float ManaRegenMultiplier { get; private set; }
+        public float AdditionalDamage { get; private set; }
+        public float DamageMultiplier { get; private set; }
 
         public PlayerStatsModifier(bool isEmpty = true)
         {
@@ -44,7 +57,7 @@ namespace Ingame.Player
             AdditionalDamage = 0;
             DamageMultiplier = isEmpty ? 0 : 1;
         }
-        
+
         public PlayerFlatStats Modify(PlayerFlatStats original)
         {
             return new PlayerFlatStats(
@@ -53,7 +66,42 @@ namespace Ingame.Player
                 (original.ManaRegen + AdditionalManaRegen) * ManaRegenMultiplier,
                 (original.Damage + AdditionalDamage) * DamageMultiplier);
         }
-        
+
+        public PlayerStatsModifier Add(PlayerStatsModifier left, PlayerStatsType type, float amount)
+        {
+            switch (type)
+            {
+                case PlayerStatsType.AHealth:
+                    left.AdditionalHealth += amount;
+                    break;
+                case PlayerStatsType.MHealth:
+                    left.HealthMultiplier += amount;
+                    break;
+                case PlayerStatsType.AMana:
+                    left.AdditionalMana += amount;
+                    break;
+                case PlayerStatsType.MMana:
+                    left.ManaMultiplier += amount;
+                    break;
+                case PlayerStatsType.AManaRegen:
+                    left.AdditionalManaRegen += amount;
+                    break;
+                case PlayerStatsType.MManaRegen:
+                    left.ManaRegenMultiplier += amount;
+                    break;
+                case PlayerStatsType.ADamage:
+                    left.AdditionalDamage += amount;
+                    break;
+                case PlayerStatsType.MDamage:
+                    left.DamageMultiplier += amount;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return left;
+        }
+
         public static PlayerStatsModifier operator +(PlayerStatsModifier left, PlayerStatsModifier right)
         {
             left.AdditionalHealth += right.AdditionalHealth;
@@ -113,16 +161,24 @@ namespace Ingame.Player
 
         private void InitStats()
         {
-            modifiedStats = _consistentModifier.Modify(baseStats);
+            StatsUpdate();
 
             Health = modifiedStats.Health;
             Mana = modifiedStats.Mana;
         }
 
+        private void StatsUpdate()
+        {
+            modifiedStats = _consistentModifier.Modify(baseStats);
+
+            HUD.Instance.SetHealth(_health, modifiedStats.Health);
+            HUD.Instance.SetMana(_mana, modifiedStats.Mana);
+        }
+
         private void ModifyStats(PlayerStatsModifier modifier)
         {
             _consistentModifier += modifier;
-            modifiedStats = _consistentModifier.Modify(baseStats);
+            StatsUpdate();
         }
 
         public bool UseMana(float mana)
