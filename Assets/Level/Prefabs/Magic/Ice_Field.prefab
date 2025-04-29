@@ -146,9 +146,9 @@ MonoBehaviour:
     objectCompareType: 0
     effectCompareType: 3
   effectData:
+    <Duration>k__BackingField: 5
     <StatModifyType>k__BackingField: 0
-    <Amount>k__BackingField: -0.5
-    <Duration>k__BackingField: 6
+    <Amount>k__BackingField: -0.3
 --- !u!1001 &4014072496675384253
 PrefabInstance:
   m_ObjectHideFlags: 0

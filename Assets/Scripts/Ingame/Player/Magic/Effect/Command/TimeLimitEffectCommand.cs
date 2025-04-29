@@ -32,7 +32,7 @@ namespace Ingame.Player.Effect.Command
     }
     
     [Serializable]
-    public abstract class TimeLimitEnemyEffectData : TimeLimitEffectData
+    public class TimeLimitEnemyEffectData : TimeLimitEffectData
     {
         [field: SerializeField] public Enemy.StatModifyType StatModifyType { get; private set; }
         [field: SerializeField] public float Amount { get; private set; }
