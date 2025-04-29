@@ -59,11 +59,6 @@ namespace Ingame
             OnDie = null;
         }
 
-        private void OnDestroy()
-        {
-            if(EffectManager.Instance) EffectManager.Instance.Clear(this);
-        }
-
         private void Init()
         {
             _isDie = false;
@@ -97,6 +92,7 @@ namespace Ingame
         {
             _isDie = true;
             OnDie?.Invoke();
+            EffectManager.Instance.Clear(this);
         }
     }
 }
