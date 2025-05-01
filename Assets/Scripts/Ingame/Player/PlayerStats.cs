@@ -67,39 +67,37 @@ namespace Ingame.Player
                 (original.Damage + AdditionalDamage) * DamageMultiplier);
         }
 
-        public PlayerStatsModifier Add(PlayerStatsModifier left, PlayerStatsType type, float amount)
+        public void Add(PlayerStatsType type, float amount)
         {
             switch (type)
             {
                 case PlayerStatsType.AHealth:
-                    left.AdditionalHealth += amount;
+                    AdditionalHealth += amount;
                     break;
                 case PlayerStatsType.MHealth:
-                    left.HealthMultiplier += amount;
+                    HealthMultiplier += amount;
                     break;
                 case PlayerStatsType.AMana:
-                    left.AdditionalMana += amount;
+                    AdditionalMana += amount;
                     break;
                 case PlayerStatsType.MMana:
-                    left.ManaMultiplier += amount;
+                    ManaMultiplier += amount;
                     break;
                 case PlayerStatsType.AManaRegen:
-                    left.AdditionalManaRegen += amount;
+                    AdditionalManaRegen += amount;
                     break;
                 case PlayerStatsType.MManaRegen:
-                    left.ManaRegenMultiplier += amount;
+                    ManaRegenMultiplier += amount;
                     break;
                 case PlayerStatsType.ADamage:
-                    left.AdditionalDamage += amount;
+                    AdditionalDamage += amount;
                     break;
                 case PlayerStatsType.MDamage:
-                    left.DamageMultiplier += amount;
+                    DamageMultiplier += amount;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            return left;
         }
 
         public static PlayerStatsModifier operator +(PlayerStatsModifier left, PlayerStatsModifier right)
@@ -175,7 +173,13 @@ namespace Ingame.Player
             HUD.Instance.SetMana(_mana, modifiedStats.Mana);
         }
 
-        private void ModifyStats(PlayerStatsModifier modifier)
+        public void ModifyStats(PlayerStatsModifier.PlayerStatsType type, float amount)
+        {
+            _consistentModifier.Add(type, amount);
+            StatsUpdate();
+        }
+
+        public void ModifyStats(PlayerStatsModifier modifier)
         {
             _consistentModifier += modifier;
             StatsUpdate();
