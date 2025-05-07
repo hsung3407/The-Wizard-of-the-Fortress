@@ -17,14 +17,14 @@ namespace UI
             tmp.color = color;
         }
 
-        public void Display(string text, Action onEnd = null, float size = 0.5f)
+        public void Display(string text, Action<FieldFloatingText> onEnd = null, float size = 0.5f)
         {
             tmp.text = text;
-            tmp.fontSize *= size;
+            tmp.fontSize = size;
             StartCoroutine(DisplayCoroutine(onEnd));
         }
 
-        private IEnumerator DisplayCoroutine(Action onEnd)
+        private IEnumerator DisplayCoroutine(Action<FieldFloatingText> onEnd)
         {
             for (float timer = 0; timer < lifeTime; timer += Time.deltaTime)
             {
@@ -34,7 +34,7 @@ namespace UI
                 yield return null;
             }
 
-            if (onEnd != null) { onEnd.Invoke(); }
+            if (onEnd != null) { onEnd.Invoke(this); }
             else { Destroy(gameObject); }
         }
 
