@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2891850898914119593, guid: b703cf8c0aa453243a109b4288fc56fd, type: 3}
+  selectSlotParent: {fileID: 2875462573927696650}
 --- !u!1 &8382821618589623782
 GameObject:
   m_ObjectHideFlags: 0
