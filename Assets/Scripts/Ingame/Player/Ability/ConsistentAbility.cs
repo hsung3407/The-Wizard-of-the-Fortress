@@ -8,13 +8,13 @@ namespace Ingame.Player.Ability
     public class ConsistentAbility : Ability
     {
         public readonly ConsistentAbilityDataSO ConsistentData;
-        
-        public ConsistentAbility(Player player, ConsistentAbilityDataSO data) : base(player, data)
+
+        public ConsistentAbility(Player player, ConsistentAbilityDataSO data) : base(player, data,
+            data.UpgradeType == ConsistentAbilityDataSO.LevelUpgradeType.Repeat ? 0 : data.Amounts.Count)
         {
             ConsistentData = data;
-            int maxLevel = data.UpgradeType == ConsistentAbilityDataSO.LevelUpgradeType.Repeat ? 0 : data.Amounts.Count;
         }
-        
+
         protected override void OnUpgraded()
         {
             Player.PlayerStats.ModifyStats(ConsistentData.StatsType, GetAmount());
