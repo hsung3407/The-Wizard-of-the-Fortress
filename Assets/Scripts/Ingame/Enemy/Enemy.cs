@@ -86,7 +86,7 @@ namespace Ingame
 
             if (!Mathf.Approximately(takenDamage, float.MaxValue))
             {
-                FloatingTextManager.Instance.Display(transform.position + new Vector3(0, 1, 0), $"{takenDamage}");
+                FloatingTextManager.Instance.Display(transform.position + new Vector3(0, 2, 0), $"{takenDamage}");
             }
 
             _health -= takenDamage;
