@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ice_Field
   m_EditorClassIdentifier: 
   <GroupName>k__BackingField: Ice
-  <MagicName>k__BackingField: Ice_Field
+  <MagicName>k__BackingField: Ice Field
   <Command>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 0}
   <Description>k__BackingField: 
