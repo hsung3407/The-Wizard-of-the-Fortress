@@ -19,7 +19,7 @@ namespace Ingame
             if (other.CompareTag("Enemy"))
             {
                 var enemy = other.GetComponent<Enemy>();
-                enemy.TakeDamage(int.MaxValue);
+                enemy.TakeDamage(float.MaxValue);
                 TakeHit(enemy.Damage);
             }
         }

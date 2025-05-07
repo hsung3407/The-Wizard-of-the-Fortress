@@ -2,6 +2,7 @@ using System;
 using System.Timers;
 using Ingame.Player;
 using Ingame.Player.Effect;
+using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -82,6 +83,11 @@ namespace Ingame
         public void TakeDamage(float takenDamage)
         {
             if (_isDie) return;
+
+            if (!Mathf.Approximately(takenDamage, float.MaxValue))
+            {
+                FloatingTextManager.Instance.Display(transform.position, $"{takenDamage}");
+            }
 
             _health -= takenDamage;
             if (_enemyHitEffect) _enemyHitEffect.Play();

@@ -61,6 +61,8 @@ namespace Ingame.Player
             if (_abilities.TryGetValue(abilityData.AbilityName, out Ability.Ability ability)) { ability.Upgrade(); }
             else
                 _abilities.Add(abilityData.AbilityName, abilityData.CreateAbility(_player));
+            
+            UpdateAbilities();
         }
     }
 }
