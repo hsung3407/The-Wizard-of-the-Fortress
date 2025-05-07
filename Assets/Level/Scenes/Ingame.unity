@@ -6075,7 +6075,6 @@ MonoBehaviour:
   pool:
     poolObjectPrefab: {fileID: 8402537582790762003, guid: d49f9c83b7fe93f4985d221437eaaacc, type: 3}
   camera: {fileID: 330585545}
-  prefab: {fileID: 8402537582790762003, guid: d49f9c83b7fe93f4985d221437eaaacc, type: 3}
 --- !u!4 &1546156456
 Transform:
   m_ObjectHideFlags: 0
