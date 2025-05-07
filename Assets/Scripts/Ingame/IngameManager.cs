@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using SO;
 using UnityEngine;
@@ -33,6 +34,18 @@ namespace Ingame
 
         private IEnumerator IngameFlow()
         {
+            yield return new WaitForSeconds(2f);
+            
+            yield return StartCoroutine(AbilitySelectFlow());
+            
+            yield return new WaitForSeconds(2f);
+            
+            WaveStart();
+        }
+
+        private IEnumerator AbilitySelectFlow()
+        {
+            Time.timeScale = 0;
             bool selected = false;
             
             player.PlayerAbility.Select(3, ability =>
@@ -42,10 +55,7 @@ namespace Ingame
             });
             
             yield return new WaitUntil(()=>selected);
-            
-            yield return new WaitForSeconds(1f);
-            
-            WaveStart();
+            Time.timeScale = 1;
         }
 
         private void WaveStart()
