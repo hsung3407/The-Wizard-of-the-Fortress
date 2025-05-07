@@ -6,7 +6,7 @@ namespace Ingame.Player.Modifier
 {
     public abstract class ModifierBase : MonoBehaviour
     {
-        public abstract void Init(MagicDataSO magicData, MagicStats modifiedStats);
+        public abstract void Init(MagicDataSO magicData, MagicStats modifiedMagicStats, PlayerFlatStats playerStats);
         
         public abstract void Modify(Enemy enemy);
 

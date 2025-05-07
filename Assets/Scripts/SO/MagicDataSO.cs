@@ -13,28 +13,37 @@ namespace Ingame.Player
     {
         public float AdditionalDamage = 0;
         public float DamageMultiplier = 1;
+        public float AdditionalDamageMultiplier = 0;
+        public float DamageMultiplierMultiplier = 1;
         public float AdditionalManaCost = 0;
         public float ManaCostMultiplier = 1;
 
         public MagicStats Modify(MagicStats original)
         {
             var damage = (original.Damage + AdditionalDamage) * DamageMultiplier;
+            var multiplier = (original.DamageMultiplier + AdditionalDamageMultiplier) * DamageMultiplierMultiplier;
             var manaCost = (original.ManaCost + AdditionalManaCost) * ManaCostMultiplier;
-            return new MagicStats(damage, manaCost);
+            return new MagicStats(damage, multiplier, manaCost);
         }
     }
 
     [Serializable]
     public struct MagicStats
     {
+        //기본 데미지
         [field: SerializeField] public float Damage { get; private set; }
+        //플레이어 스탯 기준 데미지 반영 비율
+        [field: SerializeField] public float DamageMultiplier { get; private set; }
         [field: SerializeField] public float ManaCost { get; private set; }
 
-        public MagicStats(float damage, float manaCost)
+        public MagicStats(float damage, float damageMultiplier, float manaCost)
         {
             Damage = damage;
+            DamageMultiplier = damageMultiplier;
             ManaCost = manaCost;
         }
+
+        public float GetDamage(PlayerFlatStats playerStats) => playerStats.Damage * DamageMultiplier + Damage;
     }
 
     [CreateAssetMenu(fileName = "MagicDataSO", menuName = "Scriptable Objects/MagicDataSO")]

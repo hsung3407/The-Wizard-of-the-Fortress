@@ -7,9 +7,9 @@ namespace Ingame.Player.Magic.Modifier
     {
         private float _damage;
 
-        public override void Init(MagicDataSO magicData, MagicStats modifiedStats)
+        public override void Init(MagicDataSO magicData, MagicStats modifiedMagicStats, PlayerFlatStats playerStats)
         {
-            _damage = modifiedStats.Damage;
+            _damage = modifiedMagicStats.GetDamage(playerStats);
         }
 
         public override void Modify(Enemy enemy)

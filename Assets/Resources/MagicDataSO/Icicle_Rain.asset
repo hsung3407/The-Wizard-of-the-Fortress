@@ -21,5 +21,6 @@ MonoBehaviour:
   <PredictorType>k__BackingField: 1
   <PredictRange>k__BackingField: 5.2
   <MagicStats>k__BackingField:
-    <Damage>k__BackingField: 35
+    <Damage>k__BackingField: 10
+    <DamageMultiplier>k__BackingField: 0.5
     <ManaCost>k__BackingField: 35

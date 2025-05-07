@@ -16,7 +16,7 @@ namespace Ingame.Player.Magic.Modifier
 
         [SerializeField] private TimeLimitEnemyEffectData effectData;
 
-        public override void Init(MagicDataSO magicData, MagicStats modifiedStats)
+        public override void Init(MagicDataSO magicData, MagicStats modifiedMagicStats, PlayerFlatStats playerStats)
         {
             _effectID = effectIDData.GetEffectID(GetInstanceID());
         }

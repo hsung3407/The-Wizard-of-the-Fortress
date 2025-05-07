@@ -67,7 +67,7 @@ namespace Ingame.Player
             if (!PlayerStats.UseMana(modifiedMagicStats.ManaCost)) { return; }
 
             var magic = Instantiate(magicObject, point, Quaternion.identity);
-            magic.InitMagic(magicData, modifiedMagicStats);
+            magic.InitMagic(magicData, modifiedMagicStats, PlayerStats.ModifiedStats);
         }
     }
 }

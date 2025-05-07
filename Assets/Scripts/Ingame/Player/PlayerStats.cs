@@ -118,7 +118,7 @@ namespace Ingame.Player
     {
         [SerializeField] private PlayerFlatStats baseStats;
         private PlayerStatsModifier _consistentModifier = new PlayerStatsModifier(false);
-        private PlayerFlatStats modifiedStats;
+        public PlayerFlatStats ModifiedStats { get; private set; }
 
         private float _health;
 
@@ -127,8 +127,8 @@ namespace Ingame.Player
             get => _health;
             set
             {
-                _health = Mathf.Clamp(value, 0, modifiedStats.Mana);
-                HUD.Instance.SetHealth(_health, modifiedStats.Health);
+                _health = Mathf.Clamp(value, 0, ModifiedStats.Mana);
+                HUD.Instance.SetHealth(_health, ModifiedStats.Health);
             }
         }
 
@@ -139,8 +139,8 @@ namespace Ingame.Player
             get => _mana;
             set
             {
-                _mana = Mathf.Clamp(value, 0, modifiedStats.Mana);
-                HUD.Instance.SetMana(_mana, modifiedStats.Mana);
+                _mana = Mathf.Clamp(value, 0, ModifiedStats.Mana);
+                HUD.Instance.SetMana(_mana, ModifiedStats.Mana);
             }
         }
 
@@ -154,23 +154,23 @@ namespace Ingame.Player
 
         private void Update()
         {
-            Mana += modifiedStats.ManaRegen * Time.deltaTime;
+            Mana += ModifiedStats.ManaRegen * Time.deltaTime;
         }
 
         private void InitStats()
         {
             StatsUpdate();
 
-            Health = modifiedStats.Health;
-            Mana = modifiedStats.Mana;
+            Health = ModifiedStats.Health;
+            Mana = ModifiedStats.Mana;
         }
 
         private void StatsUpdate()
         {
-            modifiedStats = _consistentModifier.Modify(baseStats);
+            ModifiedStats = _consistentModifier.Modify(baseStats);
 
-            HUD.Instance.SetHealth(_health, modifiedStats.Health);
-            HUD.Instance.SetMana(_mana, modifiedStats.Mana);
+            HUD.Instance.SetHealth(_health, ModifiedStats.Health);
+            HUD.Instance.SetMana(_mana, ModifiedStats.Mana);
         }
 
         public void ModifyStats(PlayerStatsModifier.PlayerStatsType type, float amount)
