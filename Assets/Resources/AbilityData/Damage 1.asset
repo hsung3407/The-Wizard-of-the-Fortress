@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ade66672854a2399947eaa50a9ad34, type: 3}
+  m_Name: Damage 1
+  m_EditorClassIdentifier: 
+  <AbilityName>k__BackingField: Damage Multiply
+  <Tags>k__BackingField: []
+  <Icon>k__BackingField: {fileID: 0}
+  <AbilityDescription>k__BackingField: Damage Multiply
+  <Rarity>k__BackingField: 0
+  <StatsType>k__BackingField: 7
+  <UpgradeType>k__BackingField: 1
+  <Amounts>k__BackingField:
+  - 0.5
+  - 1
