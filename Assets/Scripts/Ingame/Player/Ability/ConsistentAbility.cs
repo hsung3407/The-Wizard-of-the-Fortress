@@ -30,7 +30,7 @@ namespace Ingame.Player.Ability
                                                                        ? 0
                                                                        : ConsistentData.Amounts[Level - 2]),
                 ConsistentAbilityDataSO.LevelUpgradeType.Repeat => ConsistentData.Amounts[
-                    Mathf.Max(Level - 1, ConsistentData.Amounts.Count - 1)],
+                    Mathf.Min(Level - 1, ConsistentData.Amounts.Count - 1)],
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
