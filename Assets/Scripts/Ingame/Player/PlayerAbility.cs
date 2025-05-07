@@ -35,10 +35,15 @@ namespace Ingame.Player
             }
         }
 
-        public void Select(int count, Action<AbilityDataSO> onSelected)
+        public void Select(int count, Action<Ability.Ability> onSelected)
         {
-            List<AbilityDataSO> abilities = new List<AbilityDataSO>(count);
-            for (int i = 0; i < count; i++) { abilities.Add(Rand()); }
+            List<Ability.Ability> abilities = new List<Ability.Ability>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var data = Rand();
+                if(_abilities.TryGetValue(data.AbilityName, out Ability.Ability ability)) abilities.Add(ability);
+                else abilities.Add(data.CreateAbility(_player));
+            }
 
             abilitySelectView.Display(abilities, onSelected);
         }
@@ -56,11 +61,14 @@ namespace Ingame.Player
             return _selectableAbilities[Random.Range(0, _selectableAbilities.Count)];
         }
 
-        public void AddAbility(AbilityDataSO abilityData)
+        public void AddAbility(Ability.Ability ability)
         {
-            if (_abilities.TryGetValue(abilityData.AbilityName, out Ability.Ability ability)) { ability.Upgrade(); }
+            if (_abilities.ContainsKey(ability.Data.AbilityName)) { ability.Upgrade(); }
             else
-                _abilities.Add(abilityData.AbilityName, abilityData.CreateAbility(_player));
+            {
+                ability.OnAdded();
+                _abilities.Add(ability.Data.AbilityName, ability);
+            }
             
             UpdateAbilities();
         }

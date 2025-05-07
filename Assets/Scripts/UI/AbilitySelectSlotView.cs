@@ -1,4 +1,5 @@
 using System;
+using Ingame.Player.Ability;
 using SO.Ability;
 using TMPro;
 using UnityEngine;
@@ -12,18 +13,20 @@ namespace UI
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI description;
+        [SerializeField] private TextMeshProUGUI level;
         [SerializeField] private Button selectButton;
 
-        public void Display(AbilityDataSO abilityData, Action<AbilityDataSO> callback)
+        public void Display(Ability ability, Action<Ability> callback)
         {
-            if(!abilityData) return;
+            if(ability == null) return;
             
-            title.text = abilityData.AbilityName;
-            icon.sprite = abilityData.Icon;
-            description.text = abilityData.AbilityDescription;
+            title.text = ability.Data.AbilityName;
+            icon.sprite = ability.Data.Icon;
+            description.text = ability.Data.AbilityDescription;
+            level.text = $"Lv.{ability.Level} / {ability.MaxLevel}";
             
             selectButton.onClick.RemoveAllListeners();
-            selectButton.onClick.AddListener(() => callback(abilityData));
+            selectButton.onClick.AddListener(() => callback(ability));
         }
     }
 }

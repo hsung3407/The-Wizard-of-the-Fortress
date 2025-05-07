@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Ingame.Player.Ability;
 using SO.Ability;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace UI
         [SerializeField] private AbilitySelectSlotView prefab;
         private readonly List<GameObject> slots = new List<GameObject>();
 
-        public void Display(List<AbilityDataSO> abilities, Action<AbilityDataSO> onSelected)
+        public void Display(List<Ability> abilities, Action<Ability> onSelected)
         {
             foreach (var ability in abilities)
             {
