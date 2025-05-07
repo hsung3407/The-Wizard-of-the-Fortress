@@ -23,6 +23,7 @@ namespace Ingame.Player
             PlayerStats = GetComponent<PlayerStats>();
             PlayerCommand = GetComponent<PlayerCommand>();
             PlayerMagic = GetComponent<PlayerMagic>();
+            PlayerAbility = GetComponent<PlayerAbility>();
         }
 
         private void Start()
