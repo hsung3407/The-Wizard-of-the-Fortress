@@ -10,7 +10,7 @@ namespace UI
 
         public void Display(Vector3 pos, string text)
         {
-            var fText = Instantiate(prefab, pos + new Vector3(0, 1, 0), camera.transform.rotation);
+            var fText = Instantiate(prefab, pos, camera.transform.rotation);
             fText.Display(text);
         }
     }
