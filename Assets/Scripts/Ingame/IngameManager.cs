@@ -7,6 +7,7 @@ namespace Ingame
 {
     public class IngameManager : MonoBehaviour
     {
+        [SerializeField] private Player.Player player;
         private StageWaveDataSO[] _waveData;
         private int _waveIndex;
         
@@ -32,6 +33,16 @@ namespace Ingame
 
         private IEnumerator IngameFlow()
         {
+            // bool selected = false;
+            //
+            // player.PlayerAbility.Select(3, ability =>
+            // {
+            //     player.PlayerAbility.AddAbility(ability);
+            //     selected = true;
+            // });
+            
+            // yield return new WaitUntil(()=>selected);
+            
             yield return new WaitForSeconds(1f);
             
             WaveStart();
