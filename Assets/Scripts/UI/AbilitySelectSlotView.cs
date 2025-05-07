@@ -23,7 +23,7 @@ namespace UI
             title.text = ability.Data.AbilityName;
             icon.sprite = ability.Data.Icon;
             description.text = ability.Data.AbilityDescription;
-            level.text = $"Lv.{ability.Level} / {ability.MaxLevel}";
+            level.text = $"Lv.{ability.Level + 1} / {(ability.MaxLevel > 1 ? ability.MaxLevel.ToString() : "\\u221E")}";
             
             selectButton.onClick.RemoveAllListeners();
             selectButton.onClick.AddListener(() => callback(ability));
