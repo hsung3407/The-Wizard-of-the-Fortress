@@ -10,7 +10,6 @@ namespace Utility
     public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
     {
         [SerializeField] private T poolObjectPrefab;
-        [SerializeField] private int initCount;
         private readonly Queue<T> _pool = new();
 
         protected void Awake()
@@ -27,7 +26,7 @@ namespace Utility
 
         public T Get()
         {
-            var pooledObject = _pool.Count > 1 ? _pool.Dequeue() : Spawn(poolObjectPrefab);
+            var pooledObject = _pool.Count > 0 ? _pool.Dequeue() : Spawn(poolObjectPrefab);
             pooledObject.gameObject.SetActive(true);
             return pooledObject;
         }
