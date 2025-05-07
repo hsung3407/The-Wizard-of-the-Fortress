@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe81354fc74c5d04eb89733b14444980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 315067846}
   waveManager: {fileID: 637915641}
 --- !u!4 &949819550
 Transform:
