@@ -33,15 +33,15 @@ namespace Ingame
 
         private IEnumerator IngameFlow()
         {
-            // bool selected = false;
-            //
-            // player.PlayerAbility.Select(3, ability =>
-            // {
-            //     player.PlayerAbility.AddAbility(ability);
-            //     selected = true;
-            // });
+            bool selected = false;
             
-            // yield return new WaitUntil(()=>selected);
+            player.PlayerAbility.Select(3, ability =>
+            {
+                player.PlayerAbility.AddAbility(ability);
+                selected = true;
+            });
+            
+            yield return new WaitUntil(()=>selected);
             
             yield return new WaitForSeconds(1f);
             
