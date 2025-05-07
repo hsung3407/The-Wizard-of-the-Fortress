@@ -4,10 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utility.SingleTon;
+using Object = UnityEngine.Object;
 
 namespace Utility
 {
-    public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+    [Serializable]
+    public class ObjectPool<T> where T : MonoBehaviour
     {
         [SerializeField] private T poolObjectPrefab;
         private readonly Queue<T> _pool = new();
@@ -19,7 +21,7 @@ namespace Utility
 
         private static T Spawn(T prefab)
         {
-            var go = Instantiate(prefab);
+            var go = Object.Instantiate(prefab);
             go.gameObject.SetActive(false);
             return go;
         }

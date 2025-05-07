@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using SO;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utility;
 using Random = UnityEngine.Random;
 
@@ -9,12 +10,11 @@ namespace Ingame
 {
     public class WaveManager : MonoBehaviour
     {
-        private EnemyPool _enemyPool;
+        [SerializeField] private ObjectPool<Enemy> enemyPool;
         private Collider _spawnArea;
 
         private void Awake()
         {
-            _enemyPool = GetComponent<EnemyPool>();
             _spawnArea = GetComponent<Collider>();
         }
 
@@ -30,11 +30,11 @@ namespace Ingame
             int enemyKillCount = 0;
             for (int i = 0; i < enemyCount; i++)
             {
-                var enemy = _enemyPool.Get();
+                var enemy = enemyPool.Get();
                 InitEnemyTransform(enemy.transform);
                 enemy.OnDie += () =>
                 {
-                    _enemyPool.Return(enemy);
+                    enemyPool.Return(enemy);
                     if(++enemyKillCount == enemyCount) onClear();
                 };
                 yield return spawnDelay;

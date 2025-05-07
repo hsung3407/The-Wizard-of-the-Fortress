@@ -2784,7 +2784,6 @@ GameObject:
   m_Component:
   - component: {fileID: 637915640}
   - component: {fileID: 637915641}
-  - component: {fileID: 637915644}
   - component: {fileID: 637915643}
   m_Layer: 0
   m_Name: Wave Manager
@@ -2820,6 +2819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bb22215d3e19948b0d449cb957afc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPool:
+    poolObjectPrefab: {fileID: 6469287540622861476, guid: 7035e9b54bec9194aa7859a7f5fa9415, type: 3}
 --- !u!65 &637915643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2841,20 +2842,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8, y: 0, z: 0}
   m_Center: {x: 0.006131649, y: 0, z: 0}
---- !u!114 &637915644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637915639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce626a0dd164776bc0aadb598f0c506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolObjectPrefab: {fileID: 6469287540622861476, guid: 7035e9b54bec9194aa7859a7f5fa9415, type: 3}
-  initCount: 30
 --- !u!1 &662153017
 GameObject:
   m_ObjectHideFlags: 0
@@ -6085,6 +6072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeDestroy: 1
+  pool:
+    poolObjectPrefab: {fileID: 8402537582790762003, guid: d49f9c83b7fe93f4985d221437eaaacc, type: 3}
   camera: {fileID: 330585545}
   prefab: {fileID: 8402537582790762003, guid: d49f9c83b7fe93f4985d221437eaaacc, type: 3}
 --- !u!4 &1546156456
