@@ -9,7 +9,7 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI tmp;
         [SerializeField] private float lifeTime = 1;
-        
+
         private void Awake()
         {
             var color = tmp.color;
@@ -17,14 +17,14 @@ namespace UI
             tmp.color = color;
         }
 
-        public void Display(string text, float size = 0.5f)
+        public void Display(string text, Action onEnd = null, float size = 0.5f)
         {
             tmp.text = text;
             tmp.fontSize *= size;
-            StartCoroutine(DisplayCoroutine());
+            StartCoroutine(DisplayCoroutine(onEnd));
         }
 
-        private IEnumerator DisplayCoroutine()
+        private IEnumerator DisplayCoroutine(Action onEnd)
         {
             for (float timer = 0; timer < lifeTime; timer += Time.deltaTime)
             {
@@ -33,11 +33,14 @@ namespace UI
                 tmp.color = color;
                 yield return null;
             }
+
+            if (onEnd != null) { onEnd.Invoke(); }
+            else { Destroy(gameObject); }
         }
-        
+
         private float GetAlpha(float alpha)
         {
-            return 1 - Mathf.Pow(2*alpha, 4);
+            return 1 - Mathf.Pow(2 * alpha, 4);
         }
     }
 }
