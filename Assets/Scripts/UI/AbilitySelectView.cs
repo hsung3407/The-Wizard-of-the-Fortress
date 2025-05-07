@@ -11,8 +11,15 @@ namespace UI
         [SerializeField] private AbilitySelectSlotView prefab;
         private readonly List<GameObject> slots = new List<GameObject>();
 
+        private void Start()
+        {   
+            gameObject.SetActive(false);
+        }
+
         public void Display(List<Ability> abilities, Action<Ability> onSelected)
         {
+            gameObject.SetActive(true);
+            
             foreach (var ability in abilities)
             {
                 var slot = Instantiate(prefab, transform);
@@ -26,6 +33,7 @@ namespace UI
             foreach (var slot in slots) { Destroy(slot); }
 
             slots.Clear();
+            gameObject.SetActive(false);
         }
     }
 }
