@@ -14,6 +14,7 @@ namespace Utility.Sound
     {
         private AudioSource _audioSource;
         private Dictionary<SFXType, AudioClip> _sfxClips = new();
+        private Dictionary<SFXType, float> _playedTime = new();
 
         protected override void Awake()
         {
@@ -23,6 +24,7 @@ namespace Utility.Sound
             foreach (var sfxData in data)
             {
                 _sfxClips.Add(sfxData.Type, sfxData.Clip);
+                _playedTime.Add(sfxData.Type, 0f);
             }
             
             canBeDestroy = false;
@@ -35,6 +37,8 @@ namespace Utility.Sound
         
         public void PlaySFX(SFXType type)
         {
+            if(_playedTime[type] >= Time.time) return;
+            _playedTime[type] = Time.time;
             _audioSource.PlayOneShot(_audioSource.clip = _sfxClips[type]);
         }
     }
