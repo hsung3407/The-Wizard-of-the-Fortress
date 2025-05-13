@@ -190,6 +190,7 @@ namespace Ingame.Player
             if (mana > Mana)
             {
                 //TODO: 마나 부족 메시지
+                NotificationManager.Instance.NotifyError("Lack - Mana");
                 Debug.Log("마나 부족");
                 return false;
             }
