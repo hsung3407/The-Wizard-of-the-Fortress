@@ -29,17 +29,12 @@ namespace Utility.Sound
             
             canBeDestroy = false;
         }
-
-        public void PlaySFX(AudioClip source)
-        {
-            _audioSource.PlayOneShot(source);
-        }
         
-        public void PlaySFX(SFXType type)
+        public void PlaySFX(SFXType type, float volume)
         {
             if(_playedTime[type] >= Time.time) return;
             _playedTime[type] = Time.time;
-            _audioSource.PlayOneShot(_audioSource.clip = _sfxClips[type]);
+            _audioSource.PlayOneShot(_sfxClips[type], volume);
         }
     }
 }
