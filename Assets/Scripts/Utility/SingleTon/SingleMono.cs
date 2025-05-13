@@ -7,7 +7,7 @@ namespace Utility.SingleTon
         private static T _instance;
 
         [Header("SingleMono")] [SerializeField]
-        private bool canBeDestroy = true;
+        protected bool canBeDestroy = true;
 
         public static T Instance
         {
