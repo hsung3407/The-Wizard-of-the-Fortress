@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using SO;
+using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -60,14 +61,14 @@ namespace Ingame
 
         private void WaveStart()
         {
-            Debug.Log($"Wave {_waveIndex} Start");
+            NotificationManager.Instance.NotifyTitle($"Wave {_waveIndex+1} Start");
             
             waveManager.StartWave(_waveData[_waveIndex], WaveClear);
         }
 
         private void WaveClear()
         {
-            Debug.Log($"Wave {_waveIndex} Clear");
+            NotificationManager.Instance.NotifyTitle($"Wave {_waveIndex+1} Clear");
 
             if (++_waveIndex == _waveData.Length) StageClear();
             else StartCoroutine(IngameFlow());
@@ -75,7 +76,7 @@ namespace Ingame
 
         private void StageClear()
         {
-            Debug.Log("Stage Clear");
+            NotificationManager.Instance.NotifyTitle("Stage Clear");
         }
     }
 }

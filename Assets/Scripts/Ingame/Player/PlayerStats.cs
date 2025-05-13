@@ -1,4 +1,5 @@
 using System;
+using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -189,8 +190,7 @@ namespace Ingame.Player
         {
             if (mana > Mana)
             {
-                //TODO: 마나 부족 메시지
-                Debug.Log("마나 부족");
+                NotificationManager.Instance.NotifyError("Lack - Mana");
                 return false;
             }
 

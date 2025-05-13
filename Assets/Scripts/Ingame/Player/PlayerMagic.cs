@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine;
 
 namespace Ingame.Player
@@ -20,7 +21,7 @@ namespace Ingame.Player
             var check =  _magicDataDict.TryGetValue(command, out data);
             if (!check)
             {
-                Debug.Log($"해당 커맨드를 가진 정보가 없음 : {command}");
+                NotificationManager.Instance.NotifyError("Can't Find Magic");
             }
             return check;
         }
