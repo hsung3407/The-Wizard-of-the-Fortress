@@ -30,26 +30,40 @@ namespace UI
         {
             if(_titleCoroutine != null) StopCoroutine(_titleCoroutine);
             title.text = text;
-            _titleCoroutine = StartCoroutine(Display(title));
+            _titleCoroutine = StartCoroutine(TitleDisplay());
         }
     
         public void NotifyError(string text)
         {
             if(_errorCoroutine != null) StopCoroutine(_errorCoroutine);
             error.text = text;
-            _errorCoroutine = StartCoroutine(Display(error));
+            _errorCoroutine = StartCoroutine(ErrorDisplay());
         }
 
-        private IEnumerator Display(TextMeshProUGUI text)
+        private IEnumerator TitleDisplay()
         {
             for (float timer = 0; timer < lifeTime; timer += Time.deltaTime)
             {
-                text.alpha = GetAlpha(timer / lifeTime);
+                error.alpha = GetTitleAlpha(timer / lifeTime);
                 yield return null;
             }
         }
     
-        private float GetAlpha(float alpha)
+        private IEnumerator ErrorDisplay()
+        {
+            for (float timer = 0; timer < lifeTime; timer += Time.deltaTime)
+            {
+                error.alpha = GetErrorAlpha(timer / lifeTime);
+                yield return null;
+            }
+        }
+    
+        private float GetTitleAlpha(float alpha)
+        {
+            return 1 - Mathf.Pow(2 * alpha - 1, 4);
+        }
+
+        private float GetErrorAlpha(float alpha)
         {
             return 1 - Mathf.Pow(2 * alpha, 4);
         }
