@@ -15,8 +15,8 @@ MonoBehaviour:
   <GroupName>k__BackingField: Ice
   <MagicName>k__BackingField: Icicle Rain
   <Command>k__BackingField: 0
-  <Icon>k__BackingField: {fileID: 0}
-  <Description>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: f0866bfd46e46824c861c653550058ab, type: 3}
+  <Description>k__BackingField: area attack
   <MagicObject>k__BackingField: {fileID: 1628545270888627204, guid: c5d73d4b77de02a48a53a8dede6261e8, type: 3}
   <PredictorType>k__BackingField: 1
   <PredictRange>k__BackingField: 5.2

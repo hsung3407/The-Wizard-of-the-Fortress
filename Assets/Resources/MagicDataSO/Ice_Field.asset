@@ -15,11 +15,12 @@ MonoBehaviour:
   <GroupName>k__BackingField: Ice
   <MagicName>k__BackingField: Ice Field
   <Command>k__BackingField: 1
-  <Icon>k__BackingField: {fileID: 0}
-  <Description>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 21300000, guid: bd5565336885f3446975c585f1b70ddd, type: 3}
+  <Description>k__BackingField: area debuff
   <MagicObject>k__BackingField: {fileID: 523172810074697831, guid: e5894d487c1a3ba4fb06fa867860aa1f, type: 3}
   <PredictorType>k__BackingField: 1
   <PredictRange>k__BackingField: 3.8
   <MagicStats>k__BackingField:
     <Damage>k__BackingField: 0
+    <DamageMultiplier>k__BackingField: 0
     <ManaCost>k__BackingField: 10
