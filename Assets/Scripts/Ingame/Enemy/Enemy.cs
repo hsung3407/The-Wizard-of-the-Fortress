@@ -5,6 +5,7 @@ using Ingame.Player.Effect;
 using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utility.Sound;
 
 namespace Ingame
 {
@@ -87,6 +88,7 @@ namespace Ingame
             if (!Mathf.Approximately(takenDamage, float.MaxValue))
             {
                 FloatingTextManager.Instance.Display(transform.position + new Vector3(0, 2, 0), $"{takenDamage}");
+                SoundManager.Instance.PlaySFX(SFXType.MonsterHit);
             }
 
             _health -= takenDamage;
