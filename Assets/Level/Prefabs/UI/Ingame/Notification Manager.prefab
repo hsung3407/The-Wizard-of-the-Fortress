@@ -53,7 +53,7 @@ MonoBehaviour:
   canBeDestroy: 1
   title: {fileID: 3612865490571571121}
   error: {fileID: 7199856929365640729}
-  lifeTime: 2.5
+  lifeTime: 4
 --- !u!1 &6731080452187372396
 GameObject:
   m_ObjectHideFlags: 0
