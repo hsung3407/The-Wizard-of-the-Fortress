@@ -5537,10 +5537,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ability Select Panel
       objectReference: {fileID: 0}
-    - target: {fileID: 4677684767143927603, guid: c1f9c208009489745b461c6aee7f9384, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
