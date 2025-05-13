@@ -15,6 +15,7 @@ namespace Ingame.Player
 
         [SerializeField] private PlayerCommandView playerCommandView;
 
+        private bool _interactable;
         public enum Command
         {
             Emission,
@@ -28,11 +29,17 @@ namespace Ingame.Player
             playerCommandView.Init(_commandCount);
         }
 
+        public void SetInteractable(bool interactable)
+        {
+            _interactable = interactable;
+            ClearCommands();
+        }
+
         public void AddCommand(int command) => AddCommand((Command)command);
         
         public void AddCommand(Command command)
         {
-            if(_commands.Length <= _counter) return;
+            if(!_interactable || _commands.Length <= _counter) return;
             
             _commands[_counter] = command;
             playerCommandView.AddDisplay(command, _counter++);
