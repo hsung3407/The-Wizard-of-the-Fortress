@@ -60,14 +60,14 @@ namespace Ingame
 
         private void WaveStart()
         {
-            NotificationManager.Instance.NotifyTitle($"Wave {_waveIndex} Start");
+            NotificationManager.Instance.NotifyTitle($"Wave {_waveIndex+1} Start");
             
             waveManager.StartWave(_waveData[_waveIndex], WaveClear);
         }
 
         private void WaveClear()
         {
-            NotificationManager.Instance.NotifyTitle($"Wave {_waveIndex} Clear");
+            NotificationManager.Instance.NotifyTitle($"Wave {_waveIndex+1} Clear");
 
             if (++_waveIndex == _waveData.Length) StageClear();
             else StartCoroutine(IngameFlow());
