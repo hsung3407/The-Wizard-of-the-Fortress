@@ -10,6 +10,7 @@ namespace Ingame.Player
     public class MagicController : MonoBehaviour
     {
         [SerializeField] private AudioClip sfx;
+        [SerializeField] private float volume = .2f;
         [SerializeField] private float lifeTime = 5f;
         
         private DetectorBase detector;
@@ -26,7 +27,7 @@ namespace Ingame.Player
             if (!detector || !modifier) return;
             detector.OnDetect += modifier.Modify;
             detector.OnRelease += modifier.UnModify;
-            SoundManager.Instance.PlaySFX(sfx, 0.5f);
+            SoundManager.Instance.PlaySFX(sfx, volume);
             
             Destroy(gameObject, lifeTime);
         }
