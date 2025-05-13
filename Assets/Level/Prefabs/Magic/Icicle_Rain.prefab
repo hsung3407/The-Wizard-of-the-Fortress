@@ -19850,7 +19850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a38c3dd5c34855b3e6e3ba08abfc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5.5
+  sfx: {fileID: 8300000, guid: ed2435e95617e6e419d90d88f07592e7, type: 3}
+  volume: 0.3
+  lifeTime: 5
 --- !u!114 &-7021088972045485995
 MonoBehaviour:
   m_ObjectHideFlags: 0
