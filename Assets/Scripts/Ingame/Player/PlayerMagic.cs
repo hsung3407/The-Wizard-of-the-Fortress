@@ -21,7 +21,6 @@ namespace Ingame.Player
             if (!check)
             {
                 NotificationManager.Instance.NotifyError("Can't Find Magic");
-                Debug.Log($"해당 커맨드를 가진 정보가 없음 : {command}");
             }
             return check;
         }
