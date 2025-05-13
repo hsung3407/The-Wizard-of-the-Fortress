@@ -50,9 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4004dfeadeacf4eb6be856a88a3008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBeDestroy: 1
   title: {fileID: 3612865490571571121}
   error: {fileID: 7199856929365640729}
-  lifeTime: 1.5
+  lifeTime: 2.5
 --- !u!1 &6731080452187372396
 GameObject:
   m_ObjectHideFlags: 0
