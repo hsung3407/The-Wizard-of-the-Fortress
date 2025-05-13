@@ -29,6 +29,11 @@ namespace Utility.Sound
             
             canBeDestroy = false;
         }
+
+        public void PlaySFX(AudioClip clip, float volume)
+        {
+            _audioSource.PlayOneShot(clip, volume);
+        }
         
         public void PlaySFX(SFXType type, float volume)
         {
