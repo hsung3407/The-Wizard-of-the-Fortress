@@ -44,7 +44,7 @@ namespace UI
         {
             for (float timer = 0; timer < lifeTime; timer += Time.deltaTime)
             {
-                error.alpha = GetTitleAlpha(timer / lifeTime);
+                title.alpha = GetTitleAlpha(timer / lifeTime);
                 yield return null;
             }
         }
