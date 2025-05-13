@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Monster Hit
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 0
-  <Clip>k__BackingField: {fileID: 8300000, guid: c1ea8a65ee03be34fb9e0e5121294f71, type: 3}
+  <Clip>k__BackingField: {fileID: 8300000, guid: 8e8cd908fae64b648b7d246eac1c3068, type: 3}
