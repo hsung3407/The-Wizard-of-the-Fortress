@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfx: {fileID: 8300000, guid: f15726390bb946647973e86d4724a6a2, type: 3}
-  volume: 0.1
+  volume: 0.07
   lifeTime: 5
 --- !u!114 &8377462616801139752
 MonoBehaviour:
