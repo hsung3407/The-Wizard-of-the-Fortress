@@ -3,11 +3,13 @@ using Ingame.Player.Magic.Detector;
 using Ingame.Player.Modifier;
 using Ingame.Player.Predictor;
 using UnityEngine;
+using Utility.Sound;
 
 namespace Ingame.Player
 {
     public class MagicController : MonoBehaviour
     {
+        [SerializeField] private AudioClip sfx;
         [SerializeField] private float lifeTime = 5f;
         
         private DetectorBase detector;
@@ -24,6 +26,7 @@ namespace Ingame.Player
             if (!detector || !modifier) return;
             detector.OnDetect += modifier.Modify;
             detector.OnRelease += modifier.UnModify;
+            SoundManager.Instance.PlaySFX(sfx, 0.5f);
             
             Destroy(gameObject, lifeTime);
         }
