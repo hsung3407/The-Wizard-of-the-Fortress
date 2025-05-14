@@ -38,11 +38,15 @@ namespace Ingame.Player
         public void Select(int count, Action<Ability.Ability> onSelected)
         {
             List<Ability.Ability> abilities = new List<Ability.Ability>(count);
+            var data = RandomRange(3)
+                .ToList();
             for (int i = 0; i < count; i++)
             {
-                var data = Rand();
-                if(_abilities.TryGetValue(data.AbilityName, out Ability.Ability ability)) abilities.Add(ability);
-                else abilities.Add(data.CreateAbility(_player));
+                if (_abilities.TryGetValue(data[i].AbilityName, out Ability.Ability ability))
+                    abilities.Add(ability);
+                else
+                    abilities.Add(data[i]
+                        .CreateAbility(_player));
             }
 
             abilitySelectView.Display(abilities, onSelected);
@@ -56,9 +60,19 @@ namespace Ingame.Player
                 .ToList();
         }
 
-        public AbilityDataSO Rand()
+        public IEnumerable<AbilityDataSO> RandomRange(int count, bool duplicate = true)
         {
-            return _selectableAbilities[Random.Range(0, _selectableAbilities.Count)];
+            if (_selectableAbilities.Count == 0) { return null; }
+
+            var elements = new List<AbilityDataSO>();
+            do
+            {
+                elements.AddRange(_selectableAbilities
+                    .OrderBy(_ => Random.Range(0f, 100f))
+                    .Take(count - elements.Count));
+            } while (duplicate && elements.Count() < count);
+
+            return elements;
         }
 
         public void AddAbility(Ability.Ability ability)
@@ -69,7 +83,7 @@ namespace Ingame.Player
                 ability.OnAdded();
                 _abilities.Add(ability.Data.AbilityName, ability);
             }
-            
+
             UpdateAbilities();
         }
     }
