@@ -17,6 +17,8 @@ namespace Ingame.Player
 
         public event Action<MagicDataSO, MagicStatsModifier> OnFire;
 
+        private bool _interactable;
+
         private void Awake()
         {
             PlayerInput = GetComponent<PlayerInput>();
@@ -32,7 +34,7 @@ namespace Ingame.Player
 
             PlayerInput.CheckInteractable += () =>
             {
-                if (PlayerMagic.Contains(PlayerCommand.GetCommand())) { return true; }
+                if (!_interactable || PlayerMagic.Contains(PlayerCommand.GetCommand())) { return true; }
 
                 //TODO: 선택된 마법 없음 표시
                 PlayerCommand.ClearCommands();
@@ -51,6 +53,18 @@ namespace Ingame.Player
             PlayerInput.OnInteractEnd += () => { predictorManager.SetPredictor(PredictorManager.PredictorType.None); };
 
             PlayerInput.OnApply += Fire;
+        }
+
+        public void SetInteractable(bool interactable, bool init = false)
+        {
+            _interactable = interactable;
+            PlayerInput.SetInteractable(interactable);
+            PlayerCommand.SetInteractable(interactable);
+            
+            if (init)
+            {
+                PlayerCommand.ClearCommands();
+            }
         }
 
         private void Fire(Vector3 point)

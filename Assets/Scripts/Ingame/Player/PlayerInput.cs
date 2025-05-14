@@ -51,12 +51,12 @@ namespace Ingame.Player
             {
                 if (!_interacting) return;
                 _interacting = false;
-                
+
                 OnInteractEnd?.Invoke();
 
                 var point = pointInput.action.ReadValue<Vector2>();
                 if (!PredictRaycast(point, _hits)) return;
-                
+
                 OnApply?.Invoke(_hits[0].point);
             };
 
@@ -65,7 +65,7 @@ namespace Ingame.Player
                 if (!_interacting) return;
 
                 var point = c.ReadValue<Vector2>();
-                
+
                 if (PredictRaycast(point, _hits)) { OnInteract?.Invoke(_hits[0].point); }
                 else
                 {
@@ -79,6 +79,21 @@ namespace Ingame.Player
         {
             ingameViewRect.GetWorldCorners(_ingameViewCorners);
             touchAreaRect.GetWorldCorners(_touchAreaCorners);
+        }
+
+        public void SetInteractable(bool interactable)
+        {
+            _interacting = false;
+            if (interactable)
+            {
+                pressInput.action.Enable();
+                pointInput.action.Enable();
+            }
+            else
+            {
+                pressInput.action.Disable();
+                pointInput.action.Disable();
+            }
         }
 
         private bool PredictRaycast(Vector2 point, RaycastHit[] hits)

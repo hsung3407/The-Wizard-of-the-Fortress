@@ -25,7 +25,7 @@ namespace Ingame
             _waveIndex = 0;
             StartCoroutine(StartFlow());
             
-            player.PlayerCommand.SetInteractable(false);
+            player.SetInteractable(false, true);
         }
 
         private IEnumerator StartFlow()
@@ -37,7 +37,7 @@ namespace Ingame
 
         private IEnumerator IngameFlow()
         {
-            player.PlayerCommand.SetInteractable(false);
+            player.SetInteractable(false);
             
             yield return new WaitForSeconds(4f);
             
@@ -45,7 +45,7 @@ namespace Ingame
             
             yield return new WaitForSeconds(2f);
 
-            player.PlayerCommand.SetInteractable(true);
+            player.SetInteractable(true);
             WaveStart();
         }
 

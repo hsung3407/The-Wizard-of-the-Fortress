@@ -32,7 +32,6 @@ namespace Ingame.Player
         public void SetInteractable(bool interactable)
         {
             _interactable = interactable;
-            ClearCommands();
         }
 
         public void AddCommand(int command) => AddCommand((Command)command);
