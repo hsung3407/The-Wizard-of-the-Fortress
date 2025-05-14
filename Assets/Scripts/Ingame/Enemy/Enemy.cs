@@ -9,25 +9,13 @@ using Utility.Sound;
 
 namespace Ingame
 {
-    [Serializable]
-    public class EnemyBaseStat
-    {
-        [SerializeField] private float maxHealth = 100;
-        [SerializeField] private float damage = 1;
-        [SerializeField] private float speed = 1;
-
-        public float MaxHealth => maxHealth;
-        public float Damage => damage;
-        public float Speed => speed;
-    }
-
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private EnemyBaseStat baseStat;
         private EnemyHitEffect _enemyHitEffect;
 
         private float _health;
         private float _damage = 1f;
+        private float _speed = 1f;
         private float _speedMultiplier = 1;
 
         public float Damage => _damage;
@@ -52,7 +40,7 @@ namespace Ingame
 
         private void Update()
         {
-            var finalSpeed = baseStat.Speed * _speedMultiplier;
+            var finalSpeed = _speed * _speedMultiplier;
             transform.position += transform.forward * Mathf.Max(finalSpeed * Time.deltaTime, 0);
         }
 
@@ -64,9 +52,14 @@ namespace Ingame
         private void Init()
         {
             _isDie = false;
-            _health = baseStat.MaxHealth;
-            _damage = baseStat.Damage;
             _speedMultiplier = 1;
+        }
+
+        public void SetStats(float health, float damage, float speed)
+        {
+            _health = health;
+            _damage = damage;
+            _speed = speed;
         }
 
         public void ModifyStat(StatModifyType statModifyType, float amount)
