@@ -64,6 +64,8 @@ namespace Ingame.Player
         {
             if (_selectableAbilities.Count == 0) { return null; }
 
+            Random.InitState((int)DateTime.Now.Ticks);
+            
             var elements = new List<AbilityDataSO>();
             do
             {
