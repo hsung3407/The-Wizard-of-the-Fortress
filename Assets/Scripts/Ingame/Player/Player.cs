@@ -2,6 +2,7 @@ using System;
 using Ingame.Player.Predictor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Ingame.Player
 {
@@ -17,7 +18,7 @@ namespace Ingame.Player
 
         public event Action<MagicDataSO, MagicStatsModifier> OnFire;
 
-        private bool _interactable;
+        public bool Interactable { get; private set; }
 
         private void Awake()
         {
@@ -34,7 +35,7 @@ namespace Ingame.Player
 
             PlayerInput.CheckInteractable += () =>
             {
-                if (!_interactable || PlayerMagic.Contains(PlayerCommand.GetCommand())) { return true; }
+                if (!Interactable || PlayerMagic.Contains(PlayerCommand.GetCommand())) { return true; }
 
                 //TODO: 선택된 마법 없음 표시
                 PlayerCommand.ClearCommands();
@@ -57,7 +58,7 @@ namespace Ingame.Player
 
         public void SetInteractable(bool interactable, bool init = false)
         {
-            _interactable = interactable;
+            Interactable = interactable;
             PlayerInput.SetInteractable(interactable);
             PlayerCommand.SetInteractable(interactable);
             predictorManager.SetPredictor(PredictorManager.PredictorType.None);

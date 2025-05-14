@@ -7,6 +7,11 @@ using UnityEngine.Serialization;
 
 namespace Ingame
 {
+    public class PauseInfo
+    {
+        public bool PlayerInteractable;
+    }
+    
     public class IngameManager : MonoBehaviour
     {
         [SerializeField] private Player.Player player;
@@ -14,6 +19,8 @@ namespace Ingame
         private int _waveIndex;
         
         [SerializeField] private WaveManager waveManager;
+        
+        private PauseInfo _pauseInfo;
 
         private void Awake()
         {
@@ -26,6 +33,20 @@ namespace Ingame
             StartCoroutine(StartFlow());
             
             player.SetInteractable(false, true);
+        }
+
+        public void Pause()
+        {
+            _pauseInfo.PlayerInteractable = player.Interactable;
+            player.SetInteractable(false);
+
+            Time.timeScale = 0;
+        }
+
+        public void Resume()
+        {
+            player.SetInteractable(_pauseInfo.PlayerInteractable);
+            Time.timeScale = 1;
         }
 
         private IEnumerator StartFlow()
