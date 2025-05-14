@@ -8,7 +8,6 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Material skybox;
     [SerializeField] private Transform directionalLight;
     [SerializeField] private float rotateSpeed;
-
     [SerializeField] private TextMeshProUGUI tmp;
 
     void Update()
