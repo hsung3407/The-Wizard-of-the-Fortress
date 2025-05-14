@@ -7220,6 +7220,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 346185868}
     m_Modifications:
+    - target: {fileID: 1242607937321801755, guid: e2db73a970a37d4479c74858564f848c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 315067848}
+    - target: {fileID: 1242607937321801755, guid: e2db73a970a37d4479c74858564f848c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ClearCommands
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242607937321801755, guid: e2db73a970a37d4479c74858564f848c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ingame.Player.PlayerCommand, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242607937321801755, guid: e2db73a970a37d4479c74858564f848c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4488603364669504200, guid: e2db73a970a37d4479c74858564f848c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
