@@ -67,9 +67,12 @@ namespace Ingame.Player
             var elements = new List<AbilityDataSO>();
             do
             {
-                elements.AddRange(_selectableAbilities
-                    .OrderBy(_ => Random.Range(0f, 100f))
-                    .Take(count - elements.Count));
+                var random = _selectableAbilities
+                    .Select(element => (element, Random.Range(0f, 100f)))
+                    .OrderBy(element => element.Item2)
+                    .Take(count - elements.Count)
+                    .Select(element => element.Item1);
+                elements.AddRange(random);
             } while (duplicate && elements.Count() < count);
 
             return elements;
