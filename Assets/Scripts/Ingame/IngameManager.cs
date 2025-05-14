@@ -60,7 +60,7 @@ namespace Ingame
         {
             player.SetInteractable(false);
             
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             
             yield return StartCoroutine(AbilitySelectFlow());
             
