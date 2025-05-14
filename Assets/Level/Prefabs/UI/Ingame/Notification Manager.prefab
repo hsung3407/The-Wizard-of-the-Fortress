@@ -121,8 +121,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave 1 Satrt
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
+  m_sharedMaterial: {fileID: 305895889137691811, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -255,10 +255,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Can't Find Magic
+  m_text: "\uB9C8\uB098\uAC00 \uBD80\uC871\uD569\uB2C8\uB2E4\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
+  m_sharedMaterial: {fileID: 305895889137691811, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
