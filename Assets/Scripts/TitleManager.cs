@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Title : MonoBehaviour
+public class TitleManager : MonoBehaviour
 {
     private static readonly int Rotation = Shader.PropertyToID("_Rotation");
     [SerializeField] private Material skybox;
