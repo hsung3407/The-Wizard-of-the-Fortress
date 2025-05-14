@@ -24,4 +24,4 @@ MonoBehaviour:
   <MagicStats>k__BackingField:
     <Damage>k__BackingField: 0
     <DamageMultiplier>k__BackingField: 0
-    <ManaCost>k__BackingField: 10
+    <ManaCost>k__BackingField: 4

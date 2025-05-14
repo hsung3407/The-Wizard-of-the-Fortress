@@ -997,9 +997,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    <Health>k__BackingField: 100
-    <Mana>k__BackingField: 100
-    <ManaRegen>k__BackingField: 10
+    <Health>k__BackingField: 40
+    <Mana>k__BackingField: 30
+    <ManaRegen>k__BackingField: 1
     <Damage>k__BackingField: 10
 --- !u!114 &315067851
 MonoBehaviour:
