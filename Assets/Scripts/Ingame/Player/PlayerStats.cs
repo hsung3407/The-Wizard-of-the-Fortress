@@ -128,7 +128,7 @@ namespace Ingame.Player
             get => _health;
             set
             {
-                _health = Mathf.Clamp(value, 0, ModifiedStats.Mana);
+                _health = Mathf.Clamp(value, 0, ModifiedStats.Health);
                 HUD.Instance.SetHealth(_health, ModifiedStats.Health);
             }
         }
