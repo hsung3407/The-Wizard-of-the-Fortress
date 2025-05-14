@@ -60,6 +60,7 @@ namespace Ingame.Player
             _interactable = interactable;
             PlayerInput.SetInteractable(interactable);
             PlayerCommand.SetInteractable(interactable);
+            predictorManager.SetPredictor(PredictorManager.PredictorType.None);
             
             if (init)
             {
