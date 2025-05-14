@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffbb987ffe4cd245be937a6b921d07a, type: 3}
   m_Name: Wave 0
   m_EditorClassIdentifier: 
-  enemyCount: 10
-  generatePerSec: 2
+  <Health>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <EnemyCount>k__BackingField: 5
+  <GeneratePerSec>k__BackingField: 0.7
