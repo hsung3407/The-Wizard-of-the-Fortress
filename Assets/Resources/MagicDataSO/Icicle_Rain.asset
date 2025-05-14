@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GroupName>k__BackingField: Ice
   <MagicName>k__BackingField: Icicle Rain
-  <Command>k__BackingField: 0
+  <Command>k__BackingField: 10
   <Icon>k__BackingField: {fileID: 21300000, guid: f0866bfd46e46824c861c653550058ab, type: 3}
-  <Description>k__BackingField: area attack
+  <Description>k__BackingField: "\uC77C\uC815 \uBC94\uC704\uC758 \uC801\uB4E4\uC5D0\uAC8C
+    \uC9C0\uC18D\uC801\uC778 \uB300\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4"
   <MagicObject>k__BackingField: {fileID: 1628545270888627204, guid: c5d73d4b77de02a48a53a8dede6261e8, type: 3}
   <PredictorType>k__BackingField: 1
   <PredictRange>k__BackingField: 5.2
