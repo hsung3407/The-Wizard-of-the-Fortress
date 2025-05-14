@@ -25,12 +25,19 @@ namespace Ingame
 
         private IEnumerator PlayWave(StageWaveDataSO waveData, Action onClear)
         {
-            var spawnDelay = new WaitForSeconds(1 / waveData.GeneratePerSec);
+            if (waveData.EnemyCount < 1)
+            {
+                onClear?.Invoke();
+                yield break;
+            }
+            
+            var spawnDelay = new WaitForSeconds(Mathf.Max(1 / waveData.GeneratePerSec, 0.2f));
             int enemyCount = waveData.EnemyCount;
             int enemyKillCount = 0;
             for (int i = 0; i < enemyCount; i++)
             {
                 var enemy = enemyPool.Get();
+                enemy.SetStats(waveData.Health, waveData.Damage, waveData.Speed);
                 InitEnemyTransform(enemy.transform);
                 enemy.OnDie += () =>
                 {
