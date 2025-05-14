@@ -890,7 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skybox: {fileID: 2100000, guid: 85cf0b004bc4a654b9e501efcce47902, type: 2}
   directionalLight: {fileID: 2019720269}
-  rotateSpeed: 3
+  rotateSpeed: 2
 --- !u!4 &600577248
 Transform:
   m_ObjectHideFlags: 0
@@ -1520,12 +1520,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Touch to Start
+  m_text: '- Touch to Start -
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
+  m_sharedMaterial: {fileID: 305895889137691811, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1937,10 +1937,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "The Wizard of \nthe Fortress"
+  m_text: "\uC694\uC0C8\uC758 \uB9C8\uBC95\uC0AC"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
+  m_sharedMaterial: {fileID: 305895889137691811, guid: ec2bf59866d3e8c429c0b48470f67eef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
