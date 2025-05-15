@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Utility;
+using Utility.Sound;
 
 namespace Ingame
 {
@@ -28,6 +29,7 @@ namespace Ingame
         {
             _health -= damage;
             HUD.Instance.SetHealth(_health, maxHealth);
+            SoundManager.Instance.PlaySFX(SFXType.WallCrash, 0.5f);
             // Debug.Log(_health);
             if(_health <= 0) Die();
         }
