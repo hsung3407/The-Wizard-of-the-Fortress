@@ -38,6 +38,8 @@ namespace Utility.Sound
 
         public void PlaySFX(AudioClip clip, float volume)
         {
+            if(!clip) return;
+            
             _audioSource.PlayOneShot(clip, volume);
         }
         
@@ -50,6 +52,8 @@ namespace Utility.Sound
 
         public void PlayMusic(AudioClip clip, float volume)
         {
+            if(!clip) return;
+            
             if(_musicChangeCoroutine != null) StopCoroutine(_musicChangeCoroutine);
             _musicChangeCoroutine = StartCoroutine(MusicChange(clip, volume));
         }
