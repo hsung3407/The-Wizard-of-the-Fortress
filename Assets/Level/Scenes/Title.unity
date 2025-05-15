@@ -892,6 +892,7 @@ MonoBehaviour:
   directionalLight: {fileID: 2019720269}
   rotateSpeed: 2
   tmp: {fileID: 1127095866}
+  titleMusic: {fileID: 8300000, guid: 8069671238c25704ea36704e5a74fb1a, type: 3}
 --- !u!4 &600577248
 Transform:
   m_ObjectHideFlags: 0
