@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using Utility.Sound;
 
 public class TitleManager : MonoBehaviour
 {
@@ -9,6 +10,13 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Transform directionalLight;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private TextMeshProUGUI tmp;
+    
+    [SerializeField] private AudioClip titleMusic;
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayMusic(titleMusic, 0.5f);
+    }
 
     void Update()
     {
