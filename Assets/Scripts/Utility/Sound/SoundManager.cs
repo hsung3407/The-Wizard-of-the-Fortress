@@ -7,6 +7,7 @@ namespace Utility.Sound
     public enum SFXType
     {
         MonsterHit,
+        WallCrash
     }
     
     [RequireComponent(typeof(AudioSource))]
