@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Wall Crash
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
-  <Clip>k__BackingField: {fileID: 8300000, guid: b77c78897d5de644286a191ed4a193d4, type: 3}
+  <Clip>k__BackingField: {fileID: 8300000, guid: 25fe1b421d120c842b6383d0c6e72f37, type: 3}
