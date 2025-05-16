@@ -3,6 +3,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Utility.Sound;
 
 namespace Ingame.Player
 {
@@ -188,6 +189,7 @@ namespace Ingame.Player
         private void Die()
         {
             Debug.Log("Die");
+            SoundManager.Instance.PlaySFX(SFXType.WallBreak, 0.3f);
             Time.timeScale = 0;
         }
     }

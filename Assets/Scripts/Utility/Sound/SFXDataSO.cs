@@ -7,5 +7,6 @@ namespace Utility.Sound
     {
         [field: SerializeField]public SFXType Type { get; private set; }
         [field: SerializeField]public AudioClip Clip { get; private set; }
+        [field: SerializeField] public float Volume { get; private set; } = 1f;
     }
 }
