@@ -73,7 +73,6 @@ namespace Ingame.Player
         {
             var command = PlayerCommand.GetCommand();
             PlayerMagic.GetMagicDataWithCommand(command, out var magicData);
-            PlayerCommand.ClearCommands();
 
             var magicObject = magicData.MagicObject;
             var magicStatsModifier = new MagicStatsModifier();
@@ -84,6 +83,8 @@ namespace Ingame.Player
 
             var magic = Instantiate(magicObject, point, Quaternion.identity);
             magic.InitMagic(magicData, modifiedMagicStats, PlayerStats.ModifiedStats);
+            
+            PlayerCommand.ClearCommands();
         }
     }
 }
