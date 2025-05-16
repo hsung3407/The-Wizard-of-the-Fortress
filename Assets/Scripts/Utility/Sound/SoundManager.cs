@@ -12,10 +12,10 @@ namespace Utility.Sound
         WallBreak,
     }
     
-    [RequireComponent(typeof(AudioSource))]
     public class SoundManager : SingleMono<SoundManager>
     {
-        private AudioSource _audioSource;
+        private AudioSource _sfxAudioSource;
+        private AudioSource _musicAudioSource;
         private Dictionary<SFXType, (AudioClip, float)> _sfxClips = new();
         private Dictionary<SFXType, float> _playedTime = new();
         
@@ -26,8 +26,9 @@ namespace Utility.Sound
             canBeDestroy = false;
             
             base.Awake();
-            _audioSource = GetComponent<AudioSource>();
-            _audioSource.loop = true;
+            _sfxAudioSource = gameObject.AddComponent<AudioSource>();
+            _musicAudioSource = gameObject.AddComponent<AudioSource>();
+            _musicAudioSource.loop = true;
             
             var data = Resources.LoadAll<SFXDataSO>("SFXDataSO");
             foreach (var sfxData in data)
@@ -41,14 +42,14 @@ namespace Utility.Sound
         {
             if(!clip) return;
             
-            _audioSource.PlayOneShot(clip, volume);
+            _sfxAudioSource.PlayOneShot(clip, volume);
         }
         
         public void PlaySFX(SFXType type, float volume)
         {
             if(_playedTime[type] >= Time.time) return;
             _playedTime[type] = Time.time;
-            _audioSource.PlayOneShot(_sfxClips[type].Item1, _sfxClips[type].Item2 * volume);
+            _sfxAudioSource.PlayOneShot(_sfxClips[type].Item1, _sfxClips[type].Item2 * volume);
         }
 
         public void PlayMusic(AudioClip clip, float volume)
@@ -63,8 +64,8 @@ namespace Utility.Sound
         {
             float changTime = 1f;
             
-            if(_audioSource.clip && _audioSource.isPlaying) yield return FadeOut(changTime / 2, volume);
-            _audioSource.clip = clip;
+            if(_musicAudioSource.clip && _musicAudioSource.isPlaying) yield return FadeOut(changTime / 2, volume);
+            _musicAudioSource.clip = clip;
             yield return FadeIn(changTime / 2, volume);
 
             _musicChangeCoroutine = null;
@@ -74,18 +75,18 @@ namespace Utility.Sound
         {
             for (float i = 0; i < time; i+= Time.deltaTime)
             {
-                _audioSource.volume = maxVolume * (1 - i / time);
+                _musicAudioSource.volume = maxVolume * (1 - i / time);
                 yield return null;
             }
-            _audioSource.Stop();
+            _musicAudioSource.Stop();
         }
         
         private IEnumerator FadeIn(float time, float maxVolume)
         {
-            _audioSource.Play();
+            _musicAudioSource.Play();
             for (float i = 0; i < time; i+= Time.deltaTime)
             {
-                _audioSource.volume = maxVolume * i / time;
+                _musicAudioSource.volume = maxVolume * i / time;
                 yield return null;
             }
         }
