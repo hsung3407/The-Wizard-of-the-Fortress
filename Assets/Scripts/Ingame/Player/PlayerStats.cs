@@ -100,19 +100,6 @@ namespace Ingame.Player
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        public static PlayerStatsModifier operator +(PlayerStatsModifier left, PlayerStatsModifier right)
-        {
-            left.AdditionalHealth += right.AdditionalHealth;
-            left.HealthMultiplier += right.HealthMultiplier;
-            left.AdditionalMana += right.AdditionalMana;
-            left.ManaMultiplier += right.ManaMultiplier;
-            left.AdditionalManaRegen += right.AdditionalManaRegen;
-            left.ManaRegenMultiplier += right.ManaRegenMultiplier;
-            left.AdditionalDamage += right.AdditionalDamage;
-            left.DamageMultiplier += right.DamageMultiplier;
-            return left;
-        }
     }
 
     public class PlayerStats : MonoBehaviour
@@ -130,6 +117,7 @@ namespace Ingame.Player
             {
                 _health = Mathf.Clamp(value, 0, ModifiedStats.Health);
                 HUD.Instance.SetHealth(_health, ModifiedStats.Health);
+                if(_health <= 0) Die();
             }
         }
 
@@ -180,12 +168,6 @@ namespace Ingame.Player
             StatsUpdate();
         }
 
-        public void ModifyStats(PlayerStatsModifier modifier)
-        {
-            _consistentModifier += modifier;
-            StatsUpdate();
-        }
-
         public bool UseMana(float mana)
         {
             if (mana > Mana)
@@ -196,6 +178,17 @@ namespace Ingame.Player
 
             Mana -= mana;
             return true;
+        }
+        
+        public void TakeHit(float damage)
+        {
+            Health -= damage;
+        }
+
+        private void Die()
+        {
+            Debug.Log("Die");
+            Time.timeScale = 0;
         }
     }
 }

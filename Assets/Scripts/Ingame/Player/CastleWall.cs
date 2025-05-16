@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Utility;
 using Utility.Sound;
 
@@ -7,37 +8,17 @@ namespace Ingame
 {
     public class CastleWall : MonoBehaviour
     {
-        [SerializeField] private float maxHealth = 100f;
-        private float _health;
-
-        private void Awake()
-        {
-            _health = maxHealth;
-        }
-
+        [SerializeField] private UnityEvent<float> onHit; 
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
             {
                 var enemy = other.GetComponent<Enemy>();
                 enemy.TakeDamage(float.MaxValue);
-                TakeHit(enemy.Damage);
+                onHit?.Invoke(enemy.Damage);
+                SoundManager.Instance.PlaySFX(SFXType.WallCrash, 0.5f);
             }
-        }
-
-        public void TakeHit(float damage)
-        {
-            _health -= damage;
-            HUD.Instance.SetHealth(_health, maxHealth);
-            SoundManager.Instance.PlaySFX(SFXType.WallCrash, 0.5f);
-            // Debug.Log(_health);
-            if(_health <= 0) Die();
-        }
-
-        private void Die()
-        {
-            Debug.Log("Die");
-            Time.timeScale = 0;
         }
     }
 }
