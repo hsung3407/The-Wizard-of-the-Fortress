@@ -23,6 +23,8 @@ namespace Utility.Sound
 
         protected override void Awake()
         {
+            canBeDestroy = false;
+            
             base.Awake();
             _audioSource = GetComponent<AudioSource>();
             _audioSource.loop = true;
@@ -33,8 +35,6 @@ namespace Utility.Sound
                 _sfxClips.Add(sfxData.Type, sfxData.Clip);
                 _playedTime.Add(sfxData.Type, 0f);
             }
-            
-            canBeDestroy = false;
         }
 
         public void PlaySFX(AudioClip clip, float volume)
