@@ -4,6 +4,7 @@ using SO;
 using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utility.Sound;
 
 namespace Ingame
 {
@@ -15,13 +16,16 @@ namespace Ingame
     public class IngameManager : MonoBehaviour
     {
         [SerializeField] private Player.Player player;
+
+        [SerializeField] private WaveManager waveManager;
         private StageWaveDataSO[] _waveData;
         private int _waveIndex;
-        
-        [SerializeField] private WaveManager waveManager;
-        
+
         private PauseInfo _pauseInfo;
 
+        [SerializeField] private AudioClip ingameMusic;
+        [SerializeField] private float volume;
+        
         private void Awake()
         {
             _waveData = Resources.LoadAll<StageWaveDataSO>($"StageWaveData/Stage {StaticStageInfo.StageIndex}");
@@ -29,6 +33,8 @@ namespace Ingame
 
         private void Start()
         {
+            SoundManager.Instance.PlayMusic(ingameMusic, volume);
+            
             _waveIndex = 0;
             StartCoroutine(StartFlow());
             

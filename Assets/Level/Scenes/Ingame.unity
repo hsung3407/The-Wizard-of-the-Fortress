@@ -2970,7 +2970,7 @@ GameObject:
   - component: {fileID: 949819550}
   - component: {fileID: 949819549}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Ingame Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2990,6 +2990,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 315067846}
   waveManager: {fileID: 637915641}
+  ingameMusic: {fileID: 8300000, guid: 0f0cb9811ac0d094b87e0b2082cf20ae, type: 3}
+  volume: 0.07
 --- !u!4 &949819550
 Transform:
   m_ObjectHideFlags: 0
