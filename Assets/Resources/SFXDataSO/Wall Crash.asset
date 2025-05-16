@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 1
   <Clip>k__BackingField: {fileID: 8300000, guid: 25fe1b421d120c842b6383d0c6e72f37, type: 3}
+  <Volume>k__BackingField: 0.7
