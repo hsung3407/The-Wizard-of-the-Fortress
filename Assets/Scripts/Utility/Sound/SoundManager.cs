@@ -16,7 +16,7 @@ namespace Utility.Sound
     public class SoundManager : SingleMono<SoundManager>
     {
         private AudioSource _audioSource;
-        private Dictionary<SFXType, AudioClip> _sfxClips = new();
+        private Dictionary<SFXType, (AudioClip, float)> _sfxClips = new();
         private Dictionary<SFXType, float> _playedTime = new();
         
         private Coroutine _musicChangeCoroutine;
@@ -32,7 +32,7 @@ namespace Utility.Sound
             var data = Resources.LoadAll<SFXDataSO>("SFXDataSO");
             foreach (var sfxData in data)
             {
-                _sfxClips.Add(sfxData.Type, sfxData.Clip);
+                _sfxClips.Add(sfxData.Type, (sfxData.Clip, sfxData.Volume));
                 _playedTime.Add(sfxData.Type, 0f);
             }
         }
@@ -48,7 +48,7 @@ namespace Utility.Sound
         {
             if(_playedTime[type] >= Time.time) return;
             _playedTime[type] = Time.time;
-            _audioSource.PlayOneShot(_sfxClips[type], volume);
+            _audioSource.PlayOneShot(_sfxClips[type].Item1, _sfxClips[type].Item2 * volume);
         }
 
         public void PlayMusic(AudioClip clip, float volume)
