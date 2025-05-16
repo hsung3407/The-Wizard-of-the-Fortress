@@ -342,6 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c75c7b0b608a7a488de9a2c2bd0cbe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMusic: {fileID: 8300000, guid: 8e57c40f7980f674aa0191429ce1352d, type: 3}
+  volume: 0.17
 --- !u!4 &683521155
 Transform:
   m_ObjectHideFlags: 0

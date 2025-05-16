@@ -6,10 +6,11 @@ using Utility.Sound;
 public class MainManager : MonoBehaviour
 {
     [SerializeField] private AudioClip mainMusic;
+    [SerializeField] private float volume = 0.5f;
     
     private void Start()
     {
-        SoundManager.Instance.PlayMusic(mainMusic, 0.5f);
+        SoundManager.Instance.PlayMusic(mainMusic, volume);
     }
 
     public void StartStage()
