@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5254286118612078744}
   - component: {fileID: 4548763891824887269}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Stage Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,6 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7671938370193531837}
   - component: {fileID: 2709142998946336998}
+  - component: {fileID: 5931225284593435577}
+  - component: {fileID: 2479702558805076948}
   m_Layer: 5
   m_Name: Stage
   m_TagString: Untagged
@@ -99,7 +101,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4380565783247235464}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -157,6 +159,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5931225284593435577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380565783247235464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8610ac8c55d27d843b49f8d3161dae32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageTitleView: {fileID: 2479702558805076948}
+--- !u!114 &2479702558805076948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380565783247235464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdef923a19ebc14439ebad1386fbdc79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageName: {fileID: 1454687243520285974}
+  stageImage: {fileID: 4548763891824887269}
 --- !u!1 &6658102579885357377
 GameObject:
   m_ObjectHideFlags: 0
