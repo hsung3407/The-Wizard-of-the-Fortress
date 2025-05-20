@@ -43,6 +43,8 @@ namespace Ingame
             
             player.PlayerStats.OnDie += StageFailed;
             player.SetInteractable(false, true);
+            
+            Time.timeScale = 1;
         }
 
         public void Pause()
@@ -61,6 +63,7 @@ namespace Ingame
 
         public void ReturnToMain()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("Main");
         }
 
