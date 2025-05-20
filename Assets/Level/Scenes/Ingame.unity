@@ -2930,6 +2930,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6159487544142026223, guid: 28c939989d7a7b2488b79a7825d98d8f, type: 3}
   m_PrefabInstance: {fileID: 904589205}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &927869914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8900842298657554017, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+  m_PrefabInstance: {fileID: 842023549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdab9d22ca37c9458a944ffdbb83b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &938801674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3093,6 +3104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 315067846}
   waveManager: {fileID: 637915641}
+  stageResultView: {fileID: 927869914}
   ingameMusic: {fileID: 8300000, guid: 0f0cb9811ac0d094b87e0b2082cf20ae, type: 3}
   volume: 0.07
 --- !u!4 &949819550
