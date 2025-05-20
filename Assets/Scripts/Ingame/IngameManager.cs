@@ -23,6 +23,8 @@ namespace Ingame
 
         private PauseInfo _pauseInfo;
 
+        [SerializeField] private StageResultView stageResultView;
+        
         [SerializeField] private AudioClip ingameMusic;
         [SerializeField] private float volume;
         
@@ -38,6 +40,7 @@ namespace Ingame
             _waveIndex = 0;
             StartCoroutine(StartFlow());
             
+            player.PlayerStats.OnDie += StageFailed;
             player.SetInteractable(false, true);
         }
 
@@ -108,7 +111,14 @@ namespace Ingame
 
         private void StageClear()
         {
-            NotificationManager.Instance.NotifyTitle("Stage Clear");
+            Time.timeScale = 0;
+            stageResultView.Display(true, null);
+        }
+
+        private void StageFailed()
+        {
+            Time.timeScale = 0;
+            stageResultView.Display(false, null);
         }
     }
 }

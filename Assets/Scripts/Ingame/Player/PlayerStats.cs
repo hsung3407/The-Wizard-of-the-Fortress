@@ -134,6 +134,8 @@ namespace Ingame.Player
             }
         }
 
+        public event Action OnDie;
+
         //TODO 세이브 파일에서 로드
         public int CommandCount { get; private set; } = 1;
 
@@ -189,8 +191,8 @@ namespace Ingame.Player
         private void Die()
         {
             Debug.Log("Die");
+            OnDie?.Invoke();
             SoundManager.Instance.PlaySFX(SFXType.WallBreak, 0.3f);
-            Time.timeScale = 0;
         }
     }
 }
