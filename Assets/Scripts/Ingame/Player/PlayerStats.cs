@@ -176,7 +176,7 @@ namespace Ingame.Player
         {
             if (mana > Mana)
             {
-                NotificationManager.Instance.NotifyError("Lack - Mana");
+                NotificationManager.Instance.NotifyError("마나가 부족합니다");
                 return false;
             }
 
