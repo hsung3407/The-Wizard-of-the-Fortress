@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbed72b1e07409e43ba0c6712b9e829d, type: 3}
   m_Name: Stage 0
   m_EditorClassIdentifier: 
-  stageName: Stage 0
-  stageIndex: 0
-  commandCount: 1
+  <StageName>k__BackingField: Stage 0
+  <StageIndex>k__BackingField: 0
+  <StageImage>k__BackingField: {fileID: 21300000, guid: 3155f8183fedee6439ca4805032d5aa7, type: 3}
