@@ -141,6 +141,7 @@ namespace Ingame.Player
 
         private void Awake()
         {
+            OnDie = null;
             InitStats();
         }
 
