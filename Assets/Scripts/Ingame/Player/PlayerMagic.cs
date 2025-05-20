@@ -21,7 +21,7 @@ namespace Ingame.Player
             var check =  _magicDataDict.TryGetValue(command, out data);
             if (!check)
             {
-                NotificationManager.Instance.NotifyError("Can't Find Magic");
+                NotificationManager.Instance.NotifyError("완성된 마법이 없습니다");
             }
             return check;
         }
