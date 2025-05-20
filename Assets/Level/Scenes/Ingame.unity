@@ -2574,6 +2574,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage Result View
       objectReference: {fileID: 0}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 949819549}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMain
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Ingame.IngameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150994042264829293, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8794115163394781126, guid: a6aa6c40601bd9b44aadd5b08dbbea83, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

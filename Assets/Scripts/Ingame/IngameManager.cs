@@ -3,6 +3,7 @@ using System.Collections;
 using SO;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Utility.Sound;
 
@@ -56,6 +57,11 @@ namespace Ingame
         {
             player.SetInteractable(_pauseInfo.PlayerInteractable);
             Time.timeScale = 1;
+        }
+
+        public void ReturnToMain()
+        {
+            SceneManager.LoadScene("Main");
         }
 
         private IEnumerator StartFlow()
